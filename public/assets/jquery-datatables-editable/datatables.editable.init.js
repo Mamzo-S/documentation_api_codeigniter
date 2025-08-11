@@ -46,7 +46,6 @@
 				aoColumns: [
 					null,
 					null,
-					null,
 					{ "bSortable": false }
 				]
 			});

@@ -249,7 +249,11 @@
                                                     data-body="<?= htmlspecialchars($donnee['body']) ?>">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <a href="<?= base_url('DeleteAuthentification/' . $donnee['id']); ?>" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                <a href="#"
+                                                    class="open-delete-modal"
+                                                    data-id="<?= $donnee['id']; ?>">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php }
@@ -290,7 +294,6 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" id="id" name="id">
                                         <label for="field-2" class="control-label">Methode</label>
                                         <select class="form-control" name="meth">
                                             <option>choisir la methode...</option>
@@ -387,6 +390,29 @@
 
     </div>
 
+    <div id="dialog" class="modal-block mfp-hide">
+        <section class="panel panel-info panel-color">
+            <header class="panel-heading">
+                <h2 class="panel-title">Êtes-vous sûr ?</h2>
+            </header>
+            <div class="panel-body">
+                <div class="modal-wrapper">
+                    <div class="modal-text">
+                        <p>Voulez-vous vraiment supprimer cette ligne ?</p>
+                    </div>
+                </div>
+
+                <div class="row m-t-20">
+                    <div class="col-md-12 text-right">
+                        <button id="dialogConfirm" class="btn btn-primary">Oui</button>
+                        <button id="dialogCancel" class="btn btn-default">Non</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
 
     <!-- END wrapper -->
 
@@ -429,6 +455,26 @@
             modal.find('select[name="meth"]').val(methode);
             modal.find('select[name="lien"]').val(lien);
             modal.find('input[name="body"]').val(body);
+        });
+
+        let deleteId = null;
+        $(document).on("click", ".open-delete-modal", function(e) {
+            e.preventDefault();
+            deleteId = $(this).data("id");
+            $.magnificPopup.open({
+                items: {
+                    src: '#dialog'
+                },
+                type: 'inline'
+            });
+        });
+        $("#dialogConfirm").click(function() {
+            if (deleteId) {
+                window.location.href = "<?= base_url('DeleteAuthentification/'); ?>" + deleteId;
+            }
+        });
+        $("#dialogCancel").click(function() {
+            $.magnificPopup.close();
         });
     </script>
 

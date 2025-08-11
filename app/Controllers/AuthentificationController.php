@@ -22,13 +22,11 @@ class AuthentificationController extends BaseController
 
     public function AjoutAuthentification()
     {
-        $id = $this->request->getPost('id');
         $methode = $this->request->getPost('meth');
         $lien = $this->request->getPost('lien');
         $body = $this->request->getPost('body');
         $auth = new AuthentificationModel();
         $donnee = [
-            'id' => $id,
             'methode_auth' => $methode,
             'lien_auth' => $lien,
             'body' => $body
@@ -60,8 +58,8 @@ class AuthentificationController extends BaseController
             if ($data) {
                 $donnee = [
                     'methode_auth' => $methode,
-                    'lien_auth'    => $lien,
-                    'body'         => $body
+                    'lien_auth' => $lien,
+                    'body' => $body
                 ];
                 $auth->update($id, $donnee);
             }

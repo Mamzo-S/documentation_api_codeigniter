@@ -216,7 +216,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="m-b-30">
-                                        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal">Ajouter</button>
+                                        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
                                     </div>
                                 </div>
                             </div>
@@ -241,8 +241,21 @@
                                             <td><?= $donnee['methode'] ?></td>
                                             <td><?= $donnee['reponse'] ?></td>
                                             <td class="actions">
-                                                <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                <a href="#" class="on-default edit-row"
+                                                    data-toggle="modal"
+                                                    data-target="#edit-modal"
+                                                    data-id="<?= $donnee['id'] ?>"
+                                                    data-lien="<?= $donnee['lien_end'] ?>"
+                                                    data-param="<?= $donnee['parametre'] ?>"
+                                                    data-methode="<?= $donnee['methode_end'] ?>"
+                                                    data-rep="<?= $donnee['reponse'] ?>">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a href="#"
+                                                    class="open-delete-modal"
+                                                    data-id="<?= $donnee['id']; ?>">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php }
@@ -269,7 +282,7 @@
         <!-- ============================================================== -->
 
         <!-- MODAL -->
-        <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -277,52 +290,116 @@
                         <h4 class="modal-title">Nouveau endpoint</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="field-2" class="control-label">Base URL</label>
-                                    <select class="form-control" name="lien">
-                                        <option>choisir le lien...</option>
-                                        <?php
-                                        foreach ($lien as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['base_url'] ?></option>;
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
+                        <form action="<?= base_url('AjoutEndpoint') ?>" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Base URL</label>
+                                        <select class="form-control" name="lien">
+                                            <option>choisir le lien...</option>
+                                            <?php
+                                            foreach ($lien as $donnee) { ?>
+                                                <option value="<?= $donnee['id'] ?>"><?= $donnee['base_url'] ?></option>;
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Parametre</label>
+                                        <input type="text" class="form-control" id="field-2" name="param">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Methode</label>
+                                        <select class="form-control" name="meth">
+                                            <option>choisir la methode...</option>
+                                            <?php
+                                            foreach ($methode as $donnee) { ?>
+                                                <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Reponse</label>
+                                        <input type="text" class="form-control" id="field-2" name="rep">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="field-2" class="control-label">Parametre</label>
-                                    <input type="text" class="form-control" id="field-2" name="param">
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-info waves-effect waves-light">Ajouter</button>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="field-2" class="control-label">Methode</label>
-                                    <select class="form-control" name="meth">
-                                        <option>choisir la methode...</option>
-                                        <?php
-                                        foreach ($methode as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="field-2" class="control-label">Reponse</label>
-                                    <input type="text" class="form-control" id="field-2" name="rep">
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
-                        <button type="button" class="btn btn-info waves-effect waves-light">Ajouter</button>
+                </div>
+            </div>
+        </div><!-- /.modal -->
+
+        <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Modification d'un endpoint</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<?= base_url('EditEndpoint') ?>" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="id" name="id">
+                                        <label for="field-2" class="control-label">Base URL</label>
+                                        <select class="form-control" name="lien">
+                                            <option></option>
+                                            <?php
+                                            foreach ($lien as $donnee) { ?>
+                                                <option value="<?= $donnee['id'] ?>"><?= $donnee['base_url'] ?></option>;
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Parametre</label>
+                                        <input type="text" class="form-control" id="field-2" name="param" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Methode</label>
+                                        <select class="form-control" name="meth">
+                                            <option></option>
+                                            <?php
+                                            foreach ($methode as $donnee) { ?>
+                                                <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Reponse</label>
+                                        <input type="text" class="form-control" id="field-2" name="rep" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-info waves-effect waves-light">Modifier</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -331,19 +408,19 @@
         <div id="dialog" class="modal-block mfp-hide">
             <section class="panel panel-info panel-color">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Are you sure?</h2>
+                    <h2 class="panel-title">Êtes-vous sûr ?</h2>
                 </header>
                 <div class="panel-body">
                     <div class="modal-wrapper">
                         <div class="modal-text">
-                            <p>Are you sure that you want to delete this row?</p>
+                            <p>Voulez-vous vraiment supprimer cette ligne ?</p>
                         </div>
                     </div>
 
                     <div class="row m-t-20">
                         <div class="col-md-12 text-right">
-                            <button id="dialogConfirm" class="btn btn-primary">Confirm</button>
-                            <button id="dialogCancel" class="btn btn-default">Cancel</button>
+                            <button id="dialogConfirm" class="btn btn-primary">Oui</button>
+                            <button id="dialogCancel" class="btn btn-default">Non</button>
                         </div>
                     </div>
                 </div>
@@ -355,10 +432,6 @@
 
     </div>
     <!-- END wrapper -->
-
-    <script>
-        var resizefunc = [];
-    </script>
 
     <!-- jQuery  -->
     <script src="<?= base_url() ?>/js/jquery.min.js"></script>
@@ -381,6 +454,47 @@
     <script src="<?= base_url() ?>/assets/jquery-datatables-editable/jquery.dataTables.js"></script>
     <script src="<?= base_url() ?>/assets/datatables/dataTables.bootstrap.js"></script>
     <script src="<?= base_url() ?>/assets/jquery-datatables-editable/datatables.editable.init.js"></script>
+
+    <script>
+        var resizefunc = [];
+
+        $('#edit-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let methode = button.data('methode');
+            let lien = button.data('lien');
+            let rep = button.data('rep');
+            let param = button.data('param');
+
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('select[name="meth"]').val(methode);
+            modal.find('select[name="lien"]').val(lien);
+            modal.find('input[name="rep"]').val(rep);
+            modal.find('input[name="param"]').val(param);
+        });
+
+
+        let deleteId = null;
+        $(document).on("click", ".open-delete-modal", function(e) {
+            e.preventDefault();
+            deleteId = $(this).data("id");
+            $.magnificPopup.open({
+                items: {
+                    src: '#dialog'
+                },
+                type: 'inline'
+            });
+        });
+        $("#dialogConfirm").click(function() {
+            if (deleteId) {
+                window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
+            }
+        });
+        $("#dialogCancel").click(function() {
+            $.magnificPopup.close();
+        });
+    </script>
 
 </body>
 
