@@ -5,8 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
 $routes->get('index', 'Home::index');
+
+$routes->get('/', 'UserController::loginform');
+$routes->post('/login', 'UserController::login'); 
+$routes->get('/login', 'UserController::loginform'); 
+$routes->get('/logout', 'UserController::logout');
 
 //endpoints
 $routes->get('endpoints', 'EndpointController::AfficherEndpoints');
