@@ -25,19 +25,19 @@
         <div id="sidebar-menu">
             <ul>
                 <li>
-                    <a href="<?= base_url() ?>index" class="waves-effect active"><i class="md md-home"></i><span> Accueil </span></a>
+                    <a href="<?= base_url() ?>index" class="waves-effect <?= (current_url() == base_url('index')) ? 'active' : '' ?>"><i class="md md-home"></i><span> Accueil </span></a>
                 </li>
 
-                <li><a href="<?= base_url() ?>endpoints">Endpoints</a></li>
-                <li class="active"><a href="<?= base_url() ?>architecture">Architecture</a></li>
-                <li><a href="<?= base_url() ?>authentification">Authentification</a></li>
+                <li><a href="<?= base_url() ?>endpoints" class="<?= (current_url() == base_url('endpoints')) ? 'active' : '' ?>">Endpoints</a></li>
+                <li><a href="<?= base_url() ?>architecture" class="<?= (current_url() == base_url('architecture')) ? 'active' : '' ?>">Architecture</a></li>
+                <li><a href="<?= base_url() ?>authentification" class="<?= (current_url() == base_url('authentification')) ? 'active' : '' ?>">Authentification</a></li>
 
                 <li class="has_sub">
-                    <a href="<?= base_url() ?>/#" class="waves-effect"><i class="md md-view-list"></i><span> Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" class="waves-effect"><i class="md md-view-list"></i><span> Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?= base_url() ?>methode">Methode</a></li>
-                        <li><a href="<?= base_url() ?>format_donnee">Format-donnee</a></li>
-                        <li><a href="<?= base_url() ?>base_url">Base URL</a></li>
+                        <li class="<?= (current_url() == base_url('methode')) ? 'active' : '' ?>"><a  href="<?= base_url('methode') ?>" >Methode</a></li>
+                        <li><a href="<?= base_url() ?>format_donnee" class="<?= (current_url() == base_url('format_donnee')) ? 'active' : '' ?>">Format-donnee</a></li>
+                        <li><a href="<?= base_url() ?>base_url" class="<?= (current_url() == base_url('base_url')) ? 'active' : '' ?>">Base URL</a></li>
                     </ul>
                 </li>
 

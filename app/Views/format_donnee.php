@@ -127,7 +127,7 @@
 </div>
 
 <div id="dialog" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" style="width: 30%;" role="document">
         <div class="modal-content">
             <header class="panel-heading bg-danger">
                 <h2 class="panel-title">Êtes-vous sûr ?</h2>
@@ -146,7 +146,7 @@
 <?= $this->include('template/footer') ?>
 
 <script>
-    var resizefunc = [];
+    // var resizefunc = [];
 
     $('#edit-modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
