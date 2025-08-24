@@ -4,10 +4,27 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model {
+class UserModel extends Model
+{
     protected $table = 'user';
     protected $primaryKey = 'id';
-    
-    protected $allowedFields = ['nom', 'prenom', 'email', 'motdepasse', 'username'];
 
+    protected $allowedFields = ['nom', 'prenom', 'email', 'motdepasse', 'username', 'profile_id', 'statut'];
+
+    public function AfficherUser()
+    {
+        $req = "SELECT user.id, nom, prenom, email, username, statut, motdepasse, profil.profile_name AS profils
+                FROM user
+                JOIN profil ON user.profile_id=profil.id";
+        $query = $this->db->query($req);
+        return $query->getResultArray();
+    }
+
+    public function getUserByEmail($username)
+    {
+        return $this->select('user.*, profil.profile_name AS profils')
+            ->join('profil', 'profil.id = user.profile_id')
+            ->where('user.username', $username)
+            ->first();
+    }
 }

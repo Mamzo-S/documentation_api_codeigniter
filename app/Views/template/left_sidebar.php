@@ -11,14 +11,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <?= ucfirst(session()->get('prenom')) ?></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= base_url() ?>/javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
-                        <li><a href="<?= base_url() ?>/javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
                         <li><a href="<?= base_url('logout') ?>"><i class="md md-lock"></i> Logout</a></li>
-                        <!-- <li><a href="<?= base_url() ?>/actions/logoutAction.php"><i class="md md-settings-power"></i> Logout</a></li> -->
                     </ul>
                 </div>
 
-                <p class="text-muted m-0">Administrator</p>
+                <p class="text-muted m-0"><?= session()->get('profil') ?></p>
             </div>
         </div>
         <!--- Divider -->
@@ -32,15 +31,28 @@
                 <li><a href="<?= base_url() ?>architecture" class="<?= (current_url() == base_url('architecture')) ? 'active' : '' ?>">Architecture</a></li>
                 <li><a href="<?= base_url() ?>authentification" class="<?= (current_url() == base_url('authentification')) ? 'active' : '' ?>">Authentification</a></li>
 
+                
+                <?php if (session()->get('profile_id') !=2): ?>
                 <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="md md-view-list"></i><span> Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <a href="#" class="waves-effect"><i class="md md-settings"></i><span> Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
-                        <li class="<?= (current_url() == base_url('methode')) ? 'active' : '' ?>"><a  href="<?= base_url('methode') ?>" >Methode</a></li>
+                        <li><a href="<?= base_url('methode') ?>" class="<?= (current_url() == base_url('methode')) ? 'active' : '' ?>">Methode</a></li>
                         <li><a href="<?= base_url() ?>format_donnee" class="<?= (current_url() == base_url('format_donnee')) ? 'active' : '' ?>">Format-donnee</a></li>
                         <li><a href="<?= base_url() ?>base_url" class="<?= (current_url() == base_url('base_url')) ? 'active' : '' ?>">Base URL</a></li>
+                        <li><a href="<?= base_url() ?>menu" class="<?= (current_url() == base_url('menu')) ? 'active' : '' ?>">Menu</a></li>
+                        <li><a href="<?= base_url() ?>sous_menu" class="<?= (current_url() == base_url('sous_menu')) ? 'active' : '' ?>">Sous Menu</a></li>
                     </ul>
                 </li>
-
+                <?php endif; ?>
+                <?php if (session()->get('profile_id') ==1 ): ?>
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect"><i class="md md-security"></i><span> Sécurité </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="<?= base_url() ?>gestionUtilisateur" class="<?= (current_url() == base_url('gestionUtilisateur')) ? 'active' : '' ?>">Gestion utilisateur</a></li>
+                            <li><a href="<?= base_url() ?>gestionProfil" class="<?= (current_url() == base_url('gestionProfil')) ? 'active' : '' ?>">Gestion profil</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
             </ul>
             <div class="clearfix"></div>
         </div>

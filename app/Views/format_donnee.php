@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -146,8 +146,9 @@
 <?= $this->include('template/footer') ?>
 
 <script>
-    // var resizefunc = [];
+    var resizefunc = [];
 
+    //modification
     $('#edit-modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
@@ -158,6 +159,7 @@
         modal.find('input[name="format"]').val(format);
     });
 
+    //suppression
     $('.btn-delete').click(function(e) {
         e.preventDefault();
         deleteId = $(this).data('id');
@@ -168,4 +170,46 @@
             window.location.href = "<?= base_url('DeleteFormat/'); ?>" + deleteId;
         }
     });
+
+    //gestion de roles et permissions
+    let smenuId = 2;
+    let perm = role[(smenuId)];
+    if (perm.add == 1) {
+        $(".btn-add").show();
+    } else {
+        $(".btn-add").hide();
+    }
+
+    if (perm.upd == 1) {
+        $('#edit-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let format = button.data('format');
+
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('input[name="format"]').val(format);
+        });
+    } else {
+        $(".edit-row").hide();
+    }
+
+    if (perm.del == 1) {
+        $('.btn-delete').click(function(e) {
+            e.preventDefault();
+            deleteId = $(this).data('id');
+            $('#dialog').modal('show');
+        });
+        $('#dialogConfirm').click(function() {
+            if (deleteId) {
+                window.location.href = "<?= base_url('DeleteFormat/'); ?>" + deleteId;
+            }
+        });
+    } else {
+        $(".btn-delete").hide();
+    }
+
+    if (perm.upd != 1 && perm.del != 1) {
+        $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+    }
 </script>

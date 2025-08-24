@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                         <option>choisir le lien...</option>
                                         <?php
                                         foreach ($lien as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['base_url'] ?></option>;
+                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
                                         <?php
                                         }
                                         ?>
@@ -157,7 +157,7 @@
                                         <option></option>
                                         <?php
                                         foreach ($lien as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['base_url'] ?></option>;
+                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
                                         <?php
                                         }
                                         ?>
@@ -177,7 +177,7 @@
                                         <option></option>
                                         <?php
                                         foreach ($methode as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>
                                         <?php
                                         }
                                         ?>
@@ -227,6 +227,10 @@
 <?= $this->include('template/footer') ?>
 
 <script>
+    let role = <?= json_encode(session()->get('tab_smenu')) ?>;
+</script>
+
+<script>
     var resizefunc = [];
 
     $('#edit-modal').on('show.bs.modal', function(event) {
@@ -257,4 +261,54 @@
             window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
         }
     });
+
+    //gestion de roles et permissions
+    let smenuId = 9;
+    let perm = role[(smenuId)];
+
+    if (perm.add == 1) {
+        $(".btn-add").show();
+    } else {
+        $(".btn-add").hide();
+    }
+
+    if (perm.upd == 1) {
+        $('#edit-modal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        let id = button.data('id');
+        let methode = button.data('methode');
+        let lien = button.data('lien');
+        let rep = button.data('rep');
+        let param = button.data('param');
+
+        var modal = $(this);
+        modal.find('input[name="id"]').val(id);
+        modal.find('select[name="meth"]').val(methode);
+        modal.find('select[name="lien"]').val(lien);
+        modal.find('input[name="rep"]').val(rep);
+        modal.find('input[name="param"]').val(param);
+    });
+    } else {
+        $(".edit-row").hide();
+    }
+
+    if (perm.del == 1) {
+        $('.btn-delete').click(function(e) {
+        e.preventDefault();
+        deleteId = $(this).data('id');
+        $('#dialog').modal('show');
+    });
+
+    $('#dialogConfirm').click(function() {
+        if (deleteId) {
+            window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
+        }
+    });
+    } else {
+        $(".btn-delete").hide();
+    }
+
+    if (perm.upd != 1 && perm.del != 1) {
+        $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+    }
 </script>

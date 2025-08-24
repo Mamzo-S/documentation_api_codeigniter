@@ -69,11 +69,11 @@
 
 					_self.rowCancel( $(this).closest( 'tr' ) );
 				})
-				.on('click', 'a.edit-row', function( e ) {
-					e.preventDefault();
+				// .on('click', 'a.edit-row', function( e ) {
+				// 	e.preventDefault();
 
-					_self.rowEdit( $(this).closest( 'tr' ) );
-				})
+				// 	_self.rowEdit( $(this).closest( 'tr' ) );
+				// })
 				.on( 'click', 'a.remove-row', function( e ) {
 					e.preventDefault();
 

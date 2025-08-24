@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -29,6 +29,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Nom API</th>
                                 <th>Base_URL</th>
                                 <th>Actions</th>
                             </tr>
@@ -38,6 +39,7 @@
                             foreach ($lien as $donnee) { ?>
                                 <tr class="gradeX">
                                     <td><?= $i++ ?></td>
+                                    <td><?= $donnee['nom_url'] ?></td>
                                     <td><?= $donnee['base_url'] ?></td>
                                     <td class="actions">
                                         <a href="#" class="on-default edit-row"
@@ -145,7 +147,7 @@
 <?= $this->include('template/footer') ?>
 
 <script>
-    // var resizefunc = [];
+    var resizefunc = [];
 
     $('#edit-modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
@@ -162,10 +164,50 @@
         deleteId = $(this).data('id');
         $('#dialog').modal('show');
     });
-
     $('#dialogConfirm').click(function() {
         if (deleteId) {
             window.location.href = "<?= base_url('DeleteLien/'); ?>" + deleteId;
         }
     });
+
+    //gestion de roles et permissions
+    let smenuId = 3;
+    let perm = role[(smenuId)];
+    if (perm.add == 1) {
+        $(".btn-add").show();
+    } else {
+        $(".btn-add").hide();
+    }
+
+    if (perm.upd == 1) {
+        $('#edit-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let meth = button.data('meth');
+
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('input[name="meth"]').val(meth);
+        });
+    } else {
+        $(".edit-row").hide();
+    }
+
+    if (perm.del == 1) {
+        $('#edit-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let lien = button.data('lien');
+
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('input[name="lien"]').val(lien);
+        });
+    } else {
+        $(".btn-delete").hide();
+    }
+
+    if (perm.upd != 1 && perm.del != 1) {
+        $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+    }
 </script>

@@ -1,15 +1,9 @@
-<?= $this->include('template/header') ?>
-<?= $this->include('template/left_sidebar') ?>
-<?= $this->include('template/top_bar') ?>
-
+<?= $this->include('template/header'); ?>
+<?= $this->include('template/top_bar'); ?>
+<?= $this->include('template/left_sidebar'); ?>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
-<!-- <script>
-    let role = <?= json_encode(session()->get('role')) ?>
-    console.log('role:', role);
-</script> -->
-
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -18,7 +12,7 @@
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title">Methode</h4>
+                    <h4 class="pull-left page-title">Liste des menus</h4>
                 </div>
             </div>
 
@@ -34,23 +28,23 @@
                     <table class="table table-bordered table-striped" id="datatable-editable">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Methode</th>
+                                <th>Code</th>
+                                <th>Libelle</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1;
-                            foreach ($methode as $donnee) { ?>
+                            <?php foreach ($menu as $donnee) { ?>
                                 <tr class="gradeX">
-                                    <td><?= $i++ ?></td>
-                                    <td><?= $donnee['methode_name'] ?></td>
+                                    <td><?= $donnee['code'] ?></td>
+                                    <td><?= $donnee['libelle'] ?></td>
                                     <td class="actions">
                                         <a href="#" class="on-default edit-row"
                                             data-toggle="modal"
                                             data-target="#edit-modal"
                                             data-id="<?= $donnee['id'] ?>"
-                                            data-meth="<?= $donnee['methode_name'] ?>">
+                                            data-code="<?= $donnee['code'] ?>"
+                                            data-lib="<?= $donnee['libelle'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a href="#"
@@ -60,9 +54,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                            <?php }
-                            $i++;
-                            ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -79,15 +71,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Nouvelle methode</h4>
+                    <h4 class="modal-title">Nouveau menu</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('AjoutMethode') ?>" method="POST">
+                    <form action="<?= base_url('AjoutMenu') ?>" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Methode</label>
-                                    <input type="text" class="form-control" id="field-2" name="meth">
+                                    <label for="field-2" class="control-label">Code</label>
+                                    <input type="text" class="form-control" id="field-2" name="code">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Libelle</label>
+                                    <input type="text" class="form-control" id="field-2" name="libelle">
                                 </div>
                             </div>
                         </div>
@@ -100,23 +98,29 @@
 
             </div>
         </div>
-    </div><!-- /.modal -->
+    </div>
 
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Modification d'une methode</h4>
+                    <h4 class="modal-title">Modifier un menu</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('EditMethode') ?>" method="POST">
+                    <form action="<?= base_url('EditMenu') ?>" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="hidden" id='id' name="id">
-                                    <label for="field-2" class="control-label">Methode</label>
-                                    <input type="text" class="form-control" id="field-2" name="meth">
+                                    <label for="field-2" class="control-label">Code</label>
+                                    <input type="text" class="form-control" id="field-2" name="code">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Libelle</label>
+                                    <input type="text" class="form-control" id="field-2" name="libelle">
                                 </div>
                             </div>
                         </div>
@@ -129,7 +133,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <div id="dialog" class="modal" tabindex="-1" role="dialog">
@@ -158,15 +161,17 @@
 <script>
     var resizefunc = [];
 
-    //edit
+    //modification
     $('#edit-modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
-        let meth = button.data('meth');
+        let code = button.data('code');
+        let lib = button.data('lib');
 
         var modal = $(this);
         modal.find('input[name="id"]').val(id);
-        modal.find('input[name="meth"]').val(meth);
+        modal.find('input[name="code"]').val(code);
+        modal.find('input[name="libelle"]').val(lib);
     });
 
     //suppression
@@ -177,12 +182,12 @@
     });
     $('#dialogConfirm').click(function() {
         if (deleteId) {
-            window.location.href = "<?= base_url('DeleteMethode/'); ?>" + deleteId;
+            window.location.href = "<?= base_url('DeleteMenu/'); ?>" + deleteId;
         }
     });
 
     //gestion de roles et permissions
-    let smenuId = 1;
+    let smenuId = 4;
     let perm = role[(smenuId)];
     if (perm.add == 1) {
         $(".btn-add").show();
@@ -194,11 +199,13 @@
         $('#edit-modal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             let id = button.data('id');
-            let meth = button.data('meth');
+            let code = button.data('code');
+            let lib = button.data('lib');
 
             var modal = $(this);
             modal.find('input[name="id"]').val(id);
-            modal.find('input[name="meth"]').val(meth);
+            modal.find('input[name="code"]').val(code);
+            modal.find('input[name="libelle"]').val(lib);
         });
     } else {
         $(".edit-row").hide();
@@ -212,7 +219,7 @@
         });
         $('#dialogConfirm').click(function() {
             if (deleteId) {
-                window.location.href = "<?= base_url('DeleteMethode/'); ?>" + deleteId;
+                window.location.href = "<?= base_url('DeleteMenu/'); ?>" + deleteId;
             }
         });
     } else {

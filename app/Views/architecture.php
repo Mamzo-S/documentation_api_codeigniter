@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -200,6 +200,9 @@
 
 <?= $this->include('template/footer') ?>
 
+<script>
+    let role = <?= json_encode(session()->get('tab_smenu')) ?>;
+</script>
 
 <script>
     var resizefunc = [];
@@ -229,4 +232,52 @@
             window.location.href = "<?= base_url('DeleteArchitecture/'); ?>" + deleteId;
         }
     });
+
+    //gestion de roles et permissions
+    let smenuId = 8;
+    let perm = role[(smenuId)];
+
+    if (perm.add == 1) {
+        $(".btn-add").show();
+    }else{
+        $(".btn-add").hide();
+    }
+
+    if (perm.upd == 1) {
+        $('#edit-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let archi = button.data('archi');
+            let format = button.data('format');
+            let header = button.data('hed');
+
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('input[name="archi"]').val(archi);
+            modal.find('select[name="format"]').val(format);
+            modal.find('input[name="hed"]').val(header);
+        });
+    } else {
+        $(".edit-row").hide();
+    }
+
+    if (perm.del == 1) {
+        $('.btn-delete').click(function(e) {
+            e.preventDefault();
+            deleteId = $(this).data('id');
+            $('#dialog').modal('show');
+        });
+
+        $('#dialogConfirm').click(function() {
+            if (deleteId) {
+                window.location.href = "<?= base_url('DeleteArchitecture/'); ?>" + deleteId;
+            }
+        });
+    } else {
+        $(".btn-delete").hide();
+    }
+
+    if (perm.upd != 1 && perm.del != 1) {
+        $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+    }
 </script>
