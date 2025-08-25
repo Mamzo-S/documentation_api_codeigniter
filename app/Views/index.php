@@ -1,15 +1,3 @@
-<?php
-// session_start();
-// if(!isset($_SESSION['user'])){
-//     header("Location: /views/login.php");
-// }
-
-// require_once('actions/sessionAction.php');
-
-// $prenom = $_SESSION['user']['prenom'];
-// $nom = $_SESSION['user']['nom'];
-?>
-
 <?= $this->include('template/header'); ?>
 <?= $this->include('template/top_bar'); ?>
 <?= $this->include('template/left_sidebar'); ?>

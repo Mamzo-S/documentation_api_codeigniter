@@ -11,30 +11,28 @@ class RoleController extends BaseController
         $roleModel = new RoleModel();
 
         $profil_id = $this->request->getPost('profil');
-        // $sousmenu_id = $this->request->getPost('sousmenu');
-
         $read = $this->request->getPost('read') ?? [];
         $add = $this->request->getPost('add') ?? [];
         $upd = $this->request->getPost('upd') ?? [];
         $del = $this->request->getPost('del') ?? [];
 
         $allSm = array_unique(
-            array_merge(
-                array_keys($read),
+    array_merge(
+        array_keys($read),
                 array_keys($add),
                 array_keys($upd),
-                array_keys($del),
+                array_keys($del)
             )
         );
 
         foreach ($allSm as $sm) {
             $data = [
-                'd_read'    => isset($read[$sm]) ? 1 : 0,
-                'd_add'      => isset($add[$sm]) ? 1 : 0,
-                'd_upd'      => isset($upd[$sm]) ? 1 : 0,
-                'd_del'     => isset($del[$sm]) ? 1 : 0,
+                'd_read' => isset($read[$sm]) ? 1 : 0,
+                'd_add' => isset($add[$sm]) ? 1 : 0,
+                'd_upd' => isset($upd[$sm]) ? 1 : 0,
+                'd_del' => isset($del[$sm]) ? 1 : 0,
                 'profil_id' => $profil_id,
-                'id_sousmenu'  => $sm,
+                'id_sousmenu' => $sm,
             ];
 
             $roleModel->insert($data);

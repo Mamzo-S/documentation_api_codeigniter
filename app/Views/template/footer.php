@@ -1,5 +1,5 @@
 <footer class="footer text-right">
-    2015 © Moltran.
+    @Mamadou SOW 2025 © Moltran.
 </footer>
 
 

@@ -21,7 +21,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal"
+                                    data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -38,24 +39,18 @@
                                 <tr class="gradeX">
                                     <td><?= $donnee['profile_name'] ?></td>
                                     <td style="text-align: center;">
-                                        <a href="#"
-                                            class="btn-role"
-                                            data-toggle="modal"
-                                            data-target="#roles-modal"
+                                        <a href="#" class="btn-role" data-toggle="modal" data-target="#roles-modal"
                                             data-id="<?= $donnee['id']; ?>">
                                             <i class="fa fa-cogs"></i>
                                         </a>
                                     </td>
                                     <td class="actions">
-                                        <a href="#" class="on-default edit-row"
-                                            data-toggle="modal"
-                                            data-target="#edit-modal"
-                                            data-id="<?= $donnee['id'] ?>"
+                                        <a href="#" class="on-default edit-row" data-toggle="modal"
+                                            data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
                                             data-profil="<?= $donnee['profile_name'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="#"
-                                            class="on-default remove-row btn-delete"
+                                        <a href="#" class="on-default remove-row btn-delete"
                                             data-id="<?= $donnee['id']; ?>">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
@@ -73,7 +68,8 @@
 
     </div> <!-- content -->
 
-    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,7 +87,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Ajouter</button>
                         </div>
                     </form>
@@ -101,7 +98,8 @@
         </div>
     </div>
 
-    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,7 +118,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Modifier</button>
                         </div>
                     </form>
@@ -129,12 +128,13 @@
         </div>
     </div>
 
-    <div id="roles-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rolesModalLabel" aria-hidden="true" style="display: none;">
+    <div id="roles-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rolesModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Gestion de rôle pour </h4>
+                    <h4 class="modal-title">Gestion de rôle pour les utilisateurs </h4>
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('SaveRole') ?>" method="POST">
@@ -152,7 +152,8 @@
                                             <?php foreach ($menu as $donnee): ?>
                                                 <tr>
                                                     <td>
-                                                        <a href="#" class="menu-item" data-toggle="modal" data-target="#smenu-modal" data-id="<?= $donnee['id'] ?>">
+                                                        <a href="#" class="menu-item" data-toggle="modal"
+                                                            data-target="#smenu-modal" data-id="<?= $donnee['id'] ?>">
                                                             <?= $donnee['libelle'] ?>
                                                         </a>
                                                     </td>
@@ -170,7 +171,8 @@
 
                         </div>
                         <div class="modal-footer" style="margin-top: 20px;">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Enregistrer</button>
                         </div>
                     </form>
@@ -203,70 +205,36 @@
 
 <script>
     let menus = <?= json_encode($menu) ?>;
+    let checkboxSelect = {};
 
-    document.querySelectorAll(".menu-item").forEach(item => {
-        item.addEventListener("click", function(e) {
-            e.preventDefault();
-            let menuId = this.getAttribute("data-id");
-            let menu = menus.find(m => m.id == menuId);
-
-            let html = `
-
-            <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Sous-menus</th>
-                    <th>Lecture</th>
-                    <th>Ajout</th>
-                    <th>Modif</th>
-                    <th>Suppr</th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-
-            if (menu && menu.sous_menus.length > 0) {
-                menu.sous_menus.forEach(sm => {
-                    html += `
-                    <tr>
-                        <td>${sm.libelle}</td>
-                        <td><input type="checkbox" name="read[${sm.id}]" value="1"></td>
-                        <td><input type="checkbox" name="add[${sm.id}]" value="1"></td>
-                        <td><input type="checkbox" name="upd[${sm.id}]" value="1"></td>
-                        <td><input type="checkbox" name="del[${sm.id}]" value="1"></td>
-                    </tr>
-                `;
-                });
-            } else {
-                html += `
-                <tr>
-                    <td colspan="5" class="text-center text-muted">Aucun sous-menu pour ce menu</td>
-                </tr>
-            `;
+    function EnreCheckSelect() {
+        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
+            if (!checkboxSelect[cb.name]) {
+                checkboxSelect[cb.name] = {};
             }
-
-            html += `</tbody></table>`;
-            document.getElementById("submenu-container").innerHTML = html;
+            checkboxSelect[cb.name].value = cb.checked;
         });
-    });
-</script>
+    }
 
-<!-- <script>
-    let menus = <?= json_encode($menu) ?>;
-
-    let sm_select = {};
+    function RestCheckSelect() {
+        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
+            if (checkboxSelect[cb.name] && checkboxSelect[cb.name].value) {
+                cb.checked = true;
+            }
+        });
+    }
 
     document.querySelectorAll(".menu-item").forEach(item => {
-        item.addEventListener("click", function(e) {
+        item.addEventListener("click", function (e) {
             e.preventDefault();
+
+            EnreCheckSelect();
+
             let menuId = this.getAttribute("data-id");
             let menu = menus.find(m => m.id == menuId);
 
             let html = `
-            <label>
-                <input type="checkbox" id="checkAll"> Tout cocher
-            </label>
-            <table class="table table-bordered">
+                <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Sous-menus</th>
@@ -277,68 +245,41 @@
                     </tr>
                 </thead>
                 <tbody>
-        `;
+            `;
 
             if (menu && menu.sous_menus.length > 0) {
                 menu.sous_menus.forEach(sm => {
-                    let read = sm_select[sm.id]?.read ? "checked" : "";
-                    let add = sm_select[sm.id]?.add ? "checked" : "";
-                    let upd = sm_select[sm.id]?.upd ? "checked" : "";
-                    let del = sm_select[sm.id]?.del ? "checked" : "";
-
                     html += `
-                    <tr>
-                        <td>${sm.libelle}</td>
-                        <td><input type="checkbox" class="chk" data-id="${sm.id}" data-type="read" ${read}></td>
-                        <td><input type="checkbox" class="chk" data-id="${sm.id}" data-type="add" ${add}></td>
-                        <td><input type="checkbox" class="chk" data-id="${sm.id}" data-type="upd" ${upd}></td>
-                        <td><input type="checkbox" class="chk" data-id="${sm.id}" data-type="del" ${del}></td>
-                    </tr>
-                `;
+                        <tr>
+                            <td>${sm.libelle}</td>
+                            <td><input type="checkbox" name="read[${sm.id}]" value="1"></td>
+                            <td><input type="checkbox" name="add[${sm.id}]" value="1"></td>
+                            <td><input type="checkbox" name="upd[${sm.id}]" value="1"></td>
+                            <td><input type="checkbox" name="del[${sm.id}]" value="1"></td>
+                        </tr>
+                    `;
                 });
             } else {
                 html += `
-                <tr>
-                    <td colspan="5" class="text-center text-muted">Aucun sous-menu pour ce menu</td>
-                </tr>
-            `;
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">Aucun sous-menu pour ce menu</td>
+                    </tr>
+                `;
             }
 
             html += `</tbody></table>`;
-            let container = document.getElementById("submenu-container");
-            container.innerHTML = html;
+            document.getElementById("submenu-container").innerHTML = html;
 
-            container.querySelectorAll(".chk").forEach(chk => {
-                chk.addEventListener("change", function() {
-                    let id = this.getAttribute("data-id");
-                    let type = this.getAttribute("data-type");
-
-                    if (!sm_select[id]) sm_select[id] = {};
-                    sm_select[id][type] = this.checked;
-                });
-            });
-
-            let checkAllBox = document.getElementById("checkAll");
-            checkAllBox.addEventListener("change", function() {
-                container.querySelectorAll(".chk").forEach(checkbox => {
-                    checkbox.checked = checkAllBox.checked;
-                    let id = checkbox.getAttribute("data-id");
-                    let type = checkbox.getAttribute("data-type");
-                    if (!sm_select[id]) sm_select[id] = {};
-                    sm_select[id][type] = checkbox.checked;
-                });
-            });
+            RestCheckSelect();
         });
     });
-</script> -->
-
-
+</script>
 
 <script>
     var resizefunc = [];
 
     //modification
-    $('#edit-modal').on('show.bs.modal', function(event) {
+    $('#edit-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
         let profil = button.data('profil');
@@ -349,24 +290,39 @@
     });
 
     //suppression
-    $('.btn-delete').click(function(e) {
+    $('.btn-delete').click(function (e) {
         e.preventDefault();
         deleteId = $(this).data('id');
         $('#dialog').modal('show');
     });
-    $('#dialogConfirm').click(function() {
+    $('#dialogConfirm').click(function () {
         if (deleteId) {
             window.location.href = "<?= base_url('DeleteProfil/'); ?>" + deleteId;
         }
     });
 
     //gestion role pour les profils
-    $(document).on("click", ".btn-role", function(e) {
+    $(document).on("click", ".btn-role", function (e) {
         e.preventDefault();
         let profilId = $(this).data("id");
         $("#roles-modal input[name='profil']").val(profilId);
 
-        // Afficher le modal
         $("#roles-modal").modal("show");
+    });
+
+    //
+    document.querySelector("#roles-modal form").addEventListener("submit", function (e) {
+        for (let checkb in checkboxSelect) {
+            if (!this.querySelector('[name="' + checkb + '"]')) {
+                let input = document.createElement("input");
+                input.type = "hidden";
+                input.name = checkb;
+
+                if (checkboxSelect[checkb].value) {
+                    input.value = "1";
+                    this.appendChild(input);
+                }
+            }
+        }
     });
 </script>
