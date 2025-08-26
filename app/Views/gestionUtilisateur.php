@@ -21,7 +21,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal"
+                                    data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -59,25 +60,21 @@
 
                                     <td class="actions">
 
-                                        <a href="#"
-                                            data-toggle="modal"
-                                            data-target="#edit-modal"
-                                            data-id="<?= $donnee['id'] ?>"
-                                            data-nom="<?= $donnee['nom'] ?>"
-                                            data-prenom="<?= $donnee['prenom'] ?>"
-                                            data-email="<?= $donnee['email'] ?>"
+                                        <a href="#" data-toggle="modal" data-target="#edit-modal"
+                                            data-id="<?= $donnee['id'] ?>" data-nom="<?= $donnee['nom'] ?>"
+                                            data-prenom="<?= $donnee['prenom'] ?>" data-email="<?= $donnee['email'] ?>"
                                             data-username="<?= $donnee['username'] ?>"
                                             data-mdp="<?= $donnee['motdepasse'] ?>"
-                                            data-profile="<?= $donnee['profils'] ?>">
-                                            <button type="button" class="btn btn-warning">Modif</button>
+                                            data-profile="<?= $donnee['profile_id'] ?>">
+                                            <button type="button" class="btn btn-warning">Modifier</button>
                                         </a>
                                         <?php if ($donnee['statut'] == 1) { ?>
-                                            <a href="<?= base_url('ChangeStatut/' . $donnee['id']) ?>">
+                                            <a href="#" class="on-default btn-bloq" data-id="<?= $donnee['id']; ?>">
                                                 <button type="button" class="btn btn-danger">Bloquer</button>
                                             </a>
 
                                         <?php } else { ?>
-                                            <a href="<?= base_url('ChangeStatut/' . $donnee['id']) ?>">
+                                            <a href="#" class="btn-debloq" data-id="<?= $donnee['id']; ?>">
                                                 <button type="button" class="btn btn-danger">Debloq</button>
                                             </a>
                                         <?php } ?>
@@ -87,10 +84,8 @@
                                             data-id="<?= $donnee['id']; ?>">
                                             <i class="fa fa-archive" style="color: red;"></i>
                                         </a> -->
-                                        
-                                        <a href="#"
-                                            class="on-default send-row btn-send"
-                                            data-id="<?= $donnee['id']; ?>">
+
+                                        <a href="<?= base_url('SendEmail/') .$donnee['id']?>" class="on-default send-row btn-send" data-id="<?= $donnee['id']; ?>">
                                             <button type="button" class="btn btn-success">
                                                 <i class="fa fa-send" style="color: green;"></i>
                                             </button>
@@ -111,7 +106,8 @@
 
     </div> <!-- content -->
 
-    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -156,18 +152,16 @@
                                     <label for="field-2" class="control-label">Profile</label>
                                     <select class="form-control" name="profile">
                                         <option>choisir le profil...</option>
-                                        <?php
-                                        foreach ($profil as $donnee) { ?>
+                                        <?php foreach ($profil as $donnee) { ?>
                                             <option value="<?= $donnee['id'] ?>"><?= $donnee['profile_name'] ?></option>;
-                                        <?php
-                                        }
-                                        ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Ajouter</button>
                         </div>
                     </form>
@@ -177,7 +171,8 @@
         </div>
     </div><!-- /.modal -->
 
-    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -222,19 +217,17 @@
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Profile</label>
                                     <select class="form-control" name="profile">
-                                        <option></option>
-                                        <?php
-                                        foreach ($profil as $donnee) { ?>
+                                        <option>choisir le profil...</option>
+                                        <?php foreach ($profil as $donnee) { ?>
                                             <option value="<?= $donnee['id'] ?>"><?= $donnee['profile_name'] ?></option>;
-                                        <?php
-                                        }
-                                        ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Modifier</button>
                         </div>
                     </form>
@@ -244,7 +237,7 @@
     </div>
 </div>
 
-<div id="dialog" class="modal" tabindex="-1" role="dialog">
+<!-- <div id="dialog" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 30%;" role="document">
         <div class="modal-content">
             <header class="panel-heading bg-danger">
@@ -259,6 +252,40 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div id="bloq" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 30%;" role="document">
+        <div class="modal-content">
+            <header class="panel-heading bg-danger">
+                <h2 class="panel-title">Êtes-vous sûr ?</h2>
+            </header>
+            <div class="modal-body">
+                <p>Voulez-vous vraiment bloquer cet utilisateur ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Non</button>
+                <button id="bloqConfirm" class="btn btn-danger">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="debloq" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 30%;" role="document">
+        <div class="modal-content">
+            <header class="panel-heading bg-success">
+                <h2 class="panel-title">Êtes-vous sûr ?</h2>
+            </header>
+            <div class="modal-body">
+                <p>Voulez-vous vraiment debloquer cet utilisateur ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Non</button>
+                <button id="debloqConfirm" class="btn btn-success">Oui</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?= $this->include('template/footer') ?>
@@ -266,8 +293,8 @@
 <script>
     var resizefunc = [];
 
-    //modification    
-    $('#edit-modal').on('show.bs.modal', function(event) {
+    //modification
+    $('#edit-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
         let nom = button.data('nom');
@@ -288,14 +315,39 @@
     });
 
     //suppression
-    $('.btn-delete').click(function(e) {
+    $('.btn-delete').click(function (e) {
         e.preventDefault();
         deleteId = $(this).data('id');
         $('#dialog').modal('show');
     });
-    $('#dialogConfirm').click(function() {
+    $('#dialogConfirm').click(function () {
         if (deleteId) {
             window.location.href = "<?= base_url('DeleteUser/'); ?>" + deleteId;
         }
     });
+
+    //bloquer
+    $('.btn-bloq').click(function (e) {
+        e.preventDefault();
+        bloqId = $(this).data('id');
+        $('#bloq').modal('show');
+    });
+    $('#bloqConfirm').click(function () {
+        if (bloqId) {
+            window.location.href = "<?= base_url('ChangeStatut'); ?>/" + bloqId;
+        }
+    });
+
+    //debloquer
+    $('.btn-debloq').click(function (e) {
+        e.preventDefault();
+        debloqId = $(this).data('id');
+        $('#debloq').modal('show');
+    });
+    $('#debloqConfirm').click(function () {
+        if (debloqId) {
+            window.location.href = "<?= base_url('ChangeStatut/'); ?>" + debloqId;
+        }
+    });
+
 </script>

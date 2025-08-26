@@ -140,4 +140,89 @@ class UserController extends BaseController
 
         return redirect()->to(site_url('login'));
     }
+
+    public function SendEmail($id = null)
+    {
+        if ($id != null) {
+            $userMod = new UserModel();
+            $user = $userMod->find($id);
+
+            if ($user) {
+                // Prépare le message
+                $to = $user['email'];
+                $subject = "Vos informations de connexion";
+                $message = "
+                Bonjour {$user['prenom']} {$user['nom']},<br><br>
+                Voici vos informations de connexion à la plateforme :<br>
+                <b>Nom d'utilisateur :</b> {$user['username']}<br>
+                <b>Mot de passe :</b> {$user['motdepasse']}<br><br>
+                Merci de vous connecter sur la plateforme.<br>
+                <i>Ce message est automatique, ne pas répondre.</i>
+            ";
+
+                // Configuration email
+                $emailConfig = [
+                    'protocol' => 'smtp',
+                    'SMTPHost' => 'pro.turbo-smtp.com',
+                    'SMTPUser' => 'diery.seye@education.sn',
+                    'SMTPPass' => 'Pexice@10#',
+                    'SMTPPort' => 465,
+                    'SMTPCrypto' => 'ssl',
+                    'mailType' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n",
+                    'wordWrap' => true,
+                ];
+
+                $email = \Config\Services::email($emailConfig);
+                $email->setFrom('no-reply@education.sn', 'Mamzo - Ne pas répondre');
+                $email->setTo($to);
+                $email->setSubject($subject);
+                $email->setMessage($message);
+
+                if ($email->send()) {
+                    return redirect()->back()->with('successMessage', 'Email envoyé à l\'utilisateur.');
+                } else {
+                    $data = $email->printDebugger(['headers']);
+                    dd($data);
+                }
+            }
+        }
+        return redirect()->back()->with('errorMessage', 'ID utilisateur invalide.');
+    }
+
+    // public function sendmail($prenom,$nom,$mail,$mdp,$ien)
+    // {
+    //     if (ENVIRONMENT !== 'production')
+    //     {
+    //         $conf = Array(
+    //             'protocol'  => 'smtp',
+    //             'smtp_host' => 'ssl://smtp.googlemail.com',
+    //             'smtp_port' =>	465,
+    //             'smtp_user' => 'info@education.sn',
+    //             'smtp_pass' => 'SimenSupport',
+    //             'mailtype'  => 'html',
+    //             'charset'   => 'utf-8');
+    //     }
+    //     else {
+    //         $conf = Array(
+    //             'protocol' => 'smtp',
+    //             'smtp_host' => 'us2.smtp.mailhostbox.com',
+    //             'smtp_port' => 587,
+    //             'smtp_user' => 'noreply3@education.sn',
+    //             'smtp_pass' => '!HO^$D@5',
+    //             'mailtype' => 'html',
+    //             'charset' => 'utf-8'
+    //         );
+    //     }
+    //     $email = send_mail_affectation1($prenom,$nom,$mail,$mdp);
+    //     $this->load->library('email',$conf);
+    //     $this->email->from('noreply3@education.sn', 'Service technique SIMEN');
+    //     $this->email->to($mail);
+    //     $this->email->bcc('ndaoabdoulaye82@gmail.com');
+    //     $this->email->subject('Service SIMEN  - MEN-SYSGAR');
+    //     $this->email->message($email);
+    //     $this->email->set_newline("\r\n");
+    //     return $this->email->send();
+    // }
 }

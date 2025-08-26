@@ -206,6 +206,7 @@
 <script>
     let menus = <?= json_encode($menu) ?>;
     let checkboxSelect = {};
+    // let selectAll = {};
 
     function EnreCheckSelect() {
         document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
@@ -310,7 +311,7 @@
         $("#roles-modal").modal("show");
     });
 
-    //
+    //pour pouvoir faire des choix dans plusieurs menus sans perdre les precedents...
     document.querySelector("#roles-modal form").addEventListener("submit", function (e) {
         for (let checkb in checkboxSelect) {
             if (!this.querySelector('[name="' + checkb + '"]')) {

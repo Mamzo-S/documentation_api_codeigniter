@@ -12,7 +12,7 @@ class Sous_menuModel extends Model {
 
     public function AfficherSous_menu()
     {
-        $req = "SELECT sous_menu.id, sous_menu.code, sous_menu.libelle, sous_menu.etat, menu.libelle AS menus
+        $req = "SELECT sous_menu.id, id_menu, sous_menu.code, sous_menu.libelle, sous_menu.etat, menu.libelle AS menus
                 FROM sous_menu
                 JOIN menu ON sous_menu.id_menu = menu.id";
         $query = $this->db->query($req);

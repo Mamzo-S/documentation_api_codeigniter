@@ -13,7 +13,7 @@ class UserModel extends Model
 
     public function AfficherUser()
     {
-        $req = "SELECT user.id, nom, prenom, email, username, statut, motdepasse, profil.profile_name AS profils
+        $req = "SELECT user.id, nom, prenom, email, username, statut, motdepasse, profile_id, profil.profile_name AS profils
                 FROM user
                 JOIN profil ON user.profile_id=profil.id";
         $query = $this->db->query($req);

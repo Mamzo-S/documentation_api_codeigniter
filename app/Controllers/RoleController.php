@@ -17,8 +17,8 @@ class RoleController extends BaseController
         $del = $this->request->getPost('del') ?? [];
 
         $allSm = array_unique(
-    array_merge(
-        array_keys($read),
+            array_merge(
+                array_keys($read),
                 array_keys($add),
                 array_keys($upd),
                 array_keys($del)

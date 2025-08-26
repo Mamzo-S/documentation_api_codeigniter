@@ -47,7 +47,7 @@
                                             data-id="<?= $donnee['id'] ?>"
                                             data-code="<?= $donnee['code'] ?>"
                                             data-lib="<?= $donnee['libelle'] ?>"
-                                            data-menu="<?= $donnee['menus'] ?>">
+                                            data-menu="<?= $donnee['id_menu'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a href="#"
