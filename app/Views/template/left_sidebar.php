@@ -27,8 +27,8 @@
                     <a href="<?= base_url() ?>index" class="waves-effect <?= (current_url() == base_url('index')) ? 'active' : '' ?>"><i class="md md-home"></i><span> Accueil </span></a>
                 </li>
 
-                <li><a href="<?= base_url() ?>endpoints" class="<?= (current_url() == base_url('endpoints')) ? 'active' : '' ?>">Endpoints</a></li>
                 <li><a href="<?= base_url() ?>architecture" class="<?= (current_url() == base_url('architecture')) ? 'active' : '' ?>">Architecture</a></li>
+                <li><a href="<?= base_url() ?>endpoints" class="<?= (current_url() == base_url('endpoints')) ? 'active' : '' ?>">Endpoints</a></li>
                 <li><a href="<?= base_url() ?>authentification" class="<?= (current_url() == base_url('authentification')) ? 'active' : '' ?>">Authentification</a></li>
 
                 
