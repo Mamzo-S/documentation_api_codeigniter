@@ -113,8 +113,6 @@ class UserController extends BaseController
                 ]);
 
                 $tab_smenu = array();
-                // $tab_menu = array();
-                // $cur_m = '';
                 foreach ($role as $r) {
                     $tab_smenu[$r['id_sousmenu']] = [
                         'add' => $r['d_add'],
@@ -148,7 +146,6 @@ class UserController extends BaseController
             $user = $userMod->find($id);
 
             if ($user) {
-                // Prépare le message
                 $to = $user['email'];
                 $subject = "Vos informations de connexion";
                 $message = "
@@ -160,7 +157,6 @@ class UserController extends BaseController
                 <i>Ce message est automatique, ne pas répondre.</i>
             ";
 
-                // Configuration email
                 $emailConfig = [
                     'protocol' => 'smtp',
                     'SMTPHost' => 'pro.turbo-smtp.com',
@@ -191,38 +187,4 @@ class UserController extends BaseController
         return redirect()->back()->with('errorMessage', 'ID utilisateur invalide.');
     }
 
-    // public function sendmail($prenom,$nom,$mail,$mdp,$ien)
-    // {
-    //     if (ENVIRONMENT !== 'production')
-    //     {
-    //         $conf = Array(
-    //             'protocol'  => 'smtp',
-    //             'smtp_host' => 'ssl://smtp.googlemail.com',
-    //             'smtp_port' =>	465,
-    //             'smtp_user' => 'info@education.sn',
-    //             'smtp_pass' => 'SimenSupport',
-    //             'mailtype'  => 'html',
-    //             'charset'   => 'utf-8');
-    //     }
-    //     else {
-    //         $conf = Array(
-    //             'protocol' => 'smtp',
-    //             'smtp_host' => 'us2.smtp.mailhostbox.com',
-    //             'smtp_port' => 587,
-    //             'smtp_user' => 'noreply3@education.sn',
-    //             'smtp_pass' => '!HO^$D@5',
-    //             'mailtype' => 'html',
-    //             'charset' => 'utf-8'
-    //         );
-    //     }
-    //     $email = send_mail_affectation1($prenom,$nom,$mail,$mdp);
-    //     $this->load->library('email',$conf);
-    //     $this->email->from('noreply3@education.sn', 'Service technique SIMEN');
-    //     $this->email->to($mail);
-    //     $this->email->bcc('ndaoabdoulaye82@gmail.com');
-    //     $this->email->subject('Service SIMEN  - MEN-SYSGAR');
-    //     $this->email->message($email);
-    //     $this->email->set_newline("\r\n");
-    //     return $this->email->send();
-    // }
 }

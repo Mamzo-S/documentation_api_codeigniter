@@ -1,5 +1,5 @@
 <footer class="footer text-right">
-    @Mamadou SOW 2025 © Moltran.
+    2025 © SIMEN.
 </footer>
 
 
