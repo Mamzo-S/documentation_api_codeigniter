@@ -1,6 +1,5 @@
 /writable/* 
 !/writable/.gitkeep 
-/vendor/ 
 /node_modules/ 
 .env 
 /public/uploads/ 
