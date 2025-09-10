@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 // $routes->get('/', 'Home::index');
 $routes->get('index', 'Home::index');
+$routes->get('swagger', 'Home::swagger');
+$routes->get('swagg', 'DocsController::swagg');
 
 $routes->get('/', 'Home::index');
 $routes->post('login', 'UserController::login'); 
@@ -78,3 +80,5 @@ $routes->post('EditSous_menu', 'Sous_menuController::EditSous_menu');
 
 //role
 $routes->post('SaveRole', 'RoleController::SaveRole');
+
+

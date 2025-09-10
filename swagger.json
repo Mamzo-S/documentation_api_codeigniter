@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API SIMEN",
+    "description": "Documentation API SIMEN",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/documentation_api_codeigniter"
+    }
+  ],
+  "paths": {
+    "/architecture": {
+      "get": {
+        "tags": [
+          "Architecture"
+        ],
+        "summary": "Afficher toutes les architectures",
+        "operationId": "30f930009b377cff595f55423b4c61a8",
+        "responses": {
+          "200": {
+            "description": "Liste des architectures"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Architecture"
+        ],
+        "summary": "Ajouter une architecture",
+        "operationId": "a903c64ebbae28e0eb06af5252613567",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "nom"
+                ],
+                "properties": {
+                  "nom": {
+                    "type": "string",
+                    "example": "Nouvelle architecture"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Architecture ajoutée"
+          }
+        }
+      }
+    },
+    "/format_donnee": {
+      "get": {
+        "tags": [
+          "Formats"
+        ],
+        "summary": "Obtenir la liste des formats de données",
+        "operationId": "3a1655bf0d5ad96606b57890465dd299",
+        "responses": {
+          "200": {
+            "description": "Liste des formats obtenue avec succès"
+          }
+        }
+      }
+    },
+    "/methode": {
+      "get": {
+        "tags": [
+          "Methodes"
+        ],
+        "summary": "Obtenir la liste de toutes les méthodes",
+        "operationId": "3095356f6047d00c980bad6bb49bb5ab",
+        "responses": {
+          "200": {
+            "description": "Liste des méthodes obtenue avec succès"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Architecture",
+      "description": "Architecture"
+    },
+    {
+      "name": "Formats",
+      "description": "Formats"
+    },
+    {
+      "name": "Methodes",
+      "description": "Methodes"
+    }
+  ]
+}

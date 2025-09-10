@@ -18,6 +18,12 @@
 
             <div class="panel">
                 <div class="panel-body">
+                    <?php if (session()->getFlashdata('successMessage')): ?>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <?= session()->getFlashdata('successMessage') ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
@@ -85,7 +91,8 @@
                                             <i class="fa fa-archive" style="color: red;"></i>
                                         </a> -->
 
-                                        <a href="<?= base_url('SendEmail/') .$donnee['id']?>" class="on-default send-row btn-send" data-id="<?= $donnee['id']; ?>">
+                                        <a href="<?= base_url('SendEmail/') . $donnee['id'] ?>"
+                                            class="on-default send-row btn-send" data-id="<?= $donnee['id']; ?>">
                                             <button type="button" class="btn btn-success">
                                                 <i class="fa fa-send" style="color: green;"></i>
                                             </button>

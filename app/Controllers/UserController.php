@@ -99,9 +99,9 @@ class UserController extends BaseController
         $roleMod = new RoleModel();
         $username = $this->request->getPost('username');
         $mdp = $this->request->getPost('mdp');
-        $user = $userMod->getUserByEmail($username);
+        $user = $userMod->getUserByUsername($username, $mdp);
 
-        if ($user && $mdp === $user['motdepasse']) {
+        if ($user) {
             if ($user['statut'] == 1) {
                 $role = $roleMod->getRole($user['profile_id']);
                 session()->set([

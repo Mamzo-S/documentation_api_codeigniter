@@ -183,7 +183,6 @@
 
 </div>
 
-
 <div id="dialog" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 30%;" role="document">
         <div class="modal-content">
@@ -206,7 +205,6 @@
 <script>
     let menus = <?= json_encode($menu) ?>;
     let checkboxSelect = {};
-    // let selectAll = {};
 
     function EnreCheckSelect() {
         document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {

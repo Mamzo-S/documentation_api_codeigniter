@@ -20,11 +20,12 @@ class UserModel extends Model
         return $query->getResultArray();
     }
 
-    public function getUserByEmail($username)
+    public function getUserByUsername($username, $mdp)
     {
         return $this->select('user.*, profil.profile_name AS profils')
             ->join('profil', 'profil.id = user.profile_id')
             ->where('user.username', $username)
+            ->where('user.motdepasse', $mdp)
             ->first();
     }
 }

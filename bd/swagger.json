@@ -1,0 +1,75 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API de SIMEN",
+    "description": "Documentation des API de SIMEN",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/documentation_api_codeigniter"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Methodes",
+      "description": "Liste des méthodes"
+    },
+    {
+      "name": "Formats",
+      "description": "Liste des formats de données"
+    }
+  ],
+  "paths": {
+    "/methode": {
+      "get": {
+        "tags": ["Methodes"],
+        "summary": "Obtenir la liste de toutes les méthodes",
+        "responses": {
+          "200": {
+            "description": "Liste des méthodes obtenue avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "nom": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/format_donnee": {
+      "get": {
+        "tags": ["Formats"],
+        "summary": "Obtenir la liste des formats de données",
+        "responses": {
+          "200": {
+            "description": "Liste des formats obtenue avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "format": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

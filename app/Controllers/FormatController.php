@@ -7,11 +7,23 @@ use App\Models\FormatModel;
 class FormatController extends BaseController
 {
 
+    /**
+     * @OA\Get(
+     *     path="/format_donnee",
+     *     summary="Obtenir la liste des formats de données",
+     *     tags={"Formats"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des formats obtenue avec succès",
+     *     )
+     * )
+     */
     public function AfficherFormat()
     {
         $format = new FormatModel();
         $donnee['format'] = $format->findAll();
-        return view('format_donnee', $donnee);
+        // return view('format_donnee', $donnee);
+        return $this->response->setJSON($donnee);
     }
 
     public function AjoutFormat()

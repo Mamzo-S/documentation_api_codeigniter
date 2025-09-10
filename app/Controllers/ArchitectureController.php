@@ -4,9 +4,22 @@ namespace App\Controllers;
 
 use App\Models\ArchitectureModel;
 use App\Models\FormatModel;
+use CodeIgniter\HTTP\ResponseInterface;
+use OpenApi\Annotations as OA;
 
 class ArchitectureController extends BaseController
 {
+    /**
+     * @OA\Get(
+     *     path="/architecture",
+     *     tags={"Architecture"},
+     *     summary="Afficher toutes les architectures",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des architectures"
+     *     )
+     * )
+     */
 
     public function AfficherArchitecture()
     {
@@ -14,8 +27,28 @@ class ArchitectureController extends BaseController
         $format = new FormatModel();
         $donnee['format'] = $format->findAll();
         $donnee['archi'] = $archi->AfficherArchitecture();
-        return view('architecture', $donnee);
+        // return view('architecture', $donnee);
+        return $this->response->setJSON($donnee);
     }
+    
+    /**
+     * @OA\Post(
+     *     path="/architecture",
+     *     tags={"Architecture"},
+     *     summary="Ajouter une architecture",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"nom"},
+     *             @OA\Property(property="nom", type="string", example="Nouvelle architecture")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Architecture ajoutée"
+     *     )
+     * )
+     */
 
     public function AjoutArchitecture()
     {

@@ -8,5 +8,9 @@ class Home extends BaseController
     {
         return view('index');
     }
+    public function swagger(): string
+    {
+        return view('swagger');
+    }
 
 }
