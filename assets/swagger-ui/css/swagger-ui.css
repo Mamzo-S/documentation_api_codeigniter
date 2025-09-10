@@ -10931,6 +10931,10 @@
     margin: -20px 15px 0 0
 }
 
+.swagger-ui .servers {
+    margin-top: 20px;
+}
+
 .swagger-ui .servers>label select {
     max-width: 100%;
     min-width: 130px;
@@ -10975,7 +10979,7 @@
 
 .swagger-ui .servers-title {
     font-size: 12px;
-    font-weight: 700
+    font-weight: 700;
 }
 
 .swagger-ui .operation-servers h4.message {

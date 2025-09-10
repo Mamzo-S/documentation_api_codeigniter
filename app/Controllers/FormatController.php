@@ -14,7 +14,7 @@ class FormatController extends BaseController
      *     tags={"Formats"},
      *     @OA\Response(
      *         response=200,
-     *         description="Liste des formats obtenue avec succès",
+     *         description="Liste des formats de donnees",
      *     )
      * )
      */
