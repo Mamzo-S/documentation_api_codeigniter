@@ -8,7 +8,17 @@ use App\Models\MethodeModel;
 
 class AuthentificationController extends BaseController
 {
-
+    /**
+     * @OA\Get(
+     *     path="/authentification",
+     *     tags={"Authentification"},
+     *     summary="Afficher toutes les authentifications",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des authentifications"
+     *     )
+     * )
+     */
     public function AfficherAuthentification()
     {
         $auth = new AuthentificationModel();

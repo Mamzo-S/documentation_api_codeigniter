@@ -9,6 +9,17 @@ use App\Models\MenuModel;
 class ProfilController extends BaseController
 {
 
+    /**
+     * @OA\Get(
+     *     path="/gestionProfil",
+     *     tags={"Profil"},
+     *     summary="Afficher tous les profils",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des profils"
+     *     )
+     * )
+     */
     public function AfficherProfil()
     {
         $prof = new ProfilModel();

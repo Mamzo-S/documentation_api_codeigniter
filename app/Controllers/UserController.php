@@ -13,6 +13,17 @@ class UserController extends BaseController
         return view('login');
     }
 
+    /**
+     * @OA\Get(
+     *     path="/gestionUtilisateur",
+     *     tags={"Utilisateur"},
+     *     summary="Afficher tous les utilisateurs",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des utilisateurs"
+     *     )
+     * )
+     */
     public function AfficherUser()
     {
         $profMod = new ProfilModel();

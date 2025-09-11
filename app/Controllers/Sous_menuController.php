@@ -7,6 +7,17 @@ use App\Models\MenuModel;
 
 class Sous_menuController extends BaseController
 {
+    /**
+     * @OA\Get(
+     *     path="/sous_menu",
+     *     tags={"Sous menu"},
+     *     summary="Afficher tous les sous menu",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des sous menu"
+     *     )
+     * )
+     */
 
     public function AfficherSous_menu()
     {

@@ -7,6 +7,17 @@ use App\Models\LienModel;
 class LienController extends BaseController
 {
 
+    /**
+     * @OA\Get(
+     *     path="/base_url",
+     *     tags={"Base url"},
+     *     summary="Afficher tous les liens",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des bases url"
+     *     )
+     * )
+     */
     public function AfficherLien()
     {
         $lien = new LienModel();

@@ -6,6 +6,17 @@ use App\Models\MenuModel;
 
 class MenuController extends BaseController
 {
+    /**
+     * @OA\Get(
+     *     path="/menu",
+     *     tags={"Menu"},
+     *     summary="Afficher tous les menus",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des menus"
+     *     )
+     * )
+     */
 
     public function AfficherMenu()
     {

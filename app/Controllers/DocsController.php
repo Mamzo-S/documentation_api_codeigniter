@@ -13,7 +13,7 @@ use OpenApi\Generator;
  * 
  * @OA\Server(
  *     url="http://localhost/documentation_api_codeigniter",
- *     description="Serveur local"
+ *     
  * )
  */
 
