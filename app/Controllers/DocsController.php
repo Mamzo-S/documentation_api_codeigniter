@@ -10,6 +10,11 @@ use OpenApi\Generator;
  *     version="1.0.0",
  *     description="Documentation API SIMEN"
  * )
+ * 
+ * @OA\Server(
+ *     url="http://localhost/documentation_api_codeigniter",
+ *     
+ * )
  */
 
 class DocsController extends BaseController
@@ -18,11 +23,12 @@ class DocsController extends BaseController
     {
         $openapi = Generator::scan([APPPATH . 'Controllers']);
         // var_dump($openapi);
-        echo json_encode($openapi);
+        // echo json_encode($openapi);
         // exit;
         // exit;
         header('Content-Type: application/json');
         echo $openapi->toJSON();
+        exit;
     }
 }
 

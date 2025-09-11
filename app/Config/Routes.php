@@ -21,7 +21,13 @@ $routes->post('AjoutEndpoint', 'EndpointController::AjoutEndpoint');
 $routes->get('DeleteEndpoint/(:num)', 'EndpointController::DeleteEndpoint/$1');
 $routes->post('EditEndpoint', 'EndpointController::EditEndpoint');
 
-//architecture
+//architecture avec json
+$routes->get('architectures', 'ArchitectureController::AfficherArchitectureJson');
+$routes->get('architectures/(:num)', 'ArchitectureController::AfficherArchitectureById/$1');
+$routes->delete('architectures/(:num)', 'ArchitectureController::DeleteArchitectureJson/$1');
+$routes->post('architectures', 'ArchitectureController::AjoutArchitectureJson');
+$routes->put('architectures/(:num)', 'ArchitectureController::EditArchitectureJson/$1');
+//architecture sans json
 $routes->get('architecture', 'ArchitectureController::AfficherArchitecture');
 $routes->post('AjoutArchitecture', 'ArchitectureController::AjoutArchitecture');
 $routes->get('DeleteArchitecture/(:num)', 'ArchitectureController::DeleteArchitecture/$1');

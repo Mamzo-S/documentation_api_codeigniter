@@ -8,6 +8,17 @@ use App\Models\MethodeModel;
 
 class EndpointController extends BaseController
 {
+    /**
+     * @OA\Get(
+     *     path="/endpoints",
+     *     tags={"Endpoint"},
+     *     summary="Afficher tous les endpoints",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des endpoints"
+     *     )
+     * )
+     */
 
     public function AfficherEndpoints()
     {
