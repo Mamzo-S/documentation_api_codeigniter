@@ -60,12 +60,24 @@ $routes->get('methode', 'MethodeController::AfficherMethode');
 $routes->post('AjoutMethode', 'MethodeController::AjoutMethode');
 $routes->post('EditMethode', 'MethodeController::EditMethode');
 $routes->get('DeleteMethode/(:num)', 'MethodeController::DeleteMethode/$1');
+//methode avec json
+$routes->get('methodes', 'MethodeController::AfficherMethodeJson');
+$routes->get('methodes/(:num)', 'MethodeController::AfficherMethodeById/$1');
+$routes->delete('methodes/(:num)', 'MethodeController::DeleteMethodeJson/$1');
+$routes->post('methodes', 'MethodeController::AjoutMethodeJson');
+$routes->put('methodes/(:num)', 'MethodeController::EditMethodeJson/$1');
 
 //format de donnee
 $routes->get('format_donnee', 'FormatController::AfficherFormat');
 $routes->post('AjoutFormat', 'FormatController::AjoutFormat');
 $routes->post('EditFormat', 'FormatController::EditFormat');
 $routes->get('DeleteFormat/(:num)', 'FormatController::DeleteFormat/$1');
+//format de donnee avec json
+$routes->get('format', 'FormatController::AfficherFormatJson');
+$routes->get('format/(:num)', 'FormatController::AfficherFormatById/$1');
+$routes->delete('format/(:num)', 'FormatController::DeleteFormatJson/$1');
+$routes->post('format', 'FormatController::AjoutFormatJson');
+$routes->put('format/(:num)', 'FormatController::EditFormatJson/$1');
 
 //base url
 $routes->get('base_url', 'LienController::AfficherLien');
@@ -86,6 +98,12 @@ $routes->get('DeleteUser/(:num)', 'UserController::DeleteUser/$1');
 $routes->post('EditUser', 'UserController::EditUser');
 $routes->get('ChangeStatut/(:num)', 'UserController::ChangeStatut/$1');
 $routes->get('SendEmail/(:num)', 'UserController::SendEmail/$1');
+//users avec json
+$routes->get('user', 'UserController::AfficherUserJson');
+$routes->get('user/(:num)', 'UserController::AfficherUserById/$1');
+$routes->delete('user/(:num)', 'UserController::DeleteUserJson/$1');
+$routes->post('user', 'UserController::AjoutUserJson');
+$routes->put('user/(:num)', 'UserController::EditUserJson/$1');
 
 
 //profil

@@ -92,7 +92,7 @@ class EndpointController extends BaseController
      *     )
      * )
      */
-    public function AfficherEndpointJson(): ResponseInterface
+    public function AfficherEndpointJson()
     {
         $endpoint = new EndpointModel();
         $donnee = $endpoint->findAll();
@@ -126,7 +126,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=404, description="Endpoint non trouvé")
      * )
      */
-    public function AfficherEndpointByIdJson($id = null): ResponseInterface
+    public function AfficherEndpointByIdJson($id = null)
     {
         $endpoint = new EndpointModel();
         $donnee = $endpoint->find($id);
@@ -160,7 +160,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=400, description="Données invalides")
      * )
      */
-    public function AjoutEndpointJson(): ResponseInterface
+    public function AjoutEndpointJson()
     {
         $donnee = $this->request->getJSON(true);
         $endpoint = new EndpointModel();
@@ -201,7 +201,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=404, description="Endpoint non trouvé")
      * )
      */
-    public function EditEndpointJson($id = null): ResponseInterface
+    public function EditEndpointJson($id = null)
     {
         $endpoint = new EndpointModel();
         $donnee = $this->request->getJSON(true);
@@ -235,7 +235,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=404, description="Endpoint non trouvé")
      * )
      */
-    public function DeleteEndpointJson($id = null): ResponseInterface
+    public function DeleteEndpointJson($id = null)
     {
         $endpoint = new EndpointModel();
         $exist = $endpoint->find($id);
