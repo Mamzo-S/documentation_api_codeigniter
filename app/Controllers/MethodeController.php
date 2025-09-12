@@ -6,24 +6,12 @@ use App\Models\MethodeModel;
 
 class MethodeController extends BaseController
 {
-
-    /**
-     * @OA\Get(
-     *     path="/methode",
-     *     summary="Obtenir la liste de toutes les méthodes",
-     *     tags={"Methodes"},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Liste des méthodes obtenue avec succès",
-     *     )
-     * )
-     */
     public function AfficherMethode()
     {
         $lien = new MethodeModel();
         $donnee['methode'] = $lien->findAll();
-        // return view('methode', $donnee);
-        return $this->response->setJSON($donnee);
+        return view('methode', $donnee);
+        // return $this->response->setJSON($donnee);
     }
 
     public function AjoutMethode()

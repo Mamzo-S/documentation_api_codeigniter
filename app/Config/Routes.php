@@ -33,7 +33,13 @@ $routes->post('AjoutArchitecture', 'ArchitectureController::AjoutArchitecture');
 $routes->get('DeleteArchitecture/(:num)', 'ArchitectureController::DeleteArchitecture/$1');
 $routes->post('EditArchitecture', 'ArchitectureController::EditArchitecture');
 
-//authentification
+//authentification avec json
+$routes->get('authentifications', 'AuthentificationController::AfficherAuthentificationJson');
+$routes->get('authentifications/(:num)', 'AuthentificationController::AfficherAuthentificationById/$1');
+$routes->delete('authentifications/(:num)', 'AuthentificationController::DeleteAuthentificationJson/$1');
+$routes->post('authentifications', 'AuthentificationController::AjoutAuthentificationJson');
+$routes->put('authentifications/(:num)', 'AuthentificationController::EditAuthentificationJson/$1');
+//authentification sans json
 $routes->get('authentification', 'AuthentificationController::AfficherAuthentification');
 $routes->post('AjoutAuthentification', 'AuthentificationController::AjoutAuthentification');
 $routes->get('DeleteAuthentification/(:num)', 'AuthentificationController::DeleteAuthentification/$1');
@@ -56,6 +62,12 @@ $routes->get('base_url', 'LienController::AfficherLien');
 $routes->post('AjoutLien', 'LienController::AjoutLien');
 $routes->post('EditLien', 'LienController::EditLien');
 $routes->get('DeleteLien/(:num)', 'LienController::DeleteLien/$1');
+//base url avec json
+$routes->get('lien', 'LienController::AfficherLienJson');
+$routes->get('lien/(:num)', 'LienController::AfficherLienById/$1');
+$routes->delete('lien/(:num)', 'LienController::DeleteLienJson/$1');
+$routes->post('lien', 'LienController::AjoutLienJson');
+$routes->put('lien/(:num)', 'LienController::EditLienJson/$1');
 
 //utilisateur
 $routes->get('gestionUtilisateur', 'UserController::AfficherUser');
