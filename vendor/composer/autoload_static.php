@@ -3044,6 +3044,7 @@ class ComposerStaticInite5969c4dbf8d17ced44832bc52c734bf
         'PhpCsFixer\\Fixer\\Whitespace\\TypeDeclarationSpacesFixer' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypeDeclarationSpacesFixer.php',
         'PhpCsFixer\\Fixer\\Whitespace\\TypesSpacesFixer' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypesSpacesFixer.php',
         'PhpCsFixer\\Fixer\\WhitespacesAwareFixerInterface' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Fixer/WhitespacesAwareFixerInterface.php',
+        'PhpCsFixer\\Future' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Future.php',
         'PhpCsFixer\\Hasher' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Hasher.php',
         'PhpCsFixer\\Linter\\CachingLinter' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Linter/CachingLinter.php',
         'PhpCsFixer\\Linter\\Linter' => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src/Linter/Linter.php',

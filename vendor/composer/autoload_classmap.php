@@ -2739,6 +2739,7 @@ return array(
     'PhpCsFixer\\Fixer\\Whitespace\\TypeDeclarationSpacesFixer' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypeDeclarationSpacesFixer.php',
     'PhpCsFixer\\Fixer\\Whitespace\\TypesSpacesFixer' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypesSpacesFixer.php',
     'PhpCsFixer\\Fixer\\WhitespacesAwareFixerInterface' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Fixer/WhitespacesAwareFixerInterface.php',
+    'PhpCsFixer\\Future' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Future.php',
     'PhpCsFixer\\Hasher' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Hasher.php',
     'PhpCsFixer\\Linter\\CachingLinter' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Linter/CachingLinter.php',
     'PhpCsFixer\\Linter\\Linter' => $vendorDir . '/friendsofphp/php-cs-fixer/src/Linter/Linter.php',

@@ -87,7 +87,7 @@ class ArchitectureController extends BaseController
     public function AfficherArchitectureJson()
     {
         $archi = new ArchitectureModel();
-        $donnee['archi'] = $archi->AfficherArchitecture();
+        $donnee = $archi->AfficherArchitecture();
         return $this->response->setJSON($donnee);
     }
 
@@ -205,7 +205,7 @@ class ArchitectureController extends BaseController
 
         $json = $this->request->getJSON(true);
         $donnee = [
-            'architecture_name' => $json['architecture_name']?? $data['architecture_name'],
+            'architecture_name' => $json['architecture_name'] ?? $data['architecture_name'],
             'format_donnee' => $json['format_donnee'] ?? $data['format_donnee'],
             'header' => $json['header'] ?? $data['header'],
         ];
