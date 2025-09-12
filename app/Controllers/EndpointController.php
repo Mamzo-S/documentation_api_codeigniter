@@ -7,7 +7,7 @@ use App\Models\LienModel;
 use App\Models\MethodeModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\IncomingRequest;
-use OpenApi\Annotations as OA;
+use OpenApi\Annotation as OA;
 
 class EndpointController extends BaseController
 {
@@ -172,8 +172,7 @@ class EndpointController extends BaseController
         ]);
         return $this->response
             ->setStatusCode(201)
-            ->setJSON(['message' => 'Endpoint crée avec succés']);
-
+            ->setJSON(['message' => 'Endpoint crée avec succés']);  
     }
 
     /**
@@ -206,7 +205,7 @@ class EndpointController extends BaseController
         $endpoint = new EndpointModel();
         $donnee = $this->request->getJSON(true);
 
-        $exist = $endpoint->find($id);
+        $exist = $endpoint->find($id);  
         if (!$exist) {
             return $this->response
                 ->setJSON(['message' => "Endpoint avec ID $id non trouvé"])
