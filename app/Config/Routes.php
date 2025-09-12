@@ -5,17 +5,27 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-// $routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index');
 $routes->get('index', 'Home::index');
 $routes->get('swagger', 'Home::swagger');
 $routes->get('swagg', 'DocsController::swagg');
 
-$routes->get('/', 'Home::index');
-$routes->post('login', 'UserController::login'); 
-$routes->get('login', 'UserController::loginform'); 
+// $routes->get(from: '/', 'Home::index');
+$routes->post('login', 'UserController::login');
+$routes->get('login', 'UserController::loginform');
 $routes->get('logout', 'UserController::logout');
 
 //endpoints
+$routes->get('endpoint', 'EndpointController::AfficherEndpointJson');
+$routes->get('endpoint/(:num)', 'EndpointController::AfficherEndpointByIdJson/$1');
+$routes->post('endpoint', 'EndpointController::AjoutEndpointJson');
+$routes->put('endpoint/(:num)', 'EndpointController::EditEndpointJson/$1');
+$routes->delete('endpoint/(:num)', 'EndpointController::DeleteEndpointJson/$1');
+
+
+
+
+//
 $routes->get('endpoints', 'EndpointController::AfficherEndpoints');
 $routes->post('AjoutEndpoint', 'EndpointController::AjoutEndpoint');
 $routes->get('DeleteEndpoint/(:num)', 'EndpointController::DeleteEndpoint/$1');

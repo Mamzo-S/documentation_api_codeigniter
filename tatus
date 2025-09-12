@@ -1,0 +1,17 @@
+[33mff3f6cf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m c etait necessaire :)
+[33m3450719[m[33m ([m[1;31morigin/gommis[m[33m, [m[1;32mrecuperation[m[33m, [m[1;32mgommis[m[33m)[m gestion des annotations pour les controllers
+[33m165124f[m ajout du dossier de vendor
+[33m4161202[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update .gitignore
+[33ma8f2dcb[m Forcer l'ajout du dossier vendor
+[33mc98ee70[m integration de swagger
+[33m09b97e0[m dernier reglage
+[33m4f819d3[m reglage des routes
+[33mafc2e24[m ajout de STMP...
+[33m6a53f0b[m gestion des droits pour les utilisateurs
+[33me6b0cae[m gestion des droits d'utilisateur
+[33m77836fe[m dernier reglage
+[33m1375445[m first commit
+[33m3ee5dc9[m modification des fonctionnalites, ajout de la page login
+[33m2bfa8da[m ajout bd
+[33mbb88428[m finalisation des fonctionnalites
+[33m360f394[m ajout du projet
