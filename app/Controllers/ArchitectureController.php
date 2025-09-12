@@ -116,7 +116,7 @@ class ArchitectureController extends BaseController
     public function AfficherArchitectureById($id)
     {
         $archi = new ArchitectureModel();
-        $donnee['archi'] = $archi->where('id', $id)->first();
+        $donnee = $archi->where('id', $id)->first();
         return $this->response->setJSON($donnee);
     }
 

@@ -8,6 +8,6 @@ class LienModel extends Model {
     protected $table = 'lien';
     protected $primaryKey = 'id';
     
-    protected $allowedFields = ['base_url'];
+    protected $allowedFields = ['base_url', 'nom_url'];
 
 }

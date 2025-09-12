@@ -21,7 +21,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal"
+                                    data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -42,15 +43,12 @@
                                     <td><?= $donnee['nom_url'] ?></td>
                                     <td><?= $donnee['base_url'] ?></td>
                                     <td class="actions">
-                                        <a href="#" class="on-default edit-row"
-                                            data-toggle="modal"
-                                            data-target="#edit-modal"
-                                            data-id="<?= $donnee['id'] ?>"
-                                            data-lien="<?= $donnee['base_url'] ?>">
+                                        <a href="#" class="on-default edit-row" data-toggle="modal"
+                                            data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
+                                            data-lien="<?= $donnee['base_url'] ?>" data-nom="<?= $donnee['nom_url'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="#"
-                                            class="on-default remove-row btn-delete"
+                                        <a href="#" class="on-default remove-row btn-delete"
                                             data-id="<?= $donnee['id']; ?>">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
@@ -70,7 +68,8 @@
 
     </div> <!-- content -->
 
-    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -82,13 +81,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="field-2" class="control-label">Nom url</label>
+                                    <input type="text" class="form-control" id="field-2" name="nom_lien">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="field-2" class="control-label">Base url</label>
                                     <input type="text" class="form-control" id="field-2" name="lien">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Ajouter</button>
                         </div>
                     </form>
@@ -98,7 +104,8 @@
         </div>
     </div><!-- /.modal -->
 
-    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,13 +118,20 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="hidden" id='id' name="id">
+                                    <label for="field-2" class="control-label">Nom url</label>
+                                    <input type="text" class="form-control" id="field-2" name="nom_lien">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="field-2" class="control-label">Base url</label>
                                     <input type="text" class="form-control" id="field-2" name="lien">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Modifier</button>
                         </div>
                     </form>
@@ -149,22 +163,24 @@
 <script>
     var resizefunc = [];
 
-    $('#edit-modal').on('show.bs.modal', function(event) {
+    $('#edit-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
+        let nom = button.data('nom');
         let lien = button.data('lien');
 
         var modal = $(this);
         modal.find('input[name="id"]').val(id);
+        modal.find('input[name="nom_lien"]').val(nom);
         modal.find('input[name="lien"]').val(lien);
     });
 
-    $('.btn-delete').click(function(e) {
+    $('.btn-delete').click(function (e) {
         e.preventDefault();
         deleteId = $(this).data('id');
         $('#dialog').modal('show');
     });
-    $('#dialogConfirm').click(function() {
+    $('#dialogConfirm').click(function () {
         if (deleteId) {
             window.location.href = "<?= base_url('DeleteLien/'); ?>" + deleteId;
         }
@@ -180,28 +196,31 @@
     }
 
     if (perm.upd == 1) {
-        $('#edit-modal').on('show.bs.modal', function(event) {
+        $('#edit-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             let id = button.data('id');
-            let meth = button.data('meth');
+            let nom = button.data('nom');
+            let lien = button.data('lien');
 
             var modal = $(this);
             modal.find('input[name="id"]').val(id);
-            modal.find('input[name="meth"]').val(meth);
+            modal.find('input[name="nom_lien"]').val(nom);
+            modal.find('input[name="lien"]').val(lien);
         });
     } else {
         $(".edit-row").hide();
     }
 
     if (perm.del == 1) {
-        $('#edit-modal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            let id = button.data('id');
-            let lien = button.data('lien');
-
-            var modal = $(this);
-            modal.find('input[name="id"]').val(id);
-            modal.find('input[name="lien"]').val(lien);
+        $('.btn-delete').click(function (e) {
+            e.preventDefault();
+            deleteId = $(this).data('id');
+            $('#dialog').modal('show');
+        });
+        $('#dialogConfirm').click(function () {
+            if (deleteId) {
+                window.location.href = "<?= base_url('DeleteLien/'); ?>" + deleteId;
+            }
         });
     } else {
         $(".btn-delete").hide();
