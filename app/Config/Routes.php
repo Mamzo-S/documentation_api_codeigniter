@@ -23,8 +23,6 @@ $routes->put('endpoint/(:num)', 'EndpointController::EditEndpointJson/$1');
 $routes->delete('endpoint/(:num)', 'EndpointController::DeleteEndpointJson/$1');
 
 
-
-
 //
 $routes->get('endpoints', 'EndpointController::AfficherEndpoints');
 $routes->post('AjoutEndpoint', 'EndpointController::AjoutEndpoint');
@@ -94,11 +92,30 @@ $routes->post('AjoutProfil', 'ProfilController::AjoutProfil');
 $routes->get('DeleteProfil/(:num)', 'ProfilController::DeleteProfil/$1');
 $routes->post('EditProfil', 'ProfilController::EditProfil');
 
+
+//profil Avec JSON
+$routes->get('profil', 'ProfilController::AfficherProfilJson');
+$routes->get('profil/(:num)', 'ProfilController::AfficherProfilByIdJson/$1');
+$routes->post('profil', 'ProfilController::AjoutProfilJson');
+$routes->put('profil/(:num)', 'ProfilController::EditProfilJson/$1');
+$routes->get('profil/(:num)', 'ProfilController::DeleteProfilJson/$1');
+
+
+
 //menu
 $routes->get('menu', 'MenuController::AfficherMenu');
 $routes->post('AjoutMenu', 'MenuController::AjoutMenu');
 $routes->get('DeleteMenu/(:num)', 'MenuController::DeleteMenu/$1');
 $routes->post('EditMenu', 'MenuController::EditMenu');
+
+
+//menu Avec JSON
+$routes->get('menu', 'MenuController::AfficherMenuJson');
+$routes->get('menu/(:num)', 'MenuController::AfficherMenuByIdJson/$1');
+$routes->post('menu', 'MenuController::AjoutMenuJson');
+$routes->put('menu/(:num)', 'MenuController::EditMenuJson/$1');
+$routes->get('menu/(:num)', 'MenuController::DeleteMenuJson/$1');
+
 
 //sous_menu
 $routes->get('sous_menu', 'Sous_menuController::AfficherSous_menu');

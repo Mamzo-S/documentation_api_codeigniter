@@ -7,7 +7,7 @@ use App\Models\LienModel;
 use App\Models\MethodeModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\IncomingRequest;
-use OpenApi\Annotations as OA;
+use OpenApi\Annotation as OA;
 
 class EndpointController extends BaseController
 {
@@ -126,7 +126,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=404, description="Endpoint non trouvé")
      * )
      */
-    public function AfficherEndpointByIdJson($id = null): ResponseInterface
+    public function AfficherEndpointByIdJson($id = null)
     {
         $endpoint = new EndpointModel();
         $donnee = $endpoint->find($id);
@@ -160,7 +160,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=400, description="Données invalides")
      * )
      */
-    public function AjoutEndpointJson(): ResponseInterface
+    public function AjoutEndpointJson()
     {
         $donnee = $this->request->getJSON(true);
         $endpoint = new EndpointModel();
@@ -172,8 +172,7 @@ class EndpointController extends BaseController
         ]);
         return $this->response
             ->setStatusCode(201)
-            ->setJSON(['message' => 'Endpoint crée avec succés']);
-
+            ->setJSON(['message' => 'Endpoint crée avec succés']);  
     }
 
     /**
@@ -201,12 +200,12 @@ class EndpointController extends BaseController
      *     @OA\Response(response=404, description="Endpoint non trouvé")
      * )
      */
-    public function EditEndpointJson($id = null): ResponseInterface
+    public function EditEndpointJson($id = null)
     {
         $endpoint = new EndpointModel();
         $donnee = $this->request->getJSON(true);
 
-        $exist = $endpoint->find($id);
+        $exist = $endpoint->find($id);  
         if (!$exist) {
             return $this->response
                 ->setJSON(['message' => "Endpoint avec ID $id non trouvé"])
@@ -235,7 +234,7 @@ class EndpointController extends BaseController
      *     @OA\Response(response=404, description="Endpoint non trouvé")
      * )
      */
-    public function DeleteEndpointJson($id = null): ResponseInterface
+    public function DeleteEndpointJson($id = null)
     {
         $endpoint = new EndpointModel();
         $exist = $endpoint->find($id);
