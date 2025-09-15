@@ -51,11 +51,7 @@ class MenuController extends BaseController
         return redirect()->to(site_url('menu'));
     }
 
-<<<<<<< HEAD
     //========Gestion Menu avec format JSON============
-=======
-    //========Gestion Endpoint avec format JSON============
->>>>>>> dcfda98bfd1e794322f6f94939c3cd93b1a053ee
     //Get /menu
     /**
      * @OA\Get(
@@ -127,11 +123,8 @@ class MenuController extends BaseController
      *          @OA\JsonContent(
      *              @OA\Property(property="code", type="string", example="Accueil"),
      *              @OA\Property(property="libelle", type="string", example="Menu principal"),
-<<<<<<< HEAD
      *              @OA\Property(property="etat", type="boolean", example=1)
-=======
      *              @OA\Property(property="etat", type="integer", example=1)
->>>>>>> dcfda98bfd1e794322f6f94939c3cd93b1a053ee
      *          )
      *        ),
      *      @OA\Response(response=201, description="Menu crée"),
@@ -212,11 +205,7 @@ class MenuController extends BaseController
             ->setJSON(['message' => 'Menu modifié']);
     }
     //Delete /menu/{id}
-<<<<<<< HEAD
     /**
-=======
-     /**
->>>>>>> dcfda98bfd1e794322f6f94939c3cd93b1a053ee
      * @OA\Delete(
      *     path="/menu/{id}",
      *     tags={"Menu"},
