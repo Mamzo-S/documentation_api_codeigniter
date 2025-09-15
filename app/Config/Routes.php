@@ -141,6 +141,16 @@ $routes->post('AjoutSous_menu', 'Sous_menuController::AjoutSous_menu');
 $routes->get('DeleteSous_menu/(:num)', 'Sous_menuController::DeleteSous_menu/$1');
 $routes->post('EditSous_menu', 'Sous_menuController::EditSous_menu');
 
+
+
+//Sous_menu avec JSON
+$routes->get('sous-menu', 'Sous_menuController::AfficherSousMenuJson');
+$routes->get('sous-menu/(:num)', 'Sous_menuController::AfficherSousMenuByIdJson/$1');
+$routes->post('sous-menu', 'Sous_menuController::AjoutSousMenuJson');
+$routes->put('sous-menu/(:num)', 'Sous_menuController::EditSousMenuJson/$1');
+$routes->get('sous-menu/(:num)', 'Sous_menuController::DeleteSousMenuJson/$1');
+
+
 //role
 $routes->post('SaveRole', 'RoleController::SaveRole');
 
