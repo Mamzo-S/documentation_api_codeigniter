@@ -19,7 +19,7 @@ class ProfilController extends BaseController
         $donnee['profil'] = $prof->findAll();
 
         foreach ($donnee['menu'] as &$m) {
-            $m['sous_menus'] = $sousmenuM->getSousMenuByIdMenu($m['id']);
+            $m['sous_menu'] = $sousmenuM->getSousMenuByIdMenu($m['id']);
         }
         return view('gestionProfil', $donnee);
     }

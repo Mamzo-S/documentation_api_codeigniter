@@ -123,7 +123,6 @@ class MenuController extends BaseController
      *          @OA\JsonContent(
      *              @OA\Property(property="code", type="string", example="Accueil"),
      *              @OA\Property(property="libelle", type="string", example="Menu principal"),
-     *              @OA\Property(property="etat", type="boolean", example=1)
      *              @OA\Property(property="etat", type="integer", example=1)
      *          )
      *        ),

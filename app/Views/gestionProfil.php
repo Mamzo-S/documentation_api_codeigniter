@@ -40,18 +40,18 @@
                                     <td><?= $donnee['profile_name'] ?></td>
                                     <td style="text-align: center;">
                                         <a href="#" class="btn-role" data-toggle="modal" data-target="#roles-modal"
-                                            data-id="<?= $donnee['id']; ?>">
+                                            data-idprofil="<?= $donnee['id']; ?>">
                                             <i class="fa fa-cogs"></i>
                                         </a>
                                     </td>
                                     <td class="actions">
                                         <a href="#" class="on-default edit-row" data-toggle="modal"
-                                            data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
+                                            data-target="#edit-modal" data-idprofil="<?= $donnee['id'] ?>"
                                             data-profil="<?= $donnee['profile_name'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a href="#" class="on-default remove-row btn-delete"
-                                            data-id="<?= $donnee['id']; ?>">
+                                            data-idprofil="<?= $donnee['id']; ?>">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
                                     </td>
@@ -153,7 +153,7 @@
                                                 <tr>
                                                     <td>
                                                         <a href="#" class="menu-item" data-toggle="modal"
-                                                            data-target="#smenu-modal" data-id="<?= $donnee['id'] ?>">
+                                                            data-target="#smenu-modal" data-idmenu="<?= $donnee['id'] ?>">
                                                             <?= $donnee['libelle'] ?>
                                                         </a>
                                                     </td>
@@ -203,84 +203,12 @@
 <?= $this->include('template/footer') ?>
 
 <script>
-    let menus = <?= json_encode($menu) ?>;
-    let checkboxSelect = {};
-
-    function EnreCheckSelect() {
-        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
-            if (!checkboxSelect[cb.name]) {
-                checkboxSelect[cb.name] = {};
-            }
-            checkboxSelect[cb.name].value = cb.checked;
-        });
-    }
-
-    function RestCheckSelect() {
-        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
-            if (checkboxSelect[cb.name] && checkboxSelect[cb.name].value) {
-                cb.checked = true;
-            }
-        });
-    }
-
-    document.querySelectorAll(".menu-item").forEach(item => {
-        item.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            EnreCheckSelect();
-
-            let menuId = this.getAttribute("data-id");
-            let menu = menus.find(m => m.id == menuId);
-
-            let html = `
-                <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Sous-menus</th>
-                        <th>Lecture</th>
-                        <th>Ajout</th>
-                        <th>Modif</th>
-                        <th>Suppr</th>
-                    </tr>
-                </thead>
-                <tbody>
-            `;
-
-            if (menu && menu.sous_menus.length > 0) {
-                menu.sous_menus.forEach(sm => {
-                    html += `
-                        <tr>
-                            <td>${sm.libelle}</td>
-                            <td><input type="checkbox" name="read[${sm.id}]" value="1"></td>
-                            <td><input type="checkbox" name="add[${sm.id}]" value="1"></td>
-                            <td><input type="checkbox" name="upd[${sm.id}]" value="1"></td>
-                            <td><input type="checkbox" name="del[${sm.id}]" value="1"></td>
-                        </tr>
-                    `;
-                });
-            } else {
-                html += `
-                    <tr>
-                        <td colspan="5" class="text-center text-muted">Aucun sous-menu pour ce menu</td>
-                    </tr>
-                `;
-            }
-
-            html += `</tbody></table>`;
-            document.getElementById("submenu-container").innerHTML = html;
-
-            RestCheckSelect();
-        });
-    });
-</script>
-
-<script>
     var resizefunc = [];
 
     //modification
     $('#edit-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        let id = button.data('id');
+        let id = button.data('idprofil');
         let profil = button.data('profil');
 
         var modal = $(this);
@@ -291,7 +219,7 @@
     //suppression
     $('.btn-delete').click(function (e) {
         e.preventDefault();
-        deleteId = $(this).data('id');
+        deleteId = $(this).data('idprofil');
         $('#dialog').modal('show');
     });
     $('#dialogConfirm').click(function () {
@@ -299,29 +227,106 @@
             window.location.href = "<?= base_url('DeleteProfil/'); ?>" + deleteId;
         }
     });
+</script>
 
-    //gestion role pour les profils
+<script>
+    // Gestion des rôles pour les profils
+    let menus = <?= json_encode($menu) ?>;
+    let checkboxSelect = {};
+
+    // pour enregistrer l'état des cases cochees
+    function EnreCheckSelect() {
+        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
+            if (!checkboxSelect[cb.name]) {
+                checkboxSelect[cb.name] = {};
+            }
+            checkboxSelect[cb.name].value = cb.checked;
+        });
+    }
+
+    // pour restaurer l'état des cases cochees
+    function RestCheckSelect() {
+        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
+            if (checkboxSelect[cb.name] && checkboxSelect[cb.name].value) {
+                cb.checked = true;
+            }
+        });
+    }
+
+    // Quand on clique sur l'icone pour gerer un profil
     $(document).on("click", ".btn-role", function (e) {
         e.preventDefault();
-        let profilId = $(this).data("id");
+        let profilId = $(this).data("idprofil");
         $("#roles-modal input[name='profil']").val(profilId);
 
-        $("#roles-modal").modal("show");
+        // Recuperation des roles pour un profil
+        $.get('getRoles/' + profilId, function (roles) {
+            checkboxSelect = {};
+            roles.forEach(role => {
+                checkboxSelect["read[" + role.id_sousmenu + "]"] = { value: role.d_read == 1 };
+                checkboxSelect["add[" + role.id_sousmenu + "]"] = { value: role.d_add == 1 };
+                checkboxSelect["upd[" + role.id_sousmenu + "]"] = { value: role.d_upd == 1 };
+                checkboxSelect["del[" + role.id_sousmenu + "]"] = { value: role.d_del == 1 };
+            });
+
+            $("#roles-modal").modal("show");
+
+            document.querySelectorAll(".menu-item").forEach(item => {
+                item.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    EnreCheckSelect();
+
+                    let menuId = this.getAttribute("data-idmenu");
+                    let menu = menus.find(m => m.id == menuId);
+
+                    let html = `
+                        <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sous-menus</th>
+                                <th>Lecture</th>
+                                <th>Ajout</th>
+                                <th>Modif</th>
+                                <th>Suppr</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    `;
+
+                    if (menu && menu.sous_menu.length > 0) {
+                        menu.sous_menu.forEach(sm => {
+                            html += `
+                                <tr>
+                                    <td>${sm.libelle}</td>
+                                    <td><input type="checkbox" name="read[${sm.id}]" value="1"></td>
+                                    <td><input type="checkbox" name="add[${sm.id}]" value="1"></td>
+                                    <td><input type="checkbox" name="upd[${sm.id}]" value="1"></td>
+                                    <td><input type="checkbox" name="del[${sm.id}]" value="1"></td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        html += `
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">Aucun sous-menu pour ce menu</td>
+                            </tr>
+                        `;
+                    }
+
+                    html += `</tbody></table>`;
+                    document.getElementById("submenu-container").innerHTML = html;
+
+                    RestCheckSelect();
+                });
+            });
+        });
     });
+    $('#roles-modal').on('hidden.bs.modal', function () {        
+        document.querySelectorAll("#submenu-container input[type=checkbox]").forEach(cb => {
+            cb.checked = false;
+        });
 
-    //pour pouvoir faire des choix dans plusieurs menus sans perdre les precedents...
-    document.querySelector("#roles-modal form").addEventListener("submit", function (e) {
-        for (let checkb in checkboxSelect) {
-            if (!this.querySelector('[name="' + checkb + '"]')) {
-                let input = document.createElement("input");
-                input.type = "hidden";
-                input.name = checkb;
-
-                if (checkboxSelect[checkb].value) {
-                    input.value = "1";
-                    this.appendChild(input);
-                }
-            }
-        }
+        document.getElementById("submenu-container").innerHTML = '<p class="text-muted">Veuillez sélectionner un menu pour voir ses sous-menus.</p>';
     });
 </script>

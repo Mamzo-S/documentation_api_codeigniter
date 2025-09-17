@@ -35,9 +35,26 @@ class RoleController extends BaseController
                 'id_sousmenu' => $sm,
             ];
 
-            $roleModel->insert($data);
-        }
+            // on verifie déjà si ca existe dans la base de donnee
+            $existe = $roleModel
+                ->where('profil_id', $profil_id)
+                ->where('id_sousmenu', $sm)
+                ->first();
 
+            if ($existe) {
+                $roleModel->update($existe['id'], $data);
+            } else {
+                $roleModel->insert($data);
+            }
+        }
         return redirect()->to(site_url('gestionProfil'));
     }
+
+    public function getRolesByProfile($profil_id)
+    {
+        $roleModel = new RoleModel();
+        $roles = $roleModel->where('profil_id', $profil_id)->findAll();
+        return $this->response->setJSON($roles);
+    }
+
 }

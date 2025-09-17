@@ -153,5 +153,6 @@ $routes->get('sous-menu/(:num)', 'Sous_menuController::DeleteSousMenuJson/$1');
 
 //role
 $routes->post('SaveRole', 'RoleController::SaveRole');
+$routes->get('getRoles/(:num)', 'RoleController::getRolesByProfile/$1');
 
 

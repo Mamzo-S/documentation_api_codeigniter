@@ -6,9 +6,9 @@ use OpenApi\Generator;
 
 /**
  * @OA\Info(
- *     title="API SIMEN",
+ *     title="API Documentation",
  *     version="1.0.0",
- *     description="Documentation API SIMEN"
+ *     description="Projet de Documentation API"
  * )
  * 
  * @OA\Server(
