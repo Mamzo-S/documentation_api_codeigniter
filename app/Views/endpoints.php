@@ -30,8 +30,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Lien</th>
-                                <th>Parametre</th>
                                 <th>Methode</th>
+                                <th>Parametre</th>
                                 <th>Reponse</th>
                                 <th>Actions</th>
                             </tr>
@@ -42,8 +42,8 @@
                                 <tr class="gradeX">
                                     <td><?= $i++ ?></td>
                                     <td><?= $donnee['liens'] ?></td>
-                                    <td><?= $donnee['parametre'] ?></td>
                                     <td><?= $donnee['methode'] ?></td>
+                                    <td><?= $donnee['parametre'] ?></td>
                                     <td><?= $donnee['reponse'] ?></td>
                                     <td class="actions">
                                         <a href="#" class="on-default edit-row"
@@ -51,8 +51,8 @@
                                             data-target="#edit-modal"
                                             data-id="<?= $donnee['id'] ?>"
                                             data-lien="<?= $donnee['lien_end'] ?>"
-                                            data-param="<?= $donnee['parametre'] ?>"
                                             data-methode="<?= $donnee['methode_end'] ?>"
+                                            data-param="<?= $donnee['parametre'] ?>"
                                             data-rep="<?= $donnee['reponse'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
