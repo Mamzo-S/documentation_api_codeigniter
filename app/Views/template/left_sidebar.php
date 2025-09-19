@@ -34,9 +34,9 @@
                         class="<?= (current_url() == base_url('architecture')) ? 'active' : '' ?>">Architecture</a></li>
                 <li><a href="<?= base_url() ?>endpoints"
                         class="<?= (current_url() == base_url('endpoints')) ? 'active' : '' ?>">Endpoints</a></li>
-                <li><a href="<?= base_url() ?>authentification"
+                <!-- <li><a href="<?= base_url() ?>authentification"
                         class="<?= (current_url() == base_url('authentification')) ? 'active' : '' ?>">Authentification</a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?= base_url() ?>swagger"
                         class="<?= (current_url() == base_url('swagger')) ? 'active' : '' ?>">Tester avec Swagger

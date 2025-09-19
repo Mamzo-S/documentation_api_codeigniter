@@ -27,15 +27,20 @@ class EndpointController extends BaseController
         $lien = $this->request->getPost('lien');
         $param = $this->request->getPost('param');
         $methode = $this->request->getPost('meth');
+        $type = $this->request->getPost('type');
+        $end = $this->request->getPost('end');
         $rep = $this->request->getPost('rep');
-        $end = new EndpointModel();
+        // $EndBase = $lien . '/' . $end;
+        $endModel = new EndpointModel();
         $donnee = [
             'lien_end' => $lien,
             'parametre' => $param,
             'methode_end' => $methode,
+            'type' => $type,
+            'endName' => $end,
             'reponse' => $rep
         ];
-        $end->insert($donnee);
+        $endModel->insert($donnee);
         return redirect()->to(site_url('endpoints'));
     }
 
@@ -51,23 +56,27 @@ class EndpointController extends BaseController
     public function EditEndpoint()
     {
         $id = $this->request->getPost('id');
-        $methode = $this->request->getPost('meth');
         $lien = $this->request->getPost('lien');
         $param = $this->request->getPost('param');
+        $methode = $this->request->getPost('meth');
+        $type = $this->request->getPost('type');
+        $end = $this->request->getPost('end');
         $rep = $this->request->getPost('rep');
 
         if ($id) {
-            $end = new EndpointModel();
-            $data = $end->find($id);
+            $endModel = new EndpointModel();
+            $data = $endModel->find($id);
 
             if ($data) {
                 $donnee = [
                     'lien_end' => $lien,
                     'parametre' => $param,
                     'methode_end' => $methode,
-                    'reponse' => $rep,
+                    'type' => $type,
+                    'endName' => $end,
+                    'reponse' => $rep
                 ];
-                $end->update($id, $donnee);
+                $endModel->update($id, $donnee);
             }
         }
         return redirect()->to(site_url('endpoints'));
@@ -99,13 +108,13 @@ class EndpointController extends BaseController
 
         if (empty($donnee)) {
             return $this->response
-                        ->setJSON(['message' => 'Aucun endpoint trouvé'])
-                        ->setStatusCode(404);
+                ->setJSON(['message' => 'Aucun endpoint trouvé'])
+                ->setStatusCode(404);
         }
 
         return $this->response
-                    ->setJSON($donnee)
-                    ->setStatusCode(200);
+            ->setJSON($donnee)
+            ->setStatusCode(200);
     }
 
     /**
@@ -133,13 +142,13 @@ class EndpointController extends BaseController
 
         if (!$donnee) {
             return $this->response
-                        ->setJSON(['message' => "Endpoint avec ID $id non trouvé"])
-                        ->setStatusCode(404);
+                ->setJSON(['message' => "Endpoint avec ID $id non trouvé"])
+                ->setStatusCode(404);
         }
 
         return $this->response
-                    ->setJSON($donnee)
-                    ->setStatusCode(200);
+            ->setJSON($donnee)
+            ->setStatusCode(200);
     }
 
     /**
@@ -172,7 +181,7 @@ class EndpointController extends BaseController
         ]);
         return $this->response
             ->setStatusCode(201)
-            ->setJSON(['message' => 'Endpoint crée avec succés']);  
+            ->setJSON(['message' => 'Endpoint crée avec succés']);
     }
 
     /**
@@ -205,7 +214,7 @@ class EndpointController extends BaseController
         $endpoint = new EndpointModel();
         $donnee = $this->request->getJSON(true);
 
-        $exist = $endpoint->find($id);  
+        $exist = $endpoint->find($id);
         if (!$exist) {
             return $this->response
                 ->setJSON(['message' => "Endpoint avec ID $id non trouvé"])

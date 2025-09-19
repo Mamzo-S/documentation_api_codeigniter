@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>Moltran </span></a>
+            <a href="<?= base_url('') ?>index" class="logo"><i class="md md-terrain"></i> <span>API SIMEN </span></a>
         </div>
     </div>
     <!-- Button mobile view to collapse sidebar menu -->

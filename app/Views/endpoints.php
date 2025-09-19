@@ -21,52 +21,46 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal" data-target="#ajout-modal">Ajouter</button>
+                                <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal"
+                                    data-target="#ajout-modal">Ajouter</button>
                             </div>
                         </div>
                     </div>
                     <table class="table table-bordered table-striped" id="datatable-editable">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Lien</th>
                                 <th>Methode</th>
+                                <th>Type</th>
                                 <th>Parametre</th>
                                 <th>Reponse</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1;
-                            foreach ($endpoint as $donnee) { ?>
+                            <?php foreach ($endpoint as $donnee) { ?>
                                 <tr class="gradeX">
-                                    <td><?= $i++ ?></td>
-                                    <td><?= $donnee['liens'] ?></td>
+                                    <td><?= $donnee['liens'] . '/' . $donnee['endName'] ?></td>
                                     <td><?= $donnee['methode'] ?></td>
+                                    <td><?= $donnee['type'] ?></td>
                                     <td><?= $donnee['parametre'] ?></td>
                                     <td><?= $donnee['reponse'] ?></td>
                                     <td class="actions">
-                                        <a href="#" class="on-default edit-row"
-                                            data-toggle="modal"
-                                            data-target="#edit-modal"
-                                            data-id="<?= $donnee['id'] ?>"
-                                            data-lien="<?= $donnee['lien_end'] ?>"
-                                            data-methode="<?= $donnee['methode_end'] ?>"
-                                            data-param="<?= $donnee['parametre'] ?>"
-                                            data-rep="<?= $donnee['reponse'] ?>">
+                                        <a href="#" class="on-default edit-row" data-toggle="modal"
+                                            data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
+                                            data-lien="<?= $donnee['lien_end'] ?>" data-end="<?= $donnee['endName'] ?>"
+                                            data-type="<?= $donnee['type'] ?>" data-methode="<?= $donnee['methode_end'] ?>"
+                                            data-param="<?= $donnee['parametre'] ?>" data-rep="<?= $donnee['reponse'] ?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="#"
-                                            class="on-default remove-row btn-delete"
+                                        <a href="#" class="on-default remove-row btn-delete"
                                             data-id="<?= $donnee['id']; ?>">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
 
                                     </td>
                                 </tr>
-                            <?php }
-                            $i++;
-                            ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -78,7 +72,8 @@
 
     </div> <!-- content -->
     <!-- MODAL -->
-    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,7 +91,21 @@
                                         <?php
                                         foreach ($lien as $donnee) { ?>
                                             <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Methode</label>
+                                    <select class="form-control" name="meth">
+                                        <option>choisir la methode...</option>
                                         <?php
+                                        foreach ($methode as $donnee) { ?>
+                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                            <?php
                                         }
                                         ?>
                                     </select>
@@ -110,15 +119,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Methode</label>
-                                    <select class="form-control" name="meth">
-                                        <option>choisir la methode...</option>
-                                        <?php
-                                        foreach ($methode as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
-                                        <?php
-                                        }
-                                        ?>
+                                    <label for="field-2" class="control-label">Endpoint</label>
+                                    <input type="text" class="form-control" id="field-2" name="end">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Type d'endpoint</label>
+                                    <select class="form-control" name="type">
+                                        <option>choisir le type...</option>
+                                        <option value="endpoint_S"> endpoint_S </option>
+                                        <option value="authentification"> authentification </option>
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +141,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Ajouter</button>
                         </div>
                     </form>
@@ -139,7 +151,8 @@
         </div>
     </div><!-- /.modal -->
 
-    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,14 +164,28 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" id="id" name="id">
+                                    <input type="hidden" name="id">
                                     <label for="field-2" class="control-label">Base URL</label>
                                     <select class="form-control" name="lien">
-                                        <option></option>
+                                        <option>choisir le lien...</option>
                                         <?php
                                         foreach ($lien as $donnee) { ?>
                                             <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Methode</label>
+                                    <select class="form-control" name="meth">
+                                        <option>choisir la methode...</option>
                                         <?php
+                                        foreach ($methode as $donnee) { ?>
+                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                            <?php
                                         }
                                         ?>
                                     </select>
@@ -167,32 +194,35 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Parametre</label>
-                                    <input type="text" class="form-control" id="field-2" name="param" value="">
+                                    <input type="text" class="form-control" id="field-2" name="param">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Methode</label>
-                                    <select class="form-control" name="meth">
+                                    <label for="field-2" class="control-label">Endpoint</label>
+                                    <input type="text" class="form-control" id="field-2" name="end">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Type d'endpoint</label>
+                                    <select class="form-control" name="type">
                                         <option></option>
-                                        <?php
-                                        foreach ($methode as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>
-                                        <?php
-                                        }
-                                        ?>
+                                        <option value="endpoint_S"> endpoint_S </option>
+                                        <option value="authentification"> authentification </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Reponse</label>
-                                    <input type="text" class="form-control" id="field-2" name="rep" value="">
+                                    <input type="text" class="form-control" id="field-2" name="rep">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-default waves-effect"
+                                data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Modifier</button>
                         </div>
                     </form>
@@ -233,13 +263,15 @@
 <script>
     var resizefunc = [];
 
-    $('#edit-modal').on('show.bs.modal', function(event) {
+    $('#edit-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
         let methode = button.data('methode');
         let lien = button.data('lien');
         let rep = button.data('rep');
         let param = button.data('param');
+        let type = button.data('type');
+        let end = button.data('end');
 
         var modal = $(this);
         modal.find('input[name="id"]').val(id);
@@ -247,16 +279,18 @@
         modal.find('select[name="lien"]').val(lien);
         modal.find('input[name="rep"]').val(rep);
         modal.find('input[name="param"]').val(param);
+        modal.find('input[name="end"]').val(end);
+        modal.find('select[name="type"]').val(type);
     });
 
 
-    $('.btn-delete').click(function(e) {
+    $('.btn-delete').click(function (e) {
         e.preventDefault();
         deleteId = $(this).data('id');
         $('#dialog').modal('show');
     });
 
-    $('#dialogConfirm').click(function() {
+    $('#dialogConfirm').click(function () {
         if (deleteId) {
             window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
         }
@@ -273,37 +307,41 @@
     }
 
     if (perm.upd == 1) {
-        $('#edit-modal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        let id = button.data('id');
-        let methode = button.data('methode');
-        let lien = button.data('lien');
-        let rep = button.data('rep');
-        let param = button.data('param');
+        $('#edit-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let methode = button.data('methode');
+            let lien = button.data('lien');
+            let rep = button.data('rep');
+            let param = button.data('param');
+            let type = button.data('type');
+            let end = button.data('end');
 
-        var modal = $(this);
-        modal.find('input[name="id"]').val(id);
-        modal.find('select[name="meth"]').val(methode);
-        modal.find('select[name="lien"]').val(lien);
-        modal.find('input[name="rep"]').val(rep);
-        modal.find('input[name="param"]').val(param);
-    });
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('select[name="meth"]').val(methode);
+            modal.find('select[name="lien"]').val(lien);
+            modal.find('input[name="rep"]').val(rep);
+            modal.find('input[name="param"]').val(param);
+            modal.find('input[name="end"]').val(end);
+            modal.find('select[name="type"]').val(type);
+        });
     } else {
         $(".edit-row").hide();
     }
 
     if (perm.del == 1) {
-        $('.btn-delete').click(function(e) {
-        e.preventDefault();
-        deleteId = $(this).data('id');
-        $('#dialog').modal('show');
-    });
+        $('.btn-delete').click(function (e) {
+            e.preventDefault();
+            deleteId = $(this).data('id');
+            $('#dialog').modal('show');
+        });
 
-    $('#dialogConfirm').click(function() {
-        if (deleteId) {
-            window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
-        }
-    });
+        $('#dialogConfirm').click(function () {
+            if (deleteId) {
+                window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
+            }
+        });
     } else {
         $(".btn-delete").hide();
     }
