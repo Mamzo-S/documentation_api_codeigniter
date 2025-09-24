@@ -31,15 +31,18 @@
                 </li>
 
                 <li><a href="<?= base_url() ?>architecture"
-                        class="<?= (current_url() == base_url('architecture')) ? 'active' : '' ?>">Architecture</a></li>
+                        class="<?= (current_url() == base_url('architecture')) ? 'active' : '' ?>"><i
+                            class="md ion-checkmark"></i><span>Architecture</span></a></li>
                 <li><a href="<?= base_url() ?>endpoints"
-                        class="<?= (current_url() == base_url('endpoints')) ? 'active' : '' ?>">Endpoints</a></li>
+                        class="<?= (current_url() == base_url('endpoints')) ? 'active' : '' ?>"><i
+                            class="md ion-checkmark"></i><span>Endpoints</span></a></li>
                 <!-- <li><a href="<?= base_url() ?>authentification"
                         class="<?= (current_url() == base_url('authentification')) ? 'active' : '' ?>">Authentification</a>
                 </li> -->
                 <li>
                     <a href="<?= base_url() ?>swagger"
-                        class="<?= (current_url() == base_url('swagger')) ? 'active' : '' ?>">Tester avec Swagger
+                        class="<?= (current_url() == base_url('swagger')) ? 'active' : '' ?>"><i
+                            class="md ion-checkmark"></i><span>Tester avec Swagger</span>
                     </a>
                 </li>
                 <?php if (session()->get('profile_id') != 2): ?>

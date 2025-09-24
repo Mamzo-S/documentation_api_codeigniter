@@ -1,102 +1,272 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API SIMEN",
-    "description": "Documentation API SIMEN",
+    "title": "Documentation API SIMEN",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost/documentation_api_codeigniter"
+      "url": "https://codeco.education.sn/ien-get"
+    },
+    {
+      "url": "https://codeco.education.sn/api-ien"
+    },
+    {
+      "url": "https://codeco.education.sn"
     }
   ],
   "paths": {
-    "/architecture": {
+    "/region": {
       "get": {
         "tags": [
-          "Architecture"
+          "Regions"
         ],
-        "summary": "Afficher toutes les architectures",
-        "operationId": "30f930009b377cff595f55423b4c61a8",
+        "summary": "Liste des régions",
         "responses": {
           "200": {
-            "description": "Liste des architectures"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Architecture"
-        ],
-        "summary": "Ajouter une architecture",
-        "operationId": "a903c64ebbae28e0eb06af5252613567",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "required": [
-                  "nom"
-                ],
-                "properties": {
-                  "nom": {
-                    "type": "string",
-                    "example": "Nouvelle architecture"
+            "description": "Retourne la liste des régions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
                   }
-                },
-                "type": "object"
+                }
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/department": {
+      "get": {
+        "tags": [
+          "Departements"
+        ],
+        "summary": "Liste des départements",
         "responses": {
-          "201": {
-            "description": "Architecture ajoutée"
+          "200": {
+            "description": "Retourne la liste des départements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/format_donnee": {
+    "/district": {
       "get": {
         "tags": [
-          "Formats"
+          "Arrondissements"
         ],
-        "summary": "Obtenir la liste des formats de données",
-        "operationId": "3a1655bf0d5ad96606b57890465dd299",
+        "summary": "Liste des arrondissements",
         "responses": {
           "200": {
-            "description": "Liste des formats obtenue avec succès"
+            "description": "Retourne la liste des arrondissements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/methode": {
+    "/town": {
       "get": {
         "tags": [
-          "Methodes"
+          "Communes"
         ],
-        "summary": "Obtenir la liste de toutes les méthodes",
-        "operationId": "3095356f6047d00c980bad6bb49bb5ab",
+        "summary": "Liste des communes",
         "responses": {
           "200": {
-            "description": "Liste des méthodes obtenue avec succès"
+            "description": "Retourne la liste des communes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ia": {
+      "get": {
+        "tags": [
+          "IA"
+        ],
+        "summary": "Liste des IA",
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des IA",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ief": {
+      "get": {
+        "tags": [
+          "IEF"
+        ],
+        "summary": "Liste des IEF",
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des IEF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/area": {
+      "get": {
+        "tags": [
+          "Communes"
+        ],
+        "summary": "Liste des communes avec code de IEF",
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des communes avec code de IEF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ia_code_admin": {
+      "get": {
+        "tags": [
+          "IA"
+        ],
+        "summary": "Liste IA avec code admin",
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des IA avec code admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_etab_by_com/{code_com}": {
+      "get": {
+        "tags": [
+          "Etab - par code Commune"
+        ],
+        "summary": "Liste des etablissements d'une commune",
+        "parameters": [
+          {
+            "name": "code_com",
+            "in": "path",
+            "required": true,
+            "description": "Code de commune",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des etablissements d'une commune",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_etab_by_ia_ief/{code_ia_ief}": {
+      "get": {
+        "tags": [
+          "Etab - par code IA ou IEF"
+        ],
+        "summary": "Liste des etablissements d'une IA ou IEF",
+        "parameters": [
+          {
+            "name": "code_ia_ief",
+            "in": "path",
+            "required": true,
+            "description": "Code IA ou IEF",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des etablissements d'une IA ou IEF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
-  },
-  "tags": [
-    {
-      "name": "Architecture",
-      "description": "Architecture"
-    },
-    {
-      "name": "Formats",
-      "description": "Formats"
-    },
-    {
-      "name": "Methodes",
-      "description": "Methodes"
-    }
-  ]
+  }
 }

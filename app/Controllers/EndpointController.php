@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Models\EndpointModel;
 use App\Models\LienModel;
 use App\Models\MethodeModel;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\HTTP\IncomingRequest;
 use OpenApi\Annotation as OA;
 
 class EndpointController extends BaseController

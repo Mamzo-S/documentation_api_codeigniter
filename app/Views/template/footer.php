@@ -26,15 +26,3 @@
 <script src="<?= base_url() ?>assets/jquery-datatables-editable/datatables.editable.init.js"></script>
 
 <script src="<?= base_url() ?>assets/js/jquery.slimscroll.js"></script>
-<!-- <script>
-    $(".slimscrollleft").slimScroll({
-        height: '100%',
-        position: 'right',
-        size: "5px",
-        color: '#dcdcdc'
-    });
-</script> -->
-
-
-
-<!-- jQuery  -->

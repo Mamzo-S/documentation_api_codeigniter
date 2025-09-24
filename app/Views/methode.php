@@ -114,7 +114,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="hidden" id='id' name="id">
+                                    <input type="text" id='id' name="id">
                                     <label for="field-2" class="control-label">Methode</label>
                                     <input type="text" class="form-control" id="field-2" name="meth">
                                 </div>

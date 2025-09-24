@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favicon_1.ico">
 
-    <title>Moltran - Responsive Admin Dashboard Template</title>
+    <title>API SIMEN</title>
 
     <!-- Base Css Files -->
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" />
