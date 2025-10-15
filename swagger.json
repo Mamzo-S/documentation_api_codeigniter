@@ -13,6 +13,9 @@
     },
     {
       "url": "https://codeco.education.sn"
+    },
+    {
+      "url": "https://management.education.sn/api/simenv1"
     }
   ],
   "paths": {
@@ -203,7 +206,7 @@
     "/list_etab_by_com/{code_com}": {
       "get": {
         "tags": [
-          "Etab - par code Commune"
+          "Etablissements"
         ],
         "summary": "Liste des etablissements d'une commune",
         "parameters": [
@@ -237,7 +240,7 @@
     "/list_etab_by_ia_ief/{code_ia_ief}": {
       "get": {
         "tags": [
-          "Etab - par code IA ou IEF"
+          "Etablissements"
         ],
         "summary": "Liste des etablissements d'une IA ou IEF",
         "parameters": [
@@ -254,6 +257,86 @@
         "responses": {
           "200": {
             "description": "Retourne la liste des etablissements d'une IA ou IEF",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fonction": {
+      "get": {
+        "tags": [
+          "Fonctions"
+        ],
+        "summary": "Liste des fonctions",
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des fonctions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorie_structure": {
+      "get": {
+        "tags": [
+          "Fonctions"
+        ],
+        "summary": "Liste des categories de fonctions",
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des categories fonctions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorie_fonction/{code_categorie}": {
+      "get": {
+        "tags": [
+          "Fonctions"
+        ],
+        "summary": "Liste des fonctions par categorie",
+        "parameters": [
+          {
+            "name": "code_categorie",
+            "in": "path",
+            "required": true,
+            "description": "Code categorie",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retourne la liste des fonctions par categorie",
             "content": {
               "application/json": {
                 "schema": {
