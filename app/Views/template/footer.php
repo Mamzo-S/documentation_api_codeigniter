@@ -26,3 +26,20 @@
 <script src="<?= base_url() ?>assets/jquery-datatables-editable/datatables.editable.init.js"></script>
 
 <script src="<?= base_url() ?>assets/js/jquery.slimscroll.js"></script>
+
+
+<!-- TinyMCE officiel avec ton API key -->
+<script src="https://cdn.tiny.cloud/1/92kgy4844hy1hphp6izgr2moiswjf4126d4autht0fub7k2o/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: 'textarea.wysiwyg',
+        height: 350,
+        plugins: 'lists link image table code',
+        toolbar: 'undo redo | styles | bold italic underline | alignleft aligncenter alignright | bullist numlist | table | code',
+        menubar: false,
+        branding: false,
+        content_style: 'body { font-family: Courier New, monospace; font-size: 14px }'
+    });
+</script>

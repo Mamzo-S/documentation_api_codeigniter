@@ -22,6 +22,7 @@ class EndpointController extends BaseController
 
     public function AjoutEndpoint()
     {
+        $titre = $this->request->getPost('titre');
         $lien = $this->request->getPost('lien');
         $param = $this->request->getPost('param');
         $methode = $this->request->getPost('meth');
@@ -31,6 +32,7 @@ class EndpointController extends BaseController
         // $EndBase = $lien . '/' . $end;
         $endModel = new EndpointModel();
         $donnee = [
+            'titre' => $titre,
             'lien_end' => $lien,
             'parametre' => $param,
             'methode_end' => $methode,

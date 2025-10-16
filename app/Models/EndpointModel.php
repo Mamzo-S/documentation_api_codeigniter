@@ -9,11 +9,11 @@ class EndpointModel extends Model
     protected $table = 'endpoints';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['lien_end', 'parametre', 'methode_end', 'reponse', 'type', 'endName'];
+    protected $allowedFields = ['titre', 'lien_end', 'parametre', 'methode_end', 'reponse', 'type', 'endName'];
 
     public function AfficherEndpoints()
     {
-        $req = "SELECT endpoints.id, endpoints.lien_end, type, endName, 
+        $req = "SELECT endpoints.id, endpoints.titre, endpoints.lien_end, type, endName, 
                     endpoints.methode_end, lien.base_url AS liens, 
                     parametre, methode.methode_name AS methode, reponse
                 FROM endpoints

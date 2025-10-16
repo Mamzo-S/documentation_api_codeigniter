@@ -16,7 +16,7 @@
                     <h4 class="pull-left page-title">Endpoints</h4>
                 </div>
             </div>
-            <div class="panel">
+            <div class="panel col-md-6">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered table-striped" id="datatable-editable">
+                    <!-- <table class="table table-bordered table-striped" id="datatable-editable">
                         <thead>
                             <tr>
                                 <th>Lien</th>
@@ -62,7 +62,20 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                    </table>
+                    </table> -->
+                    <div class="list-group ">
+                        <?php foreach ($endpoint as $donnee) { ?>
+                            <button type="button" class="list-group-item list-group-item-action btn-view-endpoint"
+                                data-id="<?= $donnee['id'] ?>" data-lien="<?= $donnee['liens'] ?>"
+                                data-end="<?= $donnee['endName'] ?>" data-methode="<?= $donnee['methode'] ?>"
+                                data-type="<?= $donnee['type'] ?>"
+                                data-param="<?= htmlspecialchars($donnee['parametre'], ENT_QUOTES) ?>"
+                                data-rep="<?= htmlspecialchars($donnee['reponse'], ENT_QUOTES) ?>">
+                                <?= $donnee['titre'] ?>
+                            </button>
+                        <?php } ?>
+                    </div>
+
                 </div>
                 <!-- end: page -->
 
@@ -71,6 +84,25 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
+    <div id="view-endpoint-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="endpoint-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Lien :</strong> <span id="endpoint-lien"></span></p>
+                    <p><strong>Methode :</strong> <span id="endpoint-methode"></span></p>
+                    <p><strong>Type :</strong> <span id="endpoint-type"></span></p>
+                    <p><strong>Paramètre :</strong> <span id="endpoint-param"></span></p>
+                    <p><strong>Réponse :</strong></p>
+                    <textarea id="endpoint-rep" class="form-control wysiwyg" rows="10" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL -->
     <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" style="display: none;">
@@ -83,6 +115,12 @@
                 <div class="modal-body">
                     <form action="<?= base_url('AjoutEndpoint') ?>" method="POST">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Titre endpoint</label>
+                                    <input type="text" class="form-control" id="field-2" name="titre">
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Base URL</label>
@@ -113,18 +151,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Parametre</label>
-                                    <input type="text" class="form-control" id="field-2" name="param">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="field-2" class="control-label">Endpoint</label>
-                                    <input type="text" class="form-control" id="field-2" name="end">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
                                     <label for="field-2" class="control-label">Type d'endpoint</label>
                                     <select class="form-control" name="type">
                                         <option>choisir le type...</option>
@@ -135,8 +161,20 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Reponse</label>
-                                    <input type="text" class="form-control" id="field-2" name="rep">
+                                    <label for="field-2" class="control-label">Endpoint</label>
+                                    <input type="text" class="form-control" id="field-2" name="end">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Parametre</label>
+                                    <input type="text" class="form-control" id="field-2" name="param">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="documentation" class="control-label">Reponse </label>
+                                    <textarea name="rep" class="form-control wysiwyg" rows="8"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -258,6 +296,32 @@
 
 <script>
     let role = <?= json_encode(session()->get('tab_smenu')) ?>;
+</script>
+
+<script>
+    $('.btn-view-endpoint').click(function () {
+        let button = $(this);
+
+        $('#endpoint-title').text(button.data('end'));
+        $('#endpoint-lien').text(button.data('lien'));
+        $('#endpoint-methode').text(button.data('methode'));
+        $('#endpoint-type').text(button.data('type'));
+        $('#endpoint-param').text(button.data('param'));
+
+        let rep = button.data('rep');
+
+        // Si TinyMCE est actif, mettre le contenu dans le WYSIWYG
+        if (tinymce.get('endpoint-rep')) {
+            tinymce.get('endpoint-rep').setContent(rep);
+        } else {
+            $('#endpoint-rep').val(rep);
+        }
+
+        $('#view-endpoint-modal').modal('show');
+    });
+
+
+
 </script>
 
 <script>
