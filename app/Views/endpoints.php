@@ -16,7 +16,7 @@
                     <h4 class="pull-left page-title">Endpoints</h4>
                 </div>
             </div>
-            <div class="panel col-md-6">
+            <div class="panel col-md-9">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -26,55 +26,53 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <table class="table table-bordered table-striped" id="datatable-editable">
-                        <thead>
+                    <table class="table table-hover table-bordered align-middle text-center">
+                        <thead class="table-light">
                             <tr>
-                                <th>Lien</th>
-                                <th>Methode</th>
-                                <th>Type</th>
-                                <th>Parametre</th>
-                                <th>Reponse</th>
-                                <th>Actions</th>
+                                <th style="width: 60%">Titre de l’Endpoint</th>
+                                <th style="width: 40%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($endpoint as $donnee) { ?>
-                                <tr class="gradeX">
-                                    <td><?= $donnee['liens'] . '/' . $donnee['endName'] ?></td>
-                                    <td><?= $donnee['methode'] ?></td>
-                                    <td><?= $donnee['type'] ?></td>
-                                    <td><?= $donnee['parametre'] ?></td>
-                                    <td><?= $donnee['reponse'] ?></td>
-                                    <td class="actions">
-                                        <a href="#" class="on-default edit-row" data-toggle="modal"
-                                            data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
-                                            data-lien="<?= $donnee['lien_end'] ?>" data-end="<?= $donnee['endName'] ?>"
-                                            data-type="<?= $donnee['type'] ?>" data-methode="<?= $donnee['methode_end'] ?>"
-                                            data-param="<?= $donnee['parametre'] ?>" data-rep="<?= $donnee['reponse'] ?>">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a href="#" class="on-default remove-row btn-delete"
-                                            data-id="<?= $donnee['id']; ?>">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
+                            <?php foreach ($endpoint as $donnee): ?>
+                                <tr>
+                                    <td><strong><?= htmlspecialchars($donnee['titre']) ?></strong></td>
+                                    <td>
+                                        <!-- Bouton Voir -->
+                                        <button type="button" class="btn btn-sm btn-info btn-view-endpoint"
+                                            data-id="<?= $donnee['id'] ?>" data-titre="<?= $donnee['titre'] ?>"
+                                            data-lien="<?= htmlspecialchars($donnee['liens']) ?>"
+                                            data-end="<?= htmlspecialchars($donnee['endName']) ?>"
+                                            data-type="<?= htmlspecialchars($donnee['type']) ?>"
+                                            data-methode="<?= htmlspecialchars($donnee['methode_end']) ?>"
+                                            data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
+                                            data-rep="<?= htmlspecialchars($donnee['reponse']) ?>">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
 
+                                        <!-- Bouton Editer -->
+                                        <button type="button" class="btn btn-sm btn-warning btn-edit-endpoint"
+                                            data-toggle="modal" data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
+                                            data-titre="<?= htmlspecialchars($donnee['titre']) ?>"
+                                            data-lien="<?= htmlspecialchars($donnee['lien_end']) ?>"
+                                            data-end="<?= htmlspecialchars($donnee['endName']) ?>"
+                                            data-type="<?= htmlspecialchars($donnee['type']) ?>"
+                                            data-methode="<?= htmlspecialchars($donnee['methode_end']) ?>"
+                                            data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
+                                            data-rep="<?= htmlspecialchars($donnee['reponse']) ?>">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+
+                                        <!-- Bouton Supprimer -->
+                                        <button type="button" class="btn btn-sm btn-danger btn-delete"
+                                            data-id="<?= $donnee['id'] ?>">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
-                            <?php } ?>
+                            <?php endforeach; ?>
                         </tbody>
-                    </table> -->
-                    <div class="list-group ">
-                        <?php foreach ($endpoint as $donnee) { ?>
-                            <button type="button" class="list-group-item list-group-item-action btn-view-endpoint"
-                                data-id="<?= $donnee['id'] ?>" data-lien="<?= $donnee['liens'] ?>"
-                                data-end="<?= $donnee['endName'] ?>" data-methode="<?= $donnee['methode'] ?>"
-                                data-type="<?= $donnee['type'] ?>"
-                                data-param="<?= htmlspecialchars($donnee['parametre'], ENT_QUOTES) ?>"
-                                data-rep="<?= htmlspecialchars($donnee['reponse'], ENT_QUOTES) ?>">
-                                <?= $donnee['titre'] ?>
-                            </button>
-                        <?php } ?>
-                    </div>
+                    </table>
 
                 </div>
                 <!-- end: page -->
@@ -202,7 +200,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="hidden" name="id">
+                                    <label for="field-2" class="control-label">Titre endpoint</label>
+                                    <input type="text" class="form-control" id="field-2" name="titre">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="field-2" class="control-label">Base URL</label>
                                     <select class="form-control" name="lien">
                                         <option>choisir le lien...</option>
@@ -231,8 +234,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Parametre</label>
-                                    <input type="text" class="form-control" id="field-2" name="param">
+                                    <label for="field-2" class="control-label">Type d'endpoint</label>
+                                    <select class="form-control" name="type">
+                                        <option>choisir le type...</option>
+                                        <option value="endpoint_S"> endpoint_S </option>
+                                        <option value="authentification"> authentification </option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -243,18 +250,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Type d'endpoint</label>
-                                    <select class="form-control" name="type">
-                                        <option></option>
-                                        <option value="endpoint_S"> endpoint_S </option>
-                                        <option value="authentification"> authentification </option>
-                                    </select>
+                                    <label for="field-2" class="control-label">Parametre</label>
+                                    <input type="text" class="form-control" id="field-2" name="param">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="field-2" class="control-label">Reponse</label>
-                                    <input type="text" class="form-control" id="field-2" name="rep">
+                                    <label for="documentation" class="control-label">Reponse </label>
+                                    <textarea name="rep" class="form-control wysiwyg" rows="10"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +305,7 @@
     $('.btn-view-endpoint').click(function () {
         let button = $(this);
 
-        $('#endpoint-title').text(button.data('end'));
+        $('#endpoint-title').text(button.data('titre'));
         $('#endpoint-lien').text(button.data('lien'));
         $('#endpoint-methode').text(button.data('methode'));
         $('#endpoint-type').text(button.data('type'));
@@ -310,7 +313,6 @@
 
         let rep = button.data('rep');
 
-        // Si TinyMCE est actif, mettre le contenu dans le WYSIWYG
         if (tinymce.get('endpoint-rep')) {
             tinymce.get('endpoint-rep').setContent(rep);
         } else {
@@ -330,6 +332,7 @@
     $('#edit-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         let id = button.data('id');
+        let titre = button.data('titre');
         let methode = button.data('methode');
         let lien = button.data('lien');
         let rep = button.data('rep');
@@ -339,12 +342,21 @@
 
         var modal = $(this);
         modal.find('input[name="id"]').val(id);
+        modal.find('input[name="titre"]').val(titre);
         modal.find('select[name="meth"]').val(methode);
         modal.find('select[name="lien"]').val(lien);
-        modal.find('input[name="rep"]').val(rep);
         modal.find('input[name="param"]').val(param);
         modal.find('input[name="end"]').val(end);
         modal.find('select[name="type"]').val(type);
+
+        setTimeout(() => {
+            let editor = tinymce.get(modal.find('textarea[name="rep"]').attr('id'));
+            if (editor) {
+                editor.setContent(rep || '');
+            } else {
+                modal.find('textarea[name="rep"]').val(rep);
+            }
+        }, 300);
     });
 
 
