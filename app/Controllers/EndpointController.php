@@ -16,6 +16,8 @@ class EndpointController extends BaseController
         $methode = new MethodeModel();
         $donnee['methode'] = $methode->findAll();
         $donnee['endpoint'] = $endpoint->AfficherEndpoints();
+        // var_dump($donnee['endpoint']);
+        // exit;
         $donnee['lien'] = $lien->findAll();
         return view('endpoints', $donnee);
     }
@@ -28,7 +30,8 @@ class EndpointController extends BaseController
         $methode = $this->request->getPost('meth');
         $type = $this->request->getPost('type');
         $end = $this->request->getPost('end');
-        $rep = $this->request->getPost('rep');
+        $repS = $this->request->getPost('rep-success');
+        $repE = $this->request->getPost('rep-error');
         // $EndBase = $lien . '/' . $end;
         $endModel = new EndpointModel();
         $donnee = [
@@ -38,7 +41,8 @@ class EndpointController extends BaseController
             'methode_end' => $methode,
             'type' => $type,
             'endName' => $end,
-            'reponse' => $rep
+            'reponse_success' => $repS,
+            'reponse_error' => $repE
         ];
         $endModel->insert($donnee);
         return redirect()->to(site_url('endpoints'));
@@ -62,7 +66,8 @@ class EndpointController extends BaseController
         $methode = $this->request->getPost('meth');
         $type = $this->request->getPost('type');
         $end = $this->request->getPost('end');
-        $rep = $this->request->getPost('rep');
+        $repS = $this->request->getPost('rep-success');
+        $repE = $this->request->getPost('rep-error');
 
         if ($id) {
             $endModel = new EndpointModel();
@@ -76,7 +81,8 @@ class EndpointController extends BaseController
                     'methode_end' => $methode,
                     'type' => $type,
                     'endName' => $end,
-                    'reponse' => $rep
+                    'reponse_success' => $repS,
+                    'reponse_error' => $repE
                 ];
                 $endModel->update($id, $donnee);
             }

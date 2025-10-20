@@ -16,7 +16,7 @@
                     <h4 class="pull-left page-title">Endpoints</h4>
                 </div>
             </div>
-            <div class="panel col-md-9">
+            <div class="panel col-md-12">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -44,9 +44,10 @@
                                             data-lien="<?= htmlspecialchars($donnee['liens']) ?>"
                                             data-end="<?= htmlspecialchars($donnee['endName']) ?>"
                                             data-type="<?= htmlspecialchars($donnee['type']) ?>"
-                                            data-methode="<?= htmlspecialchars($donnee['methode_end']) ?>"
+                                            data-methode="<?= htmlspecialchars($donnee['methode']) ?>"
                                             data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
-                                            data-rep="<?= htmlspecialchars($donnee['reponse']) ?>">
+                                            data-rep_success="<?= htmlspecialchars($donnee['reponse_success']) ?>"
+                                            data-rep_error="<?= htmlspecialchars($donnee['reponse_error']) ?>">
                                             <i class="fa fa-eye"></i>
                                         </button>
 
@@ -59,7 +60,8 @@
                                             data-type="<?= htmlspecialchars($donnee['type']) ?>"
                                             data-methode="<?= htmlspecialchars($donnee['methode_end']) ?>"
                                             data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
-                                            data-rep="<?= htmlspecialchars($donnee['reponse']) ?>">
+                                            data-rep_s="<?= htmlspecialchars($donnee['reponse_success']) ?>"
+                                            data-rep_e="<?= htmlspecialchars($donnee['reponse_error']) ?>">
                                             <i class="fa fa-pencil"></i>
                                         </button>
 
@@ -94,8 +96,17 @@
                     <p><strong>Methode :</strong> <span id="endpoint-methode"></span></p>
                     <p><strong>Type :</strong> <span id="endpoint-type"></span></p>
                     <p><strong>Paramètre :</strong> <span id="endpoint-param"></span></p>
-                    <p><strong>Réponse :</strong></p>
-                    <textarea id="endpoint-rep" class="form-control wysiwyg" rows="10" readonly></textarea>
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p><strong>Réponse succès :</strong></p>
+                            <code id="rep-success"></code>
+                        </div>
+                        <div class="col-md-5">
+                            <p><strong>Réponse erreur :</strong></p>
+                            <code id="rep-error"></code>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,7 +115,7 @@
     <!-- MODAL -->
     <div id="ajout-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -152,7 +163,7 @@
                                     <label for="field-2" class="control-label">Type d'endpoint</label>
                                     <select class="form-control" name="type">
                                         <option>choisir le type...</option>
-                                        <option value="endpoint_S"> endpoint_S </option>
+                                        <option value="endpoint_simple"> endpoint_simple </option>
                                         <option value="authentification"> authentification </option>
                                     </select>
                                 </div>
@@ -171,8 +182,16 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="documentation" class="control-label">Reponse </label>
-                                    <textarea name="rep" class="form-control wysiwyg" rows="8"></textarea>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <label for="field-2" class="control-label">Reponse succes</label>
+                                            <textarea name="rep-success" class="form-control" rows="10"></textarea>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="field-2" class="control-label">Reponse erreur</label>
+                                            <textarea name="rep-error" class="form-control" rows="10"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +208,7 @@
 
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -198,6 +217,7 @@
                 <div class="modal-body">
                     <form action="<?= base_url('EditEndpoint') ?>" method="POST">
                         <div class="row">
+                            <input type="hidden" name="id" id="id">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Titre endpoint</label>
@@ -236,8 +256,7 @@
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Type d'endpoint</label>
                                     <select class="form-control" name="type">
-                                        <option>choisir le type...</option>
-                                        <option value="endpoint_S"> endpoint_S </option>
+                                        <option value="endpoint_simple"> endpoint_simple </option>
                                         <option value="authentification"> authentification </option>
                                     </select>
                                 </div>
@@ -256,8 +275,16 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="documentation" class="control-label">Reponse </label>
-                                    <textarea name="rep" class="form-control wysiwyg" rows="10"></textarea>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <label for="field-2" class="control-label">Reponse succes</label>
+                                            <textarea name="rep-success" class="form-control" rows="10"></textarea>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="field-2" class="control-label">Reponse erreur</label>
+                                            <textarea name="rep-error" class="form-control" rows="10"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -306,18 +333,67 @@
         let button = $(this);
 
         $('#endpoint-title').text(button.data('titre'));
-        $('#endpoint-lien').text(button.data('lien'));
         $('#endpoint-methode').text(button.data('methode'));
         $('#endpoint-type').text(button.data('type'));
         $('#endpoint-param').text(button.data('param'));
 
-        let rep = button.data('rep');
+        let base = button.data('lien');
+        let end = button.data('end');
+        let lien = base + '/' + end;
+        $('#endpoint-lien').text(lien);
 
-        if (tinymce.get('endpoint-rep')) {
-            tinymce.get('endpoint-rep').setContent(rep);
+        let rep_S = button.data('rep_success');
+        let rep_E = button.data('rep_error');
+
+        if (rep_S) {
+            $('#rep-success').html(
+                rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+            );
         } else {
-            $('#endpoint-rep').val(rep);
+            $('#rep-success').html('');
         }
+
+        if (rep_E) {
+            $('#rep-error').html(
+                rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+            );
+        } else {
+            $('#rep-error').html('');
+        }
+
+        // if (rep_S) {
+        //     try {
+        //         const json = JSON.parse(rep_S);
+        //         $('#rep-success').html(
+        //             JSON.stringify(json, null, 4)
+        //                 .replace(/\n/g, '<br>')
+        //                 .replace(/ /g, '&nbsp;')
+        //         );
+        //     } catch (e) {
+        //         $('#rep-success').html(
+        //             rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+        //         );
+        //     }
+        // } else {
+        //     $('#rep-success').html('');
+        // }
+
+        // if (rep_E) {
+        //     try {
+        //         const json = JSON.parse(rep_E);
+        //         $('#rep-error').html(
+        //             JSON.stringify(json, null, 4)
+        //                 .replace(/\n/g, '<br>')
+        //                 .replace(/ /g, '&nbsp;')
+        //         );
+        //     } catch (e) {
+        //         $('#rep-error').html(
+        //             rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+        //         );
+        //     }
+        // } else {
+        //     $('#rep-error').html('');
+        // }
 
         $('#view-endpoint-modal').modal('show');
     });
@@ -335,7 +411,8 @@
         let titre = button.data('titre');
         let methode = button.data('methode');
         let lien = button.data('lien');
-        let rep = button.data('rep');
+        let rep_S = button.data('rep_s');
+        let rep_E = button.data('rep_e');
         let param = button.data('param');
         let type = button.data('type');
         let end = button.data('end');
@@ -348,17 +425,10 @@
         modal.find('input[name="param"]').val(param);
         modal.find('input[name="end"]').val(end);
         modal.find('select[name="type"]').val(type);
+        modal.find('textarea[name="rep-success"]').val(rep_S);
+        modal.find('textarea[name="rep-error"]').val(rep_E);
 
-        setTimeout(() => {
-            let editor = tinymce.get(modal.find('textarea[name="rep"]').attr('id'));
-            if (editor) {
-                editor.setContent(rep || '');
-            } else {
-                modal.find('textarea[name="rep"]').val(rep);
-            }
-        }, 300);
     });
-
 
     $('.btn-delete').click(function (e) {
         e.preventDefault();
@@ -384,23 +454,25 @@
 
     if (perm.upd == 1) {
         $('#edit-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            let id = button.data('id');
-            let methode = button.data('methode');
-            let lien = button.data('lien');
-            let rep = button.data('rep');
-            let param = button.data('param');
-            let type = button.data('type');
-            let end = button.data('end');
+            $('#edit-modal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                let id = button.data('id');
+                let methode = button.data('methode');
+                let lien = button.data('lien');
+                let rep = button.data('rep');
+                let param = button.data('param');
+                let type = button.data('type');
+                let end = button.data('end');
 
-            var modal = $(this);
-            modal.find('input[name="id"]').val(id);
-            modal.find('select[name="meth"]').val(methode);
-            modal.find('select[name="lien"]').val(lien);
-            modal.find('input[name="rep"]').val(rep);
-            modal.find('input[name="param"]').val(param);
-            modal.find('input[name="end"]').val(end);
-            modal.find('select[name="type"]').val(type);
+                var modal = $(this);
+                modal.find('input[name="id"]').val(id);
+                modal.find('select[name="meth"]').val(methode);
+                modal.find('select[name="lien"]').val(lien);
+                modal.find('input[name="rep"]').val(rep);
+                modal.find('input[name="param"]').val(param);
+                modal.find('input[name="end"]').val(end);
+                modal.find('select[name="type"]').val(type);
+            });
         });
     } else {
         $(".edit-row").hide();
