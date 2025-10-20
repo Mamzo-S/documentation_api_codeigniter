@@ -22,11 +22,11 @@
                         <div class="col-sm-6">
                             <div class="m-b-30">
                                 <button class="btn btn-primary waves-effect waves-light btn-add" data-toggle="modal"
-                                    data-target="#ajout-modal">Ajouter</button>
+                                    data-target="#ajout-modal">+ Ajouter</button>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-hover table-bordered align-middle text-center">
+                    <table class="table table-hover table-bordered align-middle text-center" id="datatable-editable">
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 60%">Titre de l’Endpoint</th>
@@ -62,7 +62,7 @@
                                             data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
                                             data-rep_s="<?= htmlspecialchars($donnee['reponse_success']) ?>"
                                             data-rep_e="<?= htmlspecialchars($donnee['reponse_error']) ?>">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil" style="color:black"></i>
                                         </button>
 
                                         <!-- Bouton Supprimer -->
@@ -92,10 +92,10 @@
                     <h4 class="modal-title" id="endpoint-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Lien :</strong> <span id="endpoint-lien"></span></p>
-                    <p><strong>Methode :</strong> <span id="endpoint-methode"></span></p>
-                    <p><strong>Type :</strong> <span id="endpoint-type"></span></p>
-                    <p><strong>Paramètre :</strong> <span id="endpoint-param"></span></p>
+                    <p><strong>Lien :</strong> <code id="endpoint-lien"></code></p>
+                    <p><strong>Methode :</strong> <code id="endpoint-methode"></code></p>
+                    <p><strong>Type :</strong> <code id="endpoint-type"></code></p>
+                    <p><strong>Paramètre :</strong> <code id="endpoint-param"></code></p>
 
                     <div class="row">
                         <div class="col-md-7">
@@ -130,6 +130,12 @@
                                     <input type="text" class="form-control" id="field-2" name="titre">
                                 </div>
                             </div>
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Description</label>
+                                    <input type="text" class="form-control" id="field-2" name="desc">
+                                </div>
+                            </div> -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Base URL</label>
@@ -180,6 +186,7 @@
                                     <input type="text" class="form-control" id="field-2" name="param">
                                 </div>
                             </div>
+                            
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="row">
@@ -345,6 +352,22 @@
         let rep_S = button.data('rep_success');
         let rep_E = button.data('rep_error');
 
+        if (typeof rep_S !== 'string') {
+            try {
+                rep_S = JSON.stringify(rep_S, null, 2);
+            } catch (e) {
+                rep_S = String(rep_S || '');
+            }
+        }
+
+        if (typeof rep_E !== 'string') {
+            try {
+                rep_E = JSON.stringify(rep_E, null, 2);
+            } catch (e) {
+                rep_E = String(rep_E || '');
+            }
+        }
+
         if (rep_S) {
             $('#rep-success').html(
                 rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
@@ -360,40 +383,6 @@
         } else {
             $('#rep-error').html('');
         }
-
-        // if (rep_S) {
-        //     try {
-        //         const json = JSON.parse(rep_S);
-        //         $('#rep-success').html(
-        //             JSON.stringify(json, null, 4)
-        //                 .replace(/\n/g, '<br>')
-        //                 .replace(/ /g, '&nbsp;')
-        //         );
-        //     } catch (e) {
-        //         $('#rep-success').html(
-        //             rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-        //         );
-        //     }
-        // } else {
-        //     $('#rep-success').html('');
-        // }
-
-        // if (rep_E) {
-        //     try {
-        //         const json = JSON.parse(rep_E);
-        //         $('#rep-error').html(
-        //             JSON.stringify(json, null, 4)
-        //                 .replace(/\n/g, '<br>')
-        //                 .replace(/ /g, '&nbsp;')
-        //         );
-        //     } catch (e) {
-        //         $('#rep-error').html(
-        //             rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-        //         );
-        //     }
-        // } else {
-        //     $('#rep-error').html('');
-        // }
 
         $('#view-endpoint-modal').modal('show');
     });
@@ -416,6 +405,38 @@
         let param = button.data('param');
         let type = button.data('type');
         let end = button.data('end');
+
+        if (typeof rep_S !== 'string') {
+            try {
+                rep_S = JSON.stringify(rep_S, null, 2);
+            } catch (e) {
+                rep_S = String(rep_S || '');
+            }
+        }
+
+        if (typeof rep_E !== 'string') {
+            try {
+                rep_E = JSON.stringify(rep_E, null, 2);
+            } catch (e) {
+                rep_E = String(rep_E || '');
+            }
+        }
+
+        if (rep_S) {
+            $('#rep-success').html(
+                rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+            );
+        } else {
+            $('#rep-success').html('');
+        }
+
+        if (rep_E) {
+            $('#rep-error').html(
+                rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+            );
+        } else {
+            $('#rep-error').html('');
+        }
 
         var modal = $(this);
         modal.find('input[name="id"]').val(id);
@@ -457,21 +478,25 @@
             $('#edit-modal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 let id = button.data('id');
+                let titre = button.data('titre');
                 let methode = button.data('methode');
                 let lien = button.data('lien');
-                let rep = button.data('rep');
+                let rep_S = button.data('rep_s');
+                let rep_E = button.data('rep_e');
                 let param = button.data('param');
                 let type = button.data('type');
                 let end = button.data('end');
 
                 var modal = $(this);
                 modal.find('input[name="id"]').val(id);
+                modal.find('input[name="titre"]').val(titre);
                 modal.find('select[name="meth"]').val(methode);
                 modal.find('select[name="lien"]').val(lien);
-                modal.find('input[name="rep"]').val(rep);
                 modal.find('input[name="param"]').val(param);
                 modal.find('input[name="end"]').val(end);
                 modal.find('select[name="type"]').val(type);
+                modal.find('textarea[name="rep-success"]').val(rep_S);
+                modal.find('textarea[name="rep-error"]').val(rep_E);
             });
         });
     } else {
@@ -495,6 +520,7 @@
     }
 
     if (perm.upd != 1 && perm.del != 1) {
-        $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+        // $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+        $("#datatable-editable .btn-edit-endpoint, #datatable-editable .btn-delete").hide();
     }
 </script>

@@ -45,7 +45,6 @@
 			this.datatable = this.$table.DataTable({
 				aoColumns: [
 					null,
-					null,
 					{ "bSortable": false }
 				]
 			});
