@@ -41,6 +41,7 @@
                                         <!-- Bouton Voir -->
                                         <button type="button" class="btn btn-sm btn-info btn-view-endpoint"
                                             data-id="<?= $donnee['id'] ?>" data-titre="<?= $donnee['titre'] ?>"
+                                            data-desc="<?= $donnee['description'] ?>"
                                             data-lien="<?= htmlspecialchars($donnee['liens']) ?>"
                                             data-end="<?= htmlspecialchars($donnee['endName']) ?>"
                                             data-type="<?= htmlspecialchars($donnee['type']) ?>"
@@ -55,6 +56,7 @@
                                         <button type="button" class="btn btn-sm btn-warning btn-edit-endpoint"
                                             data-toggle="modal" data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
                                             data-titre="<?= htmlspecialchars($donnee['titre']) ?>"
+                                            data-desc="<?= $donnee['description'] ?>"
                                             data-lien="<?= htmlspecialchars($donnee['lien_end']) ?>"
                                             data-end="<?= htmlspecialchars($donnee['endName']) ?>"
                                             data-type="<?= htmlspecialchars($donnee['type']) ?>"
@@ -92,12 +94,21 @@
                     <h4 class="modal-title" id="endpoint-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Lien :</strong> <code id="endpoint-lien"></code></p>
-                    <p><strong>Methode :</strong> <code id="endpoint-methode"></code></p>
-                    <p><strong>Type :</strong> <code id="endpoint-type"></code></p>
-                    <p><strong>Paramètre :</strong> <code id="endpoint-param"></code></p>
-
                     <div class="row">
+                        <div class="col-md-7">
+                            <p><strong>Description :</strong> <span id="endpoint-desc"></span></p>
+                            <p><strong>Lien :</strong> <code id="endpoint-lien"></code></p>
+                            <!-- <p><strong>Type :</strong> <code id="endpoint-type"></code></p>
+                            <p><strong>Paramètre :</strong> <code id="endpoint-param"></code></p> -->
+                        </div>
+                        <div class="col-md-5">
+                            <p><strong>Type :</strong> <code id="endpoint-type"></code></p>
+                            <p><strong>Methode :</strong> <code id="endpoint-methode"></code></p>
+                            <p><strong>Paramètre :</strong> <span id="endpoint-param"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
                         <div class="col-md-7">
                             <p><strong>Réponse succès :</strong></p>
                             <code id="rep-success"></code>
@@ -130,13 +141,13 @@
                                     <input type="text" class="form-control" id="field-2" name="titre">
                                 </div>
                             </div>
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Description</label>
                                     <input type="text" class="form-control" id="field-2" name="desc">
                                 </div>
-                            </div> -->
-                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Base URL</label>
                                     <select class="form-control" name="lien">
@@ -150,7 +161,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Methode</label>
                                     <select class="form-control" name="meth">
@@ -164,7 +175,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Type d'endpoint</label>
                                     <select class="form-control" name="type">
@@ -177,16 +188,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Endpoint</label>
-                                    <input type="text" class="form-control" id="field-2" name="end">
+                                    <input type="text" class="form-control" name="end">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Parametre</label>
-                                    <input type="text" class="form-control" id="field-2" name="param">
+                                    <input type="text" class="form-control" name="param">
                                 </div>
                             </div>
-                            
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="row">
@@ -224,14 +234,20 @@
                 <div class="modal-body">
                     <form action="<?= base_url('EditEndpoint') ?>" method="POST">
                         <div class="row">
-                            <input type="hidden" name="id" id="id">
                             <div class="col-md-6">
+                                <input type="hidden" name="id">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Titre endpoint</label>
                                     <input type="text" class="form-control" id="field-2" name="titre">
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Description</label>
+                                    <input type="text" class="form-control" id="field-2" name="desc">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Base URL</label>
                                     <select class="form-control" name="lien">
@@ -245,7 +261,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Methode</label>
                                     <select class="form-control" name="meth">
@@ -259,10 +275,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Type d'endpoint</label>
                                     <select class="form-control" name="type">
+                                        <option>choisir le type...</option>
                                         <option value="endpoint_simple"> endpoint_simple </option>
                                         <option value="authentification"> authentification </option>
                                     </select>
@@ -271,13 +288,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Endpoint</label>
-                                    <input type="text" class="form-control" id="field-2" name="end">
+                                    <input type="text" class="form-control" name="end">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-2" class="control-label">Parametre</label>
-                                    <input type="text" class="form-control" id="field-2" name="param">
+                                    <input type="text" class="form-control" name="param">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -336,10 +353,13 @@
 </script>
 
 <script>
+
+    //gestion de l'affichage des endoints
     $('.btn-view-endpoint').click(function () {
         let button = $(this);
 
         $('#endpoint-title').text(button.data('titre'));
+        $('#endpoint-desc').text(button.data('desc'));
         $('#endpoint-methode').text(button.data('methode'));
         $('#endpoint-type').text(button.data('type'));
         $('#endpoint-param').text(button.data('param'));
@@ -394,74 +414,76 @@
 <script>
     var resizefunc = [];
 
-    $('#edit-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        let id = button.data('id');
-        let titre = button.data('titre');
-        let methode = button.data('methode');
-        let lien = button.data('lien');
-        let rep_S = button.data('rep_s');
-        let rep_E = button.data('rep_e');
-        let param = button.data('param');
-        let type = button.data('type');
-        let end = button.data('end');
+    // $('#edit-modal').on('show.bs.modal', function (event) {
+    //     var button = $(event.relatedTarget);
+    //     let id = button.data('id');
+    //     let titre = button.data('titre');
+    //     let methode = button.data('methode');
+    //     let lien = button.data('lien');
+    //     let rep_S = button.data('rep_s');
+    //     let rep_E = button.data('rep_e');
+    //     let param = button.data('param');
+    //     let type = button.data('type');
+    //     let end = button.data('end');
+    //     let desc = button.data('desc');
 
-        if (typeof rep_S !== 'string') {
-            try {
-                rep_S = JSON.stringify(rep_S, null, 2);
-            } catch (e) {
-                rep_S = String(rep_S || '');
-            }
-        }
+    //     if (typeof rep_S !== 'string') {
+    //         try {
+    //             rep_S = JSON.stringify(rep_S, null, 2);
+    //         } catch (e) {
+    //             rep_S = String(rep_S || '');
+    //         }
+    //     }
 
-        if (typeof rep_E !== 'string') {
-            try {
-                rep_E = JSON.stringify(rep_E, null, 2);
-            } catch (e) {
-                rep_E = String(rep_E || '');
-            }
-        }
+    //     if (typeof rep_E !== 'string') {
+    //         try {
+    //             rep_E = JSON.stringify(rep_E, null, 2);
+    //         } catch (e) {
+    //             rep_E = String(rep_E || '');
+    //         }
+    //     }
 
-        if (rep_S) {
-            $('#rep-success').html(
-                rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-            );
-        } else {
-            $('#rep-success').html('');
-        }
+    //     if (rep_S) {
+    //         $('#rep-success').html(
+    //             rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+    //         );
+    //     } else {
+    //         $('#rep-success').html('');
+    //     }
 
-        if (rep_E) {
-            $('#rep-error').html(
-                rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-            );
-        } else {
-            $('#rep-error').html('');
-        }
+    //     if (rep_E) {
+    //         $('#rep-error').html(
+    //             rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+    //         );
+    //     } else {
+    //         $('#rep-error').html('');
+    //     }
 
-        var modal = $(this);
-        modal.find('input[name="id"]').val(id);
-        modal.find('input[name="titre"]').val(titre);
-        modal.find('select[name="meth"]').val(methode);
-        modal.find('select[name="lien"]').val(lien);
-        modal.find('input[name="param"]').val(param);
-        modal.find('input[name="end"]').val(end);
-        modal.find('select[name="type"]').val(type);
-        modal.find('textarea[name="rep-success"]').val(rep_S);
-        modal.find('textarea[name="rep-error"]').val(rep_E);
+    //     var modal = $(this);
+    //     modal.find('input[name="id"]').val(id);
+    //     modal.find('input[name="titre"]').val(titre);
+    //     modal.find('input[name="desc"]').val(desc);
+    //     modal.find('select[name="meth"]').val(methode);
+    //     modal.find('select[name="lien"]').val(lien);
+    //     modal.find('input[name="param"]').val(param);
+    //     modal.find('input[name="end"]').val(end);
+    //     modal.find('select[name="type"]').val(type);
+    //     modal.find('textarea[name="rep-success"]').val(rep_S);
+    //     modal.find('textarea[name="rep-error"]').val(rep_E);
 
-    });
+    // });
 
-    $('.btn-delete').click(function (e) {
-        e.preventDefault();
-        deleteId = $(this).data('id');
-        $('#dialog').modal('show');
-    });
+    // $('.btn-delete').click(function (e) {
+    //     e.preventDefault();
+    //     deleteId = $(this).data('id');
+    //     $('#dialog').modal('show');
+    // });
 
-    $('#dialogConfirm').click(function () {
-        if (deleteId) {
-            window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
-        }
-    });
+    // $('#dialogConfirm').click(function () {
+    //     if (deleteId) {
+    //         window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
+    //     }
+    // });
 
     //gestion de roles et permissions
     let smenuId = 9;
@@ -475,29 +497,62 @@
 
     if (perm.upd == 1) {
         $('#edit-modal').on('show.bs.modal', function (event) {
-            $('#edit-modal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                let id = button.data('id');
-                let titre = button.data('titre');
-                let methode = button.data('methode');
-                let lien = button.data('lien');
-                let rep_S = button.data('rep_s');
-                let rep_E = button.data('rep_e');
-                let param = button.data('param');
-                let type = button.data('type');
-                let end = button.data('end');
+            var button = $(event.relatedTarget);
+            let id = button.data('id');
+            let titre = button.data('titre');
+            let methode = button.data('methode');
+            let lien = button.data('lien');
+            let rep_S = button.data('rep_s');
+            let rep_E = button.data('rep_e');
+            let param = button.data('param');
+            let type = button.data('type');
+            let end = button.data('end');
+            let desc = button.data('desc');
 
-                var modal = $(this);
-                modal.find('input[name="id"]').val(id);
-                modal.find('input[name="titre"]').val(titre);
-                modal.find('select[name="meth"]').val(methode);
-                modal.find('select[name="lien"]').val(lien);
-                modal.find('input[name="param"]').val(param);
-                modal.find('input[name="end"]').val(end);
-                modal.find('select[name="type"]').val(type);
-                modal.find('textarea[name="rep-success"]').val(rep_S);
-                modal.find('textarea[name="rep-error"]').val(rep_E);
-            });
+            if (typeof rep_S !== 'string') {
+                try {
+                    rep_S = JSON.stringify(rep_S, null, 2);
+                } catch (e) {
+                    rep_S = String(rep_S || '');
+                }
+            }
+
+            if (typeof rep_E !== 'string') {
+                try {
+                    rep_E = JSON.stringify(rep_E, null, 2);
+                } catch (e) {
+                    rep_E = String(rep_E || '');
+                }
+            }
+
+            if (rep_S) {
+                $('#rep-success').html(
+                    rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+                );
+            } else {
+                $('#rep-success').html('');
+            }
+
+            if (rep_E) {
+                $('#rep-error').html(
+                    rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+                );
+            } else {
+                $('#rep-error').html('');
+            }
+
+            var modal = $(this);
+            modal.find('input[name="id"]').val(id);
+            modal.find('input[name="titre"]').val(titre);
+            modal.find('input[name="desc"]').val(desc);
+            modal.find('select[name="meth"]').val(methode);
+            modal.find('select[name="lien"]').val(lien);
+            modal.find('input[name="param"]').val(param);
+            modal.find('input[name="end"]').val(end);
+            modal.find('select[name="type"]').val(type);
+            modal.find('textarea[name="rep-success"]').val(rep_S);
+            modal.find('textarea[name="rep-error"]').val(rep_E);
+
         });
     } else {
         $(".edit-row").hide();

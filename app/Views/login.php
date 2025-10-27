@@ -1,20 +1,12 @@
-<?php
-// session_start();
-// require('../actions/loginAction.php');
-
-?>
 <?= $this->include('template/header') ?>
 
 <body>
-
-
     <div class="wrapper-page">
         <div class="panel panel-color panel-primary panel-pages">
             <div class="panel-heading bg-img">
                 <div class="bg-overlay"></div>
-                <h3 class="text-center m-t-10 text-white"> <strong>Connectez-vous</strong> </h3>
+                <h3 class="text-center m-t-10 text-white"> <strong>API SIMEN</strong> </h3>
             </div>
-
             <div class="panel-body">
                 <?php if (session()->getFlashdata('errorMessage')) : ?>
                     <div class="alert alert-danger alert-dismissable">
@@ -23,7 +15,6 @@
                     </div>
                 <?php endif; ?>
                 <form action="<?= base_url('login') ?>" method="POST">
-
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12">
@@ -31,7 +22,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12">
@@ -39,19 +29,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="checkbox checkbox-primary">
-                                <input id="checkbox-signup" type="checkbox">
-                                <label for="checkbox-signup">
-                                    Remember me
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-
                     <div class="form-group text-center m-t-40">
                         <div class="col-xs-12">
                             <button class="btn btn-primary btn-lg w-lg waves-effect waves-light" type="submit" name="login">Se connecter</button>
@@ -59,7 +36,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

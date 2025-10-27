@@ -32,7 +32,8 @@ class EndpointController extends BaseController
         $end = $this->request->getPost('end');
         $repS = $this->request->getPost('rep-success');
         $repE = $this->request->getPost('rep-error');
-        // $EndBase = $lien . '/' . $end;
+        $desc = $this->request->getPost('desc');
+
         $endModel = new EndpointModel();
         $donnee = [
             'titre' => $titre,
@@ -42,7 +43,8 @@ class EndpointController extends BaseController
             'type' => $type,
             'endName' => $end,
             'reponse_success' => $repS,
-            'reponse_error' => $repE
+            'reponse_error' => $repE,
+            'description' => $desc
         ];
         $endModel->insert($donnee);
         return redirect()->to(site_url('endpoints'));
@@ -68,6 +70,7 @@ class EndpointController extends BaseController
         $end = $this->request->getPost('end');
         $repS = $this->request->getPost('rep-success');
         $repE = $this->request->getPost('rep-error');
+        $desc = $this->request->getPost('desc');
 
         if ($id) {
             $endModel = new EndpointModel();
@@ -82,7 +85,8 @@ class EndpointController extends BaseController
                     'type' => $type,
                     'endName' => $end,
                     'reponse_success' => $repS,
-                    'reponse_error' => $repE
+                    'reponse_error' => $repE,
+                    'description' => $desc
                 ];
                 $endModel->update($id, $donnee);
             }
