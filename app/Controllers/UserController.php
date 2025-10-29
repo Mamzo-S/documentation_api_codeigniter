@@ -123,6 +123,8 @@ class UserController extends BaseController
                 }
                 session()->set('tab_smenu', $tab_smenu);
 
+                // var_dump($user);
+                // exit;
                 return redirect()->to(site_url('index'));
             } else {
                 return redirect()->back()->with('errorMessage', 'Cet utilisateur est bloqué, contactez votre administrateur');
