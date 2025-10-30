@@ -29,7 +29,7 @@ class UserController extends BaseController
         $prenom = $this->request->getPost('prenom');
         $email = $this->request->getPost('email');
         $username = $this->request->getPost('username');
-        $mdp = $this->request->getPost('mdp');
+        $mdp = password_hash($this->request->getPost('mdp'), PASSWORD_DEFAULT);
         $profile = $this->request->getPost('profile');
         $userMod = new UserModel();
         $donnee = [
@@ -51,7 +51,7 @@ class UserController extends BaseController
         $prenom = $this->request->getPost('prenom');
         $email = $this->request->getPost('email');
         $username = $this->request->getPost('username');
-        $mdp = $this->request->getPost('mdp');
+        $mdp = password_hash($this->request->getPost('mdp'), PASSWORD_DEFAULT);
         $profile = $this->request->getPost('profile');
         if ($id) {
             $userMod = new UserModel();

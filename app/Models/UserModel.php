@@ -22,10 +22,15 @@ class UserModel extends Model
 
     public function getUserByUsername($username, $mdp)
     {
-        return $this->select('user.*, profil.profile_name AS profils')
+        $user = $this->select('user.*, profil.profile_name AS profils')
             ->join('profil', 'profil.id = user.profile_id')
             ->where('user.username', $username)
-            ->where('user.motdepasse', $mdp)
             ->first();
+
+        if ($user && password_verify($mdp, $user['motdepasse'])) {
+            return $user;
+        }
+
+    return null;
     }
 }
