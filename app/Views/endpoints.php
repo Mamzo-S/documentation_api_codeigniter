@@ -35,45 +35,45 @@
                         </thead>
                         <tbody>
                             <?php foreach ($endpoint as $donnee): ?>
-                                <tr>
-                                    <td><strong><?= htmlspecialchars($donnee['titre']) ?></strong></td>
-                                    <td>
-                                        <!-- Bouton Voir -->
-                                        <button type="button" class="btn btn-sm btn-info btn-view-endpoint"
-                                            data-id="<?= $donnee['id'] ?>" data-titre="<?= $donnee['titre'] ?>"
-                                            data-desc="<?= $donnee['description'] ?>"
-                                            data-lien="<?= htmlspecialchars($donnee['liens']) ?>"
-                                            data-end="<?= htmlspecialchars($donnee['endName']) ?>"
-                                            data-type="<?= htmlspecialchars($donnee['type']) ?>"
-                                            data-methode="<?= htmlspecialchars($donnee['methode']) ?>"
-                                            data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
-                                            data-rep_success="<?= htmlspecialchars($donnee['reponse_success']) ?>"
-                                            data-rep_error="<?= htmlspecialchars($donnee['reponse_error']) ?>">
-                                            <i class="fa fa-eye"></i>
-                                        </button>
+                            <tr>
+                                <td><strong><?= htmlspecialchars($donnee['titre']) ?></strong></td>
+                                <td>
+                                    <!-- Bouton Voir -->
+                                    <button type="button" class="btn btn-sm btn-info btn-view-endpoint"
+                                        data-id="<?= $donnee['id'] ?>" data-titre="<?= $donnee['titre'] ?>"
+                                        data-desc="<?= $donnee['description'] ?>"
+                                        data-lien="<?= htmlspecialchars($donnee['liens']) ?>"
+                                        data-end="<?= htmlspecialchars($donnee['endName']) ?>"
+                                        data-type="<?= htmlspecialchars($donnee['type']) ?>"
+                                        data-methode="<?= htmlspecialchars($donnee['methode']) ?>"
+                                        data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
+                                        data-rep_success="<?= htmlspecialchars($donnee['reponse_success']) ?>"
+                                        data-rep_error="<?= htmlspecialchars($donnee['reponse_error']) ?>">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
 
-                                        <!-- Bouton Editer -->
-                                        <button type="button" class="btn btn-sm btn-warning btn-edit-endpoint"
-                                            data-toggle="modal" data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
-                                            data-titre="<?= htmlspecialchars($donnee['titre']) ?>"
-                                            data-desc="<?= $donnee['description'] ?>"
-                                            data-lien="<?= htmlspecialchars($donnee['lien_end']) ?>"
-                                            data-end="<?= htmlspecialchars($donnee['endName']) ?>"
-                                            data-type="<?= htmlspecialchars($donnee['type']) ?>"
-                                            data-methode="<?= htmlspecialchars($donnee['methode_end']) ?>"
-                                            data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
-                                            data-rep_s="<?= htmlspecialchars($donnee['reponse_success']) ?>"
-                                            data-rep_e="<?= htmlspecialchars($donnee['reponse_error']) ?>">
-                                            <i class="fa fa-pencil" style="color:black"></i>
-                                        </button>
+                                    <!-- Bouton Editer -->
+                                    <button type="button" class="btn btn-sm btn-warning btn-edit-endpoint"
+                                        data-toggle="modal" data-target="#edit-modal" data-id="<?= $donnee['id'] ?>"
+                                        data-titre="<?= htmlspecialchars($donnee['titre']) ?>"
+                                        data-desc="<?= $donnee['description'] ?>"
+                                        data-lien="<?= htmlspecialchars($donnee['lien_end']) ?>"
+                                        data-end="<?= htmlspecialchars($donnee['endName']) ?>"
+                                        data-type="<?= htmlspecialchars($donnee['type']) ?>"
+                                        data-methode="<?= htmlspecialchars($donnee['methode_end']) ?>"
+                                        data-param="<?= htmlspecialchars($donnee['parametre']) ?>"
+                                        data-rep_s="<?= htmlspecialchars($donnee['reponse_success']) ?>"
+                                        data-rep_e="<?= htmlspecialchars($donnee['reponse_error']) ?>">
+                                        <i class="fa fa-pencil" style="color:black"></i>
+                                    </button>
 
-                                        <!-- Bouton Supprimer -->
-                                        <button type="button" class="btn btn-sm btn-danger btn-delete"
-                                            data-id="<?= $donnee['id'] ?>">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                    <!-- Bouton Supprimer -->
+                                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                                        data-id="<?= $donnee['id'] ?>">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -154,8 +154,8 @@
                                         <option>choisir le lien...</option>
                                         <?php
                                         foreach ($lien as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
-                                            <?php
+                                        <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
+                                        <?php
                                         }
                                         ?>
                                     </select>
@@ -168,8 +168,8 @@
                                         <option>choisir la methode...</option>
                                         <?php
                                         foreach ($methode as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
-                                            <?php
+                                        <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                        <?php
                                         }
                                         ?>
                                     </select>
@@ -254,8 +254,8 @@
                                         <option>choisir le lien...</option>
                                         <?php
                                         foreach ($lien as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
-                                            <?php
+                                        <option value="<?= $donnee['id'] ?>"><?= $donnee['nom_url'] ?></option>;
+                                        <?php
                                         }
                                         ?>
                                     </select>
@@ -268,8 +268,8 @@
                                         <option>choisir la methode...</option>
                                         <?php
                                         foreach ($methode as $donnee) { ?>
-                                            <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
-                                            <?php
+                                        <option value="<?= $donnee['id'] ?>"><?= $donnee['methode_name'] ?></option>;
+                                        <?php
                                         }
                                         ?>
                                     </select>
@@ -328,7 +328,6 @@
 <!-- End Right content here -->
 <!-- ============================================================== -->
 
-
 <div id="dialog" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 30%;" role="document">
         <div class="modal-content">
@@ -349,28 +348,161 @@
 <?= $this->include('template/footer') ?>
 
 <script>
-    let role = <?= json_encode(session()->get('tab_smenu')) ?>;
+let role = <?= json_encode(session()->get('tab_smenu')) ?>;
 </script>
 
 <script>
+//gestion de l'affichage des endoints
+$('.btn-view-endpoint').click(function() {
+    let button = $(this);
 
-    //gestion de l'affichage des endoints
-    $('.btn-view-endpoint').click(function () {
-        let button = $(this);
+    $('#endpoint-title').text(button.data('titre'));
+    $('#endpoint-desc').text(button.data('desc'));
+    $('#endpoint-methode').text(button.data('methode'));
+    $('#endpoint-type').text(button.data('type'));
+    $('#endpoint-param').text(button.data('param'));
 
-        $('#endpoint-title').text(button.data('titre'));
-        $('#endpoint-desc').text(button.data('desc'));
-        $('#endpoint-methode').text(button.data('methode'));
-        $('#endpoint-type').text(button.data('type'));
-        $('#endpoint-param').text(button.data('param'));
+    let base = button.data('lien');
+    let end = button.data('end');
+    let lien = base + '/' + end;
+    $('#endpoint-lien').text(lien);
 
-        let base = button.data('lien');
+    let rep_S = button.data('rep_success');
+    let rep_E = button.data('rep_error');
+
+    if (typeof rep_S !== 'string') {
+        try {
+            rep_S = JSON.stringify(rep_S, null, 2);
+        } catch (e) {
+            rep_S = String(rep_S || '');
+        }
+    }
+
+    if (typeof rep_E !== 'string') {
+        try {
+            rep_E = JSON.stringify(rep_E, null, 2);
+        } catch (e) {
+            rep_E = String(rep_E || '');
+        }
+    }
+
+    if (rep_S) {
+        $('#rep-success').html(
+            rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+        );
+    } else {
+        $('#rep-success').html('');
+    }
+
+    if (rep_E) {
+        $('#rep-error').html(
+            rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+        );
+    } else {
+        $('#rep-error').html('');
+    }
+
+    $('#view-endpoint-modal').modal('show');
+});
+</script>
+
+<script>
+var resizefunc = [];
+
+// $('#edit-modal').on('show.bs.modal', function (event) {
+//     var button = $(event.relatedTarget);
+//     let id = button.data('id');
+//     let titre = button.data('titre');
+//     let methode = button.data('methode');
+//     let lien = button.data('lien');
+//     let rep_S = button.data('rep_s');
+//     let rep_E = button.data('rep_e');
+//     let param = button.data('param');
+//     let type = button.data('type');
+//     let end = button.data('end');
+//     let desc = button.data('desc');
+
+//     if (typeof rep_S !== 'string') {
+//         try {
+//             rep_S = JSON.stringify(rep_S, null, 2);
+//         } catch (e) {
+//             rep_S = String(rep_S || '');
+//         }
+//     }
+
+//     if (typeof rep_E !== 'string') {
+//         try {
+//             rep_E = JSON.stringify(rep_E, null, 2);
+//         } catch (e) {
+//             rep_E = String(rep_E || '');
+//         }
+//     }
+
+//     if (rep_S) {
+//         $('#rep-success').html(
+//             rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+//         );
+//     } else {
+//         $('#rep-success').html('');
+//     }
+
+//     if (rep_E) {
+//         $('#rep-error').html(
+//             rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
+//         );
+//     } else {
+//         $('#rep-error').html('');
+//     }
+
+//     var modal = $(this);
+//     modal.find('input[name="id"]').val(id);
+//     modal.find('input[name="titre"]').val(titre);
+//     modal.find('input[name="desc"]').val(desc);
+//     modal.find('select[name="meth"]').val(methode);
+//     modal.find('select[name="lien"]').val(lien);
+//     modal.find('input[name="param"]').val(param);
+//     modal.find('input[name="end"]').val(end);
+//     modal.find('select[name="type"]').val(type);
+//     modal.find('textarea[name="rep-success"]').val(rep_S);
+//     modal.find('textarea[name="rep-error"]').val(rep_E);
+
+// });
+
+// $('.btn-delete').click(function (e) {
+//     e.preventDefault();
+//     deleteId = $(this).data('id');
+//     $('#dialog').modal('show');
+// });
+
+// $('#dialogConfirm').click(function () {
+//     if (deleteId) {
+//         window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
+//     }
+// });
+
+//gestion de roles et permissions
+let smenuId = 9;
+let perm = role[(smenuId)];
+
+if (perm.add == 1) {
+    $(".btn-add").show();
+} else {
+    $(".btn-add").hide();
+}
+
+if (perm.upd == 1) {
+    $('#edit-modal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        let id = button.data('id');
+        let titre = button.data('titre');
+        let methode = button.data('methode');
+        let lien = button.data('lien');
+        let rep_S = button.data('rep_s');
+        let rep_E = button.data('rep_e');
+        let param = button.data('param');
+        let type = button.data('type');
         let end = button.data('end');
-        let lien = base + '/' + end;
-        $('#endpoint-lien').text(lien);
-
-        let rep_S = button.data('rep_success');
-        let rep_E = button.data('rep_error');
+        let desc = button.data('desc');
 
         if (typeof rep_S !== 'string') {
             try {
@@ -404,178 +536,41 @@
             $('#rep-error').html('');
         }
 
-        $('#view-endpoint-modal').modal('show');
+        var modal = $(this);
+        modal.find('input[name="id"]').val(id);
+        modal.find('input[name="titre"]').val(titre);
+        modal.find('input[name="desc"]').val(desc);
+        modal.find('select[name="meth"]').val(methode);
+        modal.find('select[name="lien"]').val(lien);
+        modal.find('input[name="param"]').val(param);
+        modal.find('input[name="end"]').val(end);
+        modal.find('select[name="type"]').val(type);
+        modal.find('textarea[name="rep-success"]').val(rep_S);
+        modal.find('textarea[name="rep-error"]').val(rep_E);
+
+    });
+} else {
+    $(".edit-row").hide();
+}
+
+if (perm.del == 1) {
+    $('.btn-delete').click(function(e) {
+        e.preventDefault();
+        deleteId = $(this).data('id');
+        $('#dialog').modal('show');
     });
 
+    $('#dialogConfirm').click(function() {
+        if (deleteId) {
+            window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
+        }
+    });
+} else {
+    $(".btn-delete").hide();
+}
 
-
-</script>
-
-<script>
-    var resizefunc = [];
-
-    // $('#edit-modal').on('show.bs.modal', function (event) {
-    //     var button = $(event.relatedTarget);
-    //     let id = button.data('id');
-    //     let titre = button.data('titre');
-    //     let methode = button.data('methode');
-    //     let lien = button.data('lien');
-    //     let rep_S = button.data('rep_s');
-    //     let rep_E = button.data('rep_e');
-    //     let param = button.data('param');
-    //     let type = button.data('type');
-    //     let end = button.data('end');
-    //     let desc = button.data('desc');
-
-    //     if (typeof rep_S !== 'string') {
-    //         try {
-    //             rep_S = JSON.stringify(rep_S, null, 2);
-    //         } catch (e) {
-    //             rep_S = String(rep_S || '');
-    //         }
-    //     }
-
-    //     if (typeof rep_E !== 'string') {
-    //         try {
-    //             rep_E = JSON.stringify(rep_E, null, 2);
-    //         } catch (e) {
-    //             rep_E = String(rep_E || '');
-    //         }
-    //     }
-
-    //     if (rep_S) {
-    //         $('#rep-success').html(
-    //             rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-    //         );
-    //     } else {
-    //         $('#rep-success').html('');
-    //     }
-
-    //     if (rep_E) {
-    //         $('#rep-error').html(
-    //             rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-    //         );
-    //     } else {
-    //         $('#rep-error').html('');
-    //     }
-
-    //     var modal = $(this);
-    //     modal.find('input[name="id"]').val(id);
-    //     modal.find('input[name="titre"]').val(titre);
-    //     modal.find('input[name="desc"]').val(desc);
-    //     modal.find('select[name="meth"]').val(methode);
-    //     modal.find('select[name="lien"]').val(lien);
-    //     modal.find('input[name="param"]').val(param);
-    //     modal.find('input[name="end"]').val(end);
-    //     modal.find('select[name="type"]').val(type);
-    //     modal.find('textarea[name="rep-success"]').val(rep_S);
-    //     modal.find('textarea[name="rep-error"]').val(rep_E);
-
-    // });
-
-    // $('.btn-delete').click(function (e) {
-    //     e.preventDefault();
-    //     deleteId = $(this).data('id');
-    //     $('#dialog').modal('show');
-    // });
-
-    // $('#dialogConfirm').click(function () {
-    //     if (deleteId) {
-    //         window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
-    //     }
-    // });
-
-    //gestion de roles et permissions
-    let smenuId = 9;
-    let perm = role[(smenuId)];
-
-    if (perm.add == 1) {
-        $(".btn-add").show();
-    } else {
-        $(".btn-add").hide();
-    }
-
-    if (perm.upd == 1) {
-        $('#edit-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            let id = button.data('id');
-            let titre = button.data('titre');
-            let methode = button.data('methode');
-            let lien = button.data('lien');
-            let rep_S = button.data('rep_s');
-            let rep_E = button.data('rep_e');
-            let param = button.data('param');
-            let type = button.data('type');
-            let end = button.data('end');
-            let desc = button.data('desc');
-
-            if (typeof rep_S !== 'string') {
-                try {
-                    rep_S = JSON.stringify(rep_S, null, 2);
-                } catch (e) {
-                    rep_S = String(rep_S || '');
-                }
-            }
-
-            if (typeof rep_E !== 'string') {
-                try {
-                    rep_E = JSON.stringify(rep_E, null, 2);
-                } catch (e) {
-                    rep_E = String(rep_E || '');
-                }
-            }
-
-            if (rep_S) {
-                $('#rep-success').html(
-                    rep_S.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-                );
-            } else {
-                $('#rep-success').html('');
-            }
-
-            if (rep_E) {
-                $('#rep-error').html(
-                    rep_E.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-                );
-            } else {
-                $('#rep-error').html('');
-            }
-
-            var modal = $(this);
-            modal.find('input[name="id"]').val(id);
-            modal.find('input[name="titre"]').val(titre);
-            modal.find('input[name="desc"]').val(desc);
-            modal.find('select[name="meth"]').val(methode);
-            modal.find('select[name="lien"]').val(lien);
-            modal.find('input[name="param"]').val(param);
-            modal.find('input[name="end"]').val(end);
-            modal.find('select[name="type"]').val(type);
-            modal.find('textarea[name="rep-success"]').val(rep_S);
-            modal.find('textarea[name="rep-error"]').val(rep_E);
-
-        });
-    } else {
-        $(".edit-row").hide();
-    }
-
-    if (perm.del == 1) {
-        $('.btn-delete').click(function (e) {
-            e.preventDefault();
-            deleteId = $(this).data('id');
-            $('#dialog').modal('show');
-        });
-
-        $('#dialogConfirm').click(function () {
-            if (deleteId) {
-                window.location.href = "<?= base_url('DeleteEndpoint/'); ?>" + deleteId;
-            }
-        });
-    } else {
-        $(".btn-delete").hide();
-    }
-
-    if (perm.upd != 1 && perm.del != 1) {
-        // $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
-        $("#datatable-editable .btn-edit-endpoint, #datatable-editable .btn-delete").hide();
-    }
+if (perm.upd != 1 && perm.del != 1) {
+    // $("#datatable-editable th:last-child, #datatable-editable td:last-child").hide();
+    $("#datatable-editable .btn-edit-endpoint, #datatable-editable .btn-delete").hide();
+}
 </script>

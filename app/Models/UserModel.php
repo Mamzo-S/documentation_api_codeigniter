@@ -31,6 +31,6 @@ class UserModel extends Model
             return $user;
         }
 
-    return null;
+        return null;
     }
 }
