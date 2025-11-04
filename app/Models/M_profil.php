@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProfilModel extends Model {
+class M_profil extends Model {
     protected $table = 'profil';
     protected $primaryKey = 'id';
     

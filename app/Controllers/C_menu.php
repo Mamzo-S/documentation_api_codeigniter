@@ -2,22 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\MenuModel;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\HTTP\IncomingRequest;
+use App\Models\M_menu;
 use CodeIgniter\Annotation as OA;
 
-class MenuController extends BaseController
+class C_menu extends BaseController
 {
     public function AfficherMenu()
     {
-        $Men = new MenuModel();
+        $Men = new M_menu();
         $donnee['menu'] = $Men->findAll();
-        return view('menu', $donnee);
+        return view('V_menu', $donnee);
     }
     public function AjoutMenu()
     {
-        $Men = new MenuModel();
+        $Men = new M_menu();
         $code = $this->request->getPost('code');
         $lib = $this->request->getPost('libelle');
         $etat = 1;
@@ -32,7 +30,7 @@ class MenuController extends BaseController
         $code = $this->request->getPost('code');
         $lib = $this->request->getPost('libelle');
         if ($id) {
-            $Men = new MenuModel();
+            $Men = new M_menu();
             $data = $Men->find($id);
             if ($data) {
                 $donnee = ['code' => $code, 'libelle' => $lib];
@@ -45,7 +43,7 @@ class MenuController extends BaseController
     public function DeleteMenu($id = null)
     {
         if ($id != null) {
-            $Men = new MenuModel();
+            $Men = new M_menu();
             $Men->delete($id);
         }
         return redirect()->to(site_url('menu'));
@@ -70,7 +68,7 @@ class MenuController extends BaseController
      */
     public function AfficherMenuJson()
     {
-        $Men = new MenuModel();
+        $Men = new M_menu();
         $donnee['menu'] = $Men->findAll();
         return view('menu', $donnee);
     }
@@ -99,7 +97,7 @@ class MenuController extends BaseController
 
     public function AfficherMenuByIdJson($id = null)
     {
-        $men = new MenuModel();
+        $men = new M_menu();
         $donnee = $men->find($id);
 
         if (!$donnee) {
@@ -133,7 +131,7 @@ class MenuController extends BaseController
 
     public function AjoutMenuJson()
     {
-        $men = new MenuModel();
+        $men = new M_menu();
         $donnee = $this->request->getJSON(true);
         $men->insert([
             'code' => $donnee['code'] ?? null,
@@ -181,7 +179,7 @@ class MenuController extends BaseController
 
     public function EditMenuJson($id = null)
     {
-        $men = new MenuModel();
+        $men = new M_menu();
 
         $exist = $men->find($id);
 
@@ -222,7 +220,7 @@ class MenuController extends BaseController
      */
     public function DeleteMenuJson($id = null)
     {
-        $men = new MenuModel();
+        $men = new M_menu();
         $exist = $men->find($id);
 
         if (!$exist) {
@@ -237,10 +235,3 @@ class MenuController extends BaseController
             ->setStatusCode(200);
     }
 }
-
-
-
-
-
-
-

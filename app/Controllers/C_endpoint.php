@@ -2,24 +2,24 @@
 
 namespace App\Controllers;
 
-use App\Models\EndpointModel;
-use App\Models\LienModel;
-use App\Models\MethodeModel;
+use App\Models\M_endpoint;
+use App\Models\M_lien;
+use App\Models\M_methode;
 use OpenApi\Annotation as OA;
 
-class EndpointController extends BaseController
+class C_endpoint extends BaseController
 {
     public function AfficherEndpoints()
     {
-        $endpoint = new EndpointModel();
-        $lien = new LienModel();
-        $methode = new MethodeModel();
+        $endpoint = new M_endpoint();
+        $lien = new M_lien();
+        $methode = new M_methode();
         $donnee['methode'] = $methode->findAll();
         $donnee['endpoint'] = $endpoint->AfficherEndpoints();
         // var_dump($donnee['endpoint']);
         // exit;
         $donnee['lien'] = $lien->findAll();
-        return view('endpoints', $donnee);
+        return view('V_endpoints', $donnee);
     }
 
     public function AjoutEndpoint()
@@ -34,7 +34,7 @@ class EndpointController extends BaseController
         $repE = $this->request->getPost('rep-error');
         $desc = $this->request->getPost('desc');
 
-        $endModel = new EndpointModel();
+        $endModel = new M_endpoint();
         $donnee = [
             'titre' => $titre,
             'lien_end' => $lien,
@@ -53,7 +53,7 @@ class EndpointController extends BaseController
     public function DeleteEndpoint($id = null)
     {
         if ($id != null) {
-            $end = new EndpointModel();
+            $end = new M_endpoint();
             $end->delete($id);
         }
         return redirect()->to(site_url('endpoints'));
@@ -73,7 +73,7 @@ class EndpointController extends BaseController
         $desc = $this->request->getPost('desc');
 
         if ($id) {
-            $endModel = new EndpointModel();
+            $endModel = new M_endpoint();
             $data = $endModel->find($id);
 
             if ($data) {
@@ -115,7 +115,7 @@ class EndpointController extends BaseController
      */
     public function AfficherEndpointJson()
     {
-        $endpoint = new EndpointModel();
+        $endpoint = new M_endpoint();
         $donnee = $endpoint->findAll();
 
         if (empty($donnee)) {
@@ -149,7 +149,7 @@ class EndpointController extends BaseController
      */
     public function AfficherEndpointByIdJson($id = null)
     {
-        $endpoint = new EndpointModel();
+        $endpoint = new M_endpoint();
         $donnee = $endpoint->find($id);
 
         if (!$donnee) {
@@ -184,7 +184,7 @@ class EndpointController extends BaseController
     public function AjoutEndpointJson()
     {
         $donnee = $this->request->getJSON(true);
-        $endpoint = new EndpointModel();
+        $endpoint = new M_endpoint();
         $endpoint->insert([
             'lien_end' => $donnee['lien_end'] ?? null,
             'parametre' => $donnee['parametre'] ?? null,
@@ -223,7 +223,7 @@ class EndpointController extends BaseController
      */
     public function EditEndpointJson($id = null)
     {
-        $endpoint = new EndpointModel();
+        $endpoint = new M_endpoint();
         $donnee = $this->request->getJSON(true);
 
         $exist = $endpoint->find($id);
@@ -257,7 +257,7 @@ class EndpointController extends BaseController
      */
     public function DeleteEndpointJson($id = null)
     {
-        $endpoint = new EndpointModel();
+        $endpoint = new M_endpoint();
         $exist = $endpoint->find($id);
 
         if (!$exist) {
@@ -272,4 +272,3 @@ class EndpointController extends BaseController
             ->setStatusCode(200);
     }
 }
-

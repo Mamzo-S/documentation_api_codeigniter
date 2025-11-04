@@ -2,23 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Models\Sous_menuModel;
-use App\Models\MenuModel;
+use App\Models\M_menu;
+use App\Models\M_sousMenu;
 
-class Sous_menuController extends BaseController
+class C_sousMenu extends BaseController
 {
     public function AfficherSous_menu()
     {
-        $menu_M = new MenuModel();
-        $sous_M = new Sous_menuModel();
+        $menu_M = new M_menu();
+        $sous_M = new M_sousMenu();
         $donnee['menu'] = $menu_M->findAll();
         $donnee['sous_menu'] = $sous_M->AfficherSous_menu();
-        return view('sous_menu', $donnee);
+        return view('V_sous_menu', $donnee);
     }
 
     public function AjoutSous_menu()
     {
-        $sous_M = new Sous_menuModel();
+        $sous_M = new M_sousMenu();
         $code = $this->request->getPost('code');
         $lib = $this->request->getPost('libelle');
         $menu = $this->request->getPost('menu');
@@ -40,7 +40,7 @@ class Sous_menuController extends BaseController
         $lib = $this->request->getPost('libelle');
         $menu = $this->request->getPost('menu');
         if ($id) {
-            $sous_M = new Sous_menuModel();
+            $sous_M = new M_sousMenu();
             $data = $sous_M->find($id);
             if ($data) {
                 $donnee = ['code' => $code, 'libelle' => $lib, 'id_menu' => $menu];
@@ -53,7 +53,7 @@ class Sous_menuController extends BaseController
     public function DeleteSous_menu($id = null)
     {
         if ($id != null) {
-            $sous_M = new Sous_menuModel();
+            $sous_M = new M_sousMenu();
             $sous_M->delete($id);
         }
         return redirect()->to(site_url('sous_menu'));
@@ -80,7 +80,7 @@ class Sous_menuController extends BaseController
      */
     public function AfficherSousMenuJson()
     {
-        $sousMen = new Sous_menuModel();
+        $sousMen = new M_sousMenu();
         $donnee['sous_menu'] = $sousMen->findAll();
         return $this->response->setJSON($donnee)->setStatusCode(200);
     }
@@ -104,7 +104,7 @@ class Sous_menuController extends BaseController
      */
     public function AfficherSousMenuByIdJson($id = null)
     {
-        $sousMen = new Sous_menuModel();
+        $sousMen = new M_sousMenu();
         $donnee = $sousMen->find($id);
 
         if (!$donnee) {
@@ -136,7 +136,7 @@ class Sous_menuController extends BaseController
      */
     public function AjoutSousMenuJson()
     {
-        $sousMen = new Sous_menuModel();
+        $sousMen = new M_sousMenu();
         $donnee = $this->request->getJSON(true);
 
         if (empty($donnee['id_menu'])) {
@@ -185,7 +185,7 @@ class Sous_menuController extends BaseController
      */
     public function EditSousMenuJson($id = null)
     {
-        $sousMen = new Sous_menuModel();
+        $sousMen = new M_sousMenu();
         $exist = $sousMen->find($id);
 
         if (!$exist) {
@@ -225,7 +225,7 @@ class Sous_menuController extends BaseController
      */
     public function DeleteSousMenuJson($id = null)
     {
-        $sousMen = new Sous_menuModel();
+        $sousMen = new M_sousMenu();
         $exist = $sousMen->find($id);
 
         if (!$exist) {
@@ -236,5 +236,3 @@ class Sous_menuController extends BaseController
         return $this->response->setJSON(['message' => 'Sous-menu supprimé'])->setStatusCode(200);
     }
 }
-
-

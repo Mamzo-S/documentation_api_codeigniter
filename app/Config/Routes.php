@@ -8,152 +8,128 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('index', 'Home::index');
 $routes->get('swagger', 'Home::swagger');
-$routes->get('swagg', 'DocsController::swagg');
+$routes->get('swagg', 'C_docs::swagg');
 
 // $routes->get(from: '/', 'Home::index');
-$routes->post('login', 'UserController::login');
-$routes->get('login', 'UserController::loginform');
-$routes->get('logout', 'UserController::logout');
+$routes->post('login', 'C_user::login');
+$routes->get('login', 'C_user::loginform');
+$routes->get('logout', 'C_user::logout');
 
-//endpoints
-$routes->get('endpoint', 'EndpointController::AfficherEndpointJson');
-$routes->get('endpoint/(:num)', 'EndpointController::AfficherEndpointByIdJson/$1');
-$routes->post('endpoint', 'EndpointController::AjoutEndpointJson');
-$routes->put('endpoint/(:num)', 'EndpointController::EditEndpointJson/$1');
-$routes->delete('endpoint/(:num)', 'EndpointController::DeleteEndpointJson/$1');
+//endpoints format json
+// $routes->get('endpoint', 'C_endpoint::AfficherEndpointJson');
+// $routes->get('endpoint/(:num)', 'C_endpoint::AfficherEndpointByIdJson/$1');
+// $routes->post('endpoint', 'C_endpoint::AjoutEndpointJson');
+// $routes->put('endpoint/(:num)', 'C_endpoint::EditEndpointJson/$1');
+// $routes->delete('endpoint/(:num)', 'C_endpoint::DeleteEndpointJson/$1');
 
 
-//
-$routes->get('endpoints', 'EndpointController::AfficherEndpoints');
-$routes->post('AjoutEndpoint', 'EndpointController::AjoutEndpoint');
-$routes->get('DeleteEndpoint/(:num)', 'EndpointController::DeleteEndpoint/$1');
-$routes->post('EditEndpoint', 'EndpointController::EditEndpoint');
+//endpoint 
+$routes->get('endpoints', 'C_endpoint::AfficherEndpoints');
+$routes->post('AjoutEndpoint', 'C_endpoint::AjoutEndpoint');
+$routes->get('DeleteEndpoint/(:num)', 'C_endpoint::DeleteEndpoint/$1');
+$routes->post('EditEndpoint', 'C_endpoint::EditEndpoint');
 
 //architecture avec json
-$routes->get('architectures', 'ArchitectureController::AfficherArchitectureJson');
-$routes->get('architectures/(:num)', 'ArchitectureController::AfficherArchitectureById/$1');
-$routes->delete('architectures/(:num)', 'ArchitectureController::DeleteArchitectureJson/$1');
-$routes->post('architectures', 'ArchitectureController::AjoutArchitectureJson');
-$routes->put('architectures/(:num)', 'ArchitectureController::EditArchitectureJson/$1');
-//architecture sans json
-$routes->get('architecture', 'ArchitectureController::AfficherArchitecture');
-$routes->post('AjoutArchitecture', 'ArchitectureController::AjoutArchitecture');
-$routes->get('DeleteArchitecture/(:num)', 'ArchitectureController::DeleteArchitecture/$1');
-$routes->post('EditArchitecture', 'ArchitectureController::EditArchitecture');
-
-//authentification avec json
-$routes->get('authentifications', 'AuthentificationController::AfficherAuthentificationJson');
-$routes->get('authentifications/(:num)', 'AuthentificationController::AfficherAuthentificationById/$1');
-$routes->delete('authentifications/(:num)', 'AuthentificationController::DeleteAuthentificationJson/$1');
-$routes->post('authentifications', 'AuthentificationController::AjoutAuthentificationJson');
-$routes->put('authentifications/(:num)', 'AuthentificationController::EditAuthentificationJson/$1');
-//authentification sans json
-$routes->get('authentification', 'AuthentificationController::AfficherAuthentification');
-$routes->post('AjoutAuthentification', 'AuthentificationController::AjoutAuthentification');
-$routes->get('DeleteAuthentification/(:num)', 'AuthentificationController::DeleteAuthentification/$1');
-$routes->post('EditAuthentification', 'AuthentificationController::EditAuthentification');
+// $routes->get('architectures', 'C_architecture::AfficherArchitectureJson');
+// $routes->get('architectures/(:num)', 'C_architecture::AfficherArchitectureById/$1');
+// $routes->delete('architectures/(:num)', 'C_architecture::DeleteArchitectureJson/$1');
+// $routes->post('architectures', 'C_architecture::AjoutArchitectureJson');
+// $routes->put('architectures/(:num)', 'C_architecture::EditArchitectureJson/$1');
+// architecture sans json
+$routes->get('architecture', 'C_architecture::AfficherArchitecture');
+$routes->post('AjoutArchitecture', 'C_architecture::AjoutArchitecture');
+$routes->get('DeleteArchitecture/(:num)', 'C_architecture::DeleteArchitecture/$1');
+$routes->post('EditArchitecture', 'C_architecture::EditArchitecture');
 
 //methode
-$routes->get('methode', 'MethodeController::AfficherMethode');
-$routes->post('AjoutMethode', 'MethodeController::AjoutMethode');
-$routes->post('EditMethode', 'MethodeController::EditMethode');
-$routes->get('DeleteMethode/(:num)', 'MethodeController::DeleteMethode/$1');
+$routes->get('methode', 'C_methode::AfficherMethode');
+$routes->post('AjoutMethode', 'C_methode::AjoutMethode');
+$routes->post('EditMethode', 'C_methode::EditMethode');
+$routes->get('DeleteMethode/(:num)', 'C_methode::DeleteMethode/$1');
 //methode avec json
-$routes->get('methodes', 'MethodeController::AfficherMethodeJson');
-$routes->get('methodes/(:num)', 'MethodeController::AfficherMethodeById/$1');
-$routes->delete('methodes/(:num)', 'MethodeController::DeleteMethodeJson/$1');
-$routes->post('methodes', 'MethodeController::AjoutMethodeJson');
-$routes->put('methodes/(:num)', 'MethodeController::EditMethodeJson/$1');
+// $routes->get('methodes', 'C_methode::AfficherMethodeJson');
+// $routes->get('methodes/(:num)', 'C_methode::AfficherMethodeById/$1');
+// $routes->delete('methodes/(:num)', 'C_methode::DeleteMethodeJson/$1');
+// $routes->post('methodes', 'C_methode::AjoutMethodeJson');
+// $routes->put('methodes/(:num)', 'C_methode::EditMethodeJson/$1');
 
 //format de donnee
-$routes->get('format_donnee', 'FormatController::AfficherFormat');
-$routes->post('AjoutFormat', 'FormatController::AjoutFormat');
-$routes->post('EditFormat', 'FormatController::EditFormat');
-$routes->get('DeleteFormat/(:num)', 'FormatController::DeleteFormat/$1');
+$routes->get('format_donnee', 'C_format::AfficherFormat');
+$routes->post('AjoutFormat', 'C_format::AjoutFormat');
+$routes->post('EditFormat', 'C_format::EditFormat');
+$routes->get('DeleteFormat/(:num)', 'C_format::DeleteFormat/$1');
 //format de donnee avec json
-$routes->get('format', 'FormatController::AfficherFormatJson');
-$routes->get('format/(:num)', 'FormatController::AfficherFormatById/$1');
-$routes->delete('format/(:num)', 'FormatController::DeleteFormatJson/$1');
-$routes->post('format', 'FormatController::AjoutFormatJson');
-$routes->put('format/(:num)', 'FormatController::EditFormatJson/$1');
+// $routes->get('format', 'C_format::AfficherFormatJson');
+// $routes->get('format/(:num)', 'C_format::AfficherFormatById/$1');
+// $routes->delete('format/(:num)', 'C_format::DeleteFormatJson/$1');
+// $routes->post('format', 'C_format::AjoutFormatJson');
+// $routes->put('format/(:num)', 'C_format::EditFormatJson/$1');
 
 //base url
-$routes->get('base_url', 'LienController::AfficherLien');
-$routes->post('AjoutLien', 'LienController::AjoutLien');
-$routes->post('EditLien', 'LienController::EditLien');
-$routes->get('DeleteLien/(:num)', 'LienController::DeleteLien/$1');
+$routes->get('base_url', 'C_lien::AfficherLien');
+$routes->post('AjoutLien', 'C_lien::AjoutLien');
+$routes->post('EditLien', 'C_lien::EditLien');
+$routes->get('DeleteLien/(:num)', 'C_lien::DeleteLien/$1');
 //base url avec json
-$routes->get('lien', 'LienController::AfficherLienJson');
-$routes->get('lien/(:num)', 'LienController::AfficherLienById/$1');
-$routes->delete('lien/(:num)', 'LienController::DeleteLienJson/$1');
-$routes->post('lien', 'LienController::AjoutLienJson');
-$routes->put('lien/(:num)', 'LienController::EditLienJson/$1');
+// $routes->get('lien', 'C_lien::AfficherLienJson');
+// $routes->get('lien/(:num)', 'C_lien::AfficherLienById/$1');
+// $routes->delete('lien/(:num)', 'C_lien::DeleteLienJson/$1');
+// $routes->post('lien', 'C_lien::AjoutLienJson');
+// $routes->put('lien/(:num)', 'C_lien::EditLienJson/$1');
 
 //utilisateur
-$routes->get('gestionUtilisateur', 'UserController::AfficherUser');
-$routes->post('AjoutUser', 'UserController::AjoutUser');
-$routes->get('DeleteUser/(:num)', 'UserController::DeleteUser/$1');
-$routes->post('EditUser', 'UserController::EditUser');
-$routes->get('ChangeStatut/(:num)', 'UserController::ChangeStatut/$1');
-$routes->get('SendEmail/(:num)', 'UserController::SendEmail/$1');
+$routes->get('gestionUtilisateur', 'C_user::AfficherUser');
+$routes->post('AjoutUser', 'C_user::AjoutUser');
+$routes->get('DeleteUser/(:num)', 'C_user::DeleteUser/$1');
+$routes->post('EditUser', 'C_user::EditUser');
+$routes->get('ChangeStatut/(:num)', 'C_user::ChangeStatut/$1');
+$routes->get('SendEmail/(:num)', 'C_user::SendEmail/$1');
 //users avec json
-$routes->get('user', 'UserController::AfficherUserJson');
-$routes->get('user/(:num)', 'UserController::AfficherUserById/$1');
-$routes->delete('user/(:num)', 'UserController::DeleteUserJson/$1');
-$routes->post('user', 'UserController::AjoutUserJson');
-$routes->put('user/(:num)', 'UserController::EditUserJson/$1');
-
+// $routes->get('user', 'C_user::AfficherUserJson');
+// $routes->get('user/(:num)', 'C_user::AfficherUserById/$1');
+// $routes->delete('user/(:num)', 'C_user::DeleteUserJson/$1');
+// $routes->post('user', 'C_user::AjoutUserJson');
+// $routes->put('user/(:num)', 'C_user::EditUserJson/$1');
 
 //profil
-$routes->get('gestionProfil', 'ProfilController::AfficherProfil');
-$routes->post('AjoutProfil', 'ProfilController::AjoutProfil');
-$routes->get('DeleteProfil/(:num)', 'ProfilController::DeleteProfil/$1');
-$routes->post('EditProfil', 'ProfilController::EditProfil');
-
+$routes->get('gestionProfil', 'C_profil::AfficherProfil');
+$routes->post('AjoutProfil', 'C_profil::AjoutProfil');
+$routes->get('DeleteProfil/(:num)', 'C_profil::DeleteProfil/$1');
+$routes->post('EditProfil', 'C_profil::EditProfil');
 
 //profil Avec JSON
-$routes->get('profil', 'ProfilController::AfficherProfilJson');
-$routes->get('profil/(:num)', 'ProfilController::AfficherProfilByIdJson/$1');
-$routes->post('profil', 'ProfilController::AjoutProfilJson');
-$routes->put('profil/(:num)', 'ProfilController::EditProfilJson/$1');
-$routes->get('profil/(:num)', 'ProfilController::DeleteProfilJson/$1');
-
-
+// $routes->get('profil', 'C_profil::AfficherProfilJson');
+// $routes->get('profil/(:num)', 'C_profil::AfficherProfilByIdJson/$1');
+// $routes->post('profil', 'C_profil::AjoutProfilJson');
+// $routes->put('profil/(:num)', 'C_profil::EditProfilJson/$1');
+// $routes->get('profil/(:num)', 'C_profil::DeleteProfilJson/$1');
 
 //menu
-$routes->get('menu', 'MenuController::AfficherMenu');
-$routes->post('AjoutMenu', 'MenuController::AjoutMenu');
-$routes->get('DeleteMenu/(:num)', 'MenuController::DeleteMenu/$1');
-$routes->post('EditMenu', 'MenuController::EditMenu');
-
+$routes->get('menu', 'C_menu::AfficherMenu');
+$routes->post('AjoutMenu', 'C_menu::AjoutMenu');
+$routes->get('DeleteMenu/(:num)', 'C_menu::DeleteMenu/$1');
+$routes->post('EditMenu', 'C_menu::EditMenu');
 
 //menu Avec JSON
-$routes->get('menu', 'MenuController::AfficherMenuJson');
-$routes->get('menu/(:num)', 'MenuController::AfficherMenuByIdJson/$1');
-$routes->post('menu', 'MenuController::AjoutMenuJson');
-$routes->put('menu/(:num)', 'MenuController::EditMenuJson/$1');
-$routes->get('menu/(:num)', 'MenuController::DeleteMenuJson/$1');
-
+// $routes->get('menu', 'C_menu::AfficherMenuJson');
+// $routes->get('menu/(:num)', 'C_menu::AfficherMenuByIdJson/$1');
+// $routes->post('menu', 'C_menu::AjoutMenuJson');
+// $routes->put('menu/(:num)', 'C_menu::EditMenuJson/$1');
+// $routes->get('menu/(:num)', 'C_menu::DeleteMenuJson/$1');
 
 //sous_menu
-$routes->get('sous_menu', 'Sous_menuController::AfficherSous_menu');
-$routes->post('AjoutSous_menu', 'Sous_menuController::AjoutSous_menu');
-$routes->get('DeleteSous_menu/(:num)', 'Sous_menuController::DeleteSous_menu/$1');
-$routes->post('EditSous_menu', 'Sous_menuController::EditSous_menu');
-
-
+$routes->get('sous_menu', 'C_sousMenu::AfficherSous_menu');
+$routes->post('AjoutSous_menu', 'C_sousMenu::AjoutSous_menu');
+$routes->get('DeleteSous_menu/(:num)', 'C_sousMenu::DeleteSous_menu/$1');
+$routes->post('EditSous_menu', 'C_sousMenu::EditSous_menu');
 
 //Sous_menu avec JSON
-$routes->get('sous-menu', 'Sous_menuController::AfficherSousMenuJson');
-$routes->get('sous-menu/(:num)', 'Sous_menuController::AfficherSousMenuByIdJson/$1');
-$routes->post('sous-menu', 'Sous_menuController::AjoutSousMenuJson');
-$routes->put('sous-menu/(:num)', 'Sous_menuController::EditSousMenuJson/$1');
-$routes->get('sous-menu/(:num)', 'Sous_menuController::DeleteSousMenuJson/$1');
-
+// $routes->get('sous-menu', 'C_sousMenu::AfficherSousMenuJson');
+// $routes->get('sous-menu/(:num)', 'C_sousMenu::AfficherSousMenuByIdJson/$1');
+// $routes->post('sous-menu', 'C_sousMenu::AjoutSousMenuJson');
+// $routes->put('sous-menu/(:num)', 'C_sousMenu::EditSousMenuJson/$1');
+// $routes->get('sous-menu/(:num)', 'C_sousMenu::DeleteSousMenuJson/$1');
 
 //role
-$routes->post('SaveRole', 'RoleController::SaveRole');
-$routes->get('getRoles/(:num)', 'RoleController::getRolesByProfile/$1');
-
-
-
+$routes->post('SaveRole', 'C_role::SaveRole');
+$routes->get('getRoles/(:num)', 'C_role::getRolesByProfile/$1');

@@ -2,24 +2,24 @@
 
 namespace App\Controllers;
 
-use App\Models\ProfilModel;
-use App\Models\UserModel;
-use App\Models\RoleModel;
+use App\Models\M_profil;
+use App\Models\M_role;
+use App\Models\M_user;
 
-class UserController extends BaseController
+class C_user extends BaseController
 {
     public function loginform()
     {
-        return view('login');
+        return view('V_login');
     }
 
     public function AfficherUser()
     {
-        $profMod = new ProfilModel();
-        $userMod = new UserModel();
+        $profMod = new M_profil();
+        $userMod = new M_user();
         $donnee['profil'] = $profMod->findAll();
         $donnee['user'] = $userMod->AfficherUser();
-        return view('gestionUtilisateur', $donnee);
+        return view('V_gestionUtilisateur', $donnee);
     }
 
     public function AjoutUser()
@@ -31,7 +31,7 @@ class UserController extends BaseController
         $username = $this->request->getPost('username');
         $mdp = password_hash($this->request->getPost('mdp'), PASSWORD_DEFAULT);
         $profile = $this->request->getPost('profile');
-        $userMod = new UserModel();
+        $userMod = new M_user();
         $donnee = [
             'nom' => $nom,
             'prenom' => $prenom,
@@ -54,7 +54,7 @@ class UserController extends BaseController
         $mdp = password_hash($this->request->getPost('mdp'), PASSWORD_DEFAULT);
         $profile = $this->request->getPost('profile');
         if ($id) {
-            $userMod = new UserModel();
+            $userMod = new M_user();
             $data = $userMod->find($id);
             if ($data) {
                 $donnee = [
@@ -74,7 +74,7 @@ class UserController extends BaseController
     public function DeleteUser($id = null)
     {
         if ($id != null) {
-            $userMod = new UserModel();
+            $userMod = new M_user();
             $userMod->delete($id);
         }
         return redirect()->to(site_url('gestionUtilisateur'));
@@ -83,7 +83,7 @@ class UserController extends BaseController
     public function ChangeStatut($id = null)
     {
         if ($id != null) {
-            $userMod = new UserModel();
+            $userMod = new M_user();
             $user = $userMod->find($id);
             if ($user) {
                 $newStatut = ($user['statut'] == 1) ? 0 : 1;
@@ -95,8 +95,8 @@ class UserController extends BaseController
 
     public function login()
     {
-        $userMod = new UserModel();
-        $roleMod = new RoleModel();
+        $userMod = new M_user();
+        $roleMod = new M_role();
         $username = $this->request->getPost('username');
         $mdp = $this->request->getPost('mdp');
         $user = $userMod->getUserByUsername($username, $mdp);
@@ -144,7 +144,7 @@ class UserController extends BaseController
     public function SendEmail($id = null)
     {
         if ($id != null) {
-            $userMod = new UserModel();
+            $userMod = new M_user();
             $user = $userMod->find($id);
 
             if ($user) {
@@ -173,7 +173,7 @@ class UserController extends BaseController
                 ];
 
                 $email = \Config\Services::email($emailConfig);
-                $email->setFrom('no-reply@education.sn', 'Mamzo - Ne pas répondre');
+                $email->setFrom('no-reply@education.sn', 'SIMEN-API - Ne pas répondre');
                 $email->setTo($to);
                 $email->setSubject($subject);
                 $email->setMessage($message);
@@ -211,7 +211,7 @@ class UserController extends BaseController
      */
     public function AfficherUserJson()
     {
-        $user = new UserModel();
+        $user = new M_user();
         $donnee = $user->findAll();
         return $this->response->setJSON($donnee);
     }
@@ -240,7 +240,7 @@ class UserController extends BaseController
      */
     public function AfficherUserById($id)
     {
-        $user = new UserModel();
+        $user = new M_user();
         $donnee = $user->where('id', $id)->first();
         if (!$donnee) {
             return $this->response
@@ -282,7 +282,7 @@ class UserController extends BaseController
 
     public function AjoutUserJson()
     {
-        $user = new UserModel();
+        $user = new M_user();
         $donnee = $this->request->getJSON(true);
         $user->insert([
             'nom' => $donnee['nom'],
@@ -335,7 +335,7 @@ class UserController extends BaseController
 
     public function EditUserJson($id)
     {
-        $user = new UserModel();
+        $user = new M_user();
         $donnee = $this->request->getJSON(true);
         $data = $user->find($id);
         if (!$data) {
@@ -366,7 +366,7 @@ class UserController extends BaseController
      * )
      */
     public function DeleteUserJson($id) {
-        $user = new UserModel();
+        $user = new M_user();
         $exist = $user->find($id);
 
         if (!$exist) {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ArchitectureModel extends Model {
+class M_architecture extends Model {
     protected $table = 'architecture';
     protected $primaryKey = 'id';
     

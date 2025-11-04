@@ -46,38 +46,38 @@
                     </a>
                 </li>
                 <?php if (session()->get('profile_id') != 2): ?>
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="md md-settings"></i><span> Configuration </span><span
-                                class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?= base_url('methode') ?>"
-                                    class="<?= (current_url() == base_url('methode')) ? 'active' : '' ?>">Methode</a></li>
-                            <li><a href="<?= base_url() ?>format_donnee"
-                                    class="<?= (current_url() == base_url('format_donnee')) ? 'active' : '' ?>">Format-donnee</a>
-                            </li>
-                            <li><a href="<?= base_url() ?>base_url"
-                                    class="<?= (current_url() == base_url('base_url')) ? 'active' : '' ?>">Base URL</a></li>
-                            <li><a href="<?= base_url() ?>menu"
-                                    class="<?= (current_url() == base_url('menu')) ? 'active' : '' ?>">Menu</a></li>
-                            <li><a href="<?= base_url() ?>sous_menu"
-                                    class="<?= (current_url() == base_url('sous_menu')) ? 'active' : '' ?>">Sous Menu</a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-settings"></i><span> Configuration </span><span
+                            class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="<?= base_url('methode') ?>"
+                                class="<?= (current_url() == base_url('methode')) ? 'active' : '' ?>">Methode</a></li>
+                        <li><a href="<?= base_url() ?>format_donnee"
+                                class="<?= (current_url() == base_url('format_donnee')) ? 'active' : '' ?>">Format-donnee</a>
+                        </li>
+                        <li><a href="<?= base_url() ?>base_url"
+                                class="<?= (current_url() == base_url('base_url')) ? 'active' : '' ?>">Base URL</a></li>
+                        <li><a href="<?= base_url() ?>menu"
+                                class="<?= (current_url() == base_url('menu')) ? 'active' : '' ?>">Menu</a></li>
+                        <li><a href="<?= base_url() ?>sous_menu"
+                                class="<?= (current_url() == base_url('sous_menu')) ? 'active' : '' ?>">Sous Menu</a>
+                        </li>
+                    </ul>
+                </li>
                 <?php endif; ?>
                 <?php if (session()->get('profile_id') == 1): ?>
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="md md-security"></i><span> Sécurité </span><span
-                                class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?= base_url() ?>gestionUtilisateur"
-                                    class="<?= (current_url() == base_url('gestionUtilisateur')) ? 'active' : '' ?>">Gestion
-                                    utilisateur</a></li>
-                            <li><a href="<?= base_url() ?>gestionProfil"
-                                    class="<?= (current_url() == base_url('gestionProfil')) ? 'active' : '' ?>">Gestion
-                                    profil</a></li>
-                        </ul>
-                    </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-security"></i><span> Sécurité </span><span
+                            class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="<?= base_url() ?>gestionUtilisateur"
+                                class="<?= (current_url() == base_url('gestionUtilisateur')) ? 'active' : '' ?>">Gestion
+                                utilisateur</a></li>
+                        <li><a href="<?= base_url() ?>gestionProfil"
+                                class="<?= (current_url() == base_url('gestionProfil')) ? 'active' : '' ?>">Gestion
+                                profil</a></li>
+                    </ul>
+                </li>
                 <?php endif; ?>
             </ul>
             <div class="clearfix"></div>

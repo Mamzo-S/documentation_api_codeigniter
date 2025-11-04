@@ -2,18 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Models\ProfilModel;
-use App\Models\Sous_menuModel;
-use App\Models\MenuModel;
+use App\Models\M_menu;
+use App\Models\M_profil;
+use App\Models\M_sousMenu;
 
-class ProfilController extends BaseController
+class C_profil extends BaseController
 {
 
     public function AfficherProfil()
     {
-        $prof = new ProfilModel();
-        $menuM = new MenuModel();
-        $sousmenuM = new Sous_menuModel();
+        $prof = new M_profil();
+        $menuM = new M_menu();
+        $sousmenuM = new M_sousMenu();
 
         $donnee['menu'] = $menuM->findAll();
         $donnee['profil'] = $prof->findAll();
@@ -21,12 +21,12 @@ class ProfilController extends BaseController
         foreach ($donnee['menu'] as &$m) {
             $m['sous_menu'] = $sousmenuM->getSousMenuByIdMenu($m['id']);
         }
-        return view('gestionProfil', $donnee);
+        return view('V_gestionProfil', $donnee);
     }
 
     public function AjoutProfil()
     {
-        $prof = new ProfilModel();
+        $prof = new M_profil();
         $profil = $this->request->getPost('profil');
         $donnee = ['profile_name' => $profil];
         $prof->insert($donnee);
@@ -38,7 +38,7 @@ class ProfilController extends BaseController
         $id = $this->request->getPost('id');
         $profil = $this->request->getPost('profil');
         if ($id) {
-            $prof = new ProfilModel();
+            $prof = new M_profil();
             $data = $prof->find($id);
             if ($data) {
                 $donnee = ['profile_name' => $profil];
@@ -51,11 +51,13 @@ class ProfilController extends BaseController
     public function DeleteProfil($id = null)
     {
         if ($id != null) {
-            $prof = new ProfilModel();
+            $prof = new M_profil();
             $prof->delete($id);
         }
         return redirect()->to(site_url('gestionProfil'));
     }
+
+    
   //========Gestion Endpoint avec format JSON============
     //Get /profil
     /**
@@ -75,7 +77,7 @@ class ProfilController extends BaseController
      */
     public function AfficherProfilJson()
     {
-        $profil = new ProfilModel();
+        $profil = new M_profil();
         $donnee['menu'] = $profil->findAll();
         return view('menu', $donnee);
     }
@@ -104,7 +106,7 @@ class ProfilController extends BaseController
 
     public function AfficherProfilByIdJson($id = null)
     {
-        $profil = new ProfilModel();
+        $profil = new M_profil();
         $donnee = $profil->find($id);
 
         if (!$donnee) {
@@ -136,7 +138,7 @@ class ProfilController extends BaseController
 
     public function AjoutProfilJson()
     {
-        $profil = new ProfilModel();
+        $profil = new M_profil();
         $donnee = $this->request->getJSON(true);
         $profil->insert([
             'profil_name' => $donnee['profil_name'] ?? null
@@ -181,7 +183,7 @@ class ProfilController extends BaseController
 
     public function EditProfilJson($id = null)
     {
-        $profil = new ProfilModel();
+        $profil = new M_profil();
 
         $exist = $profil->find($id);
 
@@ -220,7 +222,7 @@ class ProfilController extends BaseController
      */
     public function DeleteProfilJson($id = null)
     {
-        $profil = new ProfilModel();
+        $profil = new M_profil();
         $exist = $profil->find($id);
 
         if (!$exist) {
@@ -235,8 +237,3 @@ class ProfilController extends BaseController
             ->setStatusCode(200);
     }
 }
-
-
-
-
-

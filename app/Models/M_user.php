@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class M_user extends Model
 {
     protected $table = 'user';
     protected $primaryKey = 'id';

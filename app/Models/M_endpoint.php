@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EndpointModel extends Model
+class M_endpoint extends Model
 {
     protected $table = 'endpoints';
     protected $primaryKey = 'id';

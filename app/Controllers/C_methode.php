@@ -2,20 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\MethodeModel;
+use App\Models\M_methode;
 
-class MethodeController extends BaseController
+class C_methode extends BaseController
 {
     public function AfficherMethode()
     {
-        $lien = new MethodeModel();
+        $lien = new M_methode();
         $donnee['methode'] = $lien->findAll();
-        return view('methode', $donnee);
+        return view('V_methode', $donnee);
     }
 
     public function AjoutMethode()
     {
-        $methode = new MethodeModel();
+        $methode = new M_methode();
         $meth = $this->request->getPost('meth');
         $donnee = ['methode_name' => $meth];
         $methode->insert($donnee);
@@ -27,7 +27,7 @@ class MethodeController extends BaseController
         $id = $this->request->getPost('id');
         $meth = $this->request->getPost('meth');
         if ($id) {
-            $methode = new MethodeModel();
+            $methode = new M_methode();
             $data = $methode->find($id);
             if ($data) {
                 $donnee = ['methode_name' => $meth];
@@ -40,7 +40,7 @@ class MethodeController extends BaseController
     public function DeleteMethode($id = null)
     {
         if ($id != null) {
-            $methode = new MethodeModel();
+            $methode = new M_methode();
             $methode->delete($id);
         }
         return redirect()->to(site_url('methode'));
@@ -65,7 +65,7 @@ class MethodeController extends BaseController
      */
     public function AfficherMethodeJson()
     {
-        $methode = new MethodeModel();
+        $methode = new M_methode();
         $donnee = $methode->findAll();
         return $this->response->setJSON($donnee);
     }
@@ -94,7 +94,7 @@ class MethodeController extends BaseController
      */
     public function AfficherMethodeById($id)
     {
-        $methode = new MethodeModel();
+        $methode = new M_methode();
         $donnee = $methode->where('id', $id)->first();
         if (!$donnee) {
             return $this->response
@@ -131,7 +131,7 @@ class MethodeController extends BaseController
 
     public function AjoutMethodeJson()
     {
-        $methode = new MethodeModel();
+        $methode = new M_methode();
         $donnee = $this->request->getJSON(true);
         $methode->insert([
             'methode_name' => $donnee['methode_name'],
@@ -173,7 +173,7 @@ class MethodeController extends BaseController
 
     public function EditMethodeJson($id)
     {
-        $methode = new MethodeModel();
+        $methode = new M_methode();
         $donnee = $this->request->getJSON(true);
         $data = $methode->find($id);
         if (!$data) {
@@ -204,7 +204,7 @@ class MethodeController extends BaseController
      * )
      */
     public function DeleteMethodeJson($id) {
-        $methode = new MethodeModel();
+        $methode = new M_methode();
         $exist = $methode->find($id);
 
         if (!$exist) {

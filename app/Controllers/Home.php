@@ -10,7 +10,7 @@ class Home extends BaseController
     }
     public function swagger(): string
     {
-        return view('swagger');
+        return view('V_swagger');
     }
 
 }

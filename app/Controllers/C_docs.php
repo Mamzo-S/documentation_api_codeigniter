@@ -17,7 +17,7 @@ use OpenApi\Generator;
  * )
  */
 
-class DocsController extends BaseController
+class C_docs extends BaseController
 {
     public function swagg()
     {

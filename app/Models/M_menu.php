@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MenuModel extends Model {
+class M_menu extends Model {
     protected $table = 'menu';
     protected $primaryKey = 'id';
     

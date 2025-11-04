@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MethodeModel extends Model {
+class M_methode extends Model {
     protected $table = 'methode';
     protected $primaryKey = 'id';
     

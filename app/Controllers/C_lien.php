@@ -2,20 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\LienModel;
+use App\Models\M_lien;
 
-class LienController extends BaseController
+class C_lien extends BaseController
 {
     public function AfficherLien()
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
         $donnee['lien'] = $lien->findAll();
-        return view('base_url', $donnee);
+        return view('V_base_url', $donnee);
     }
 
     public function AjoutLien()
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
         $base_url = $this->request->getPost('lien');
         $nom_url = $this->request->getPost('nom_lien');
         $donnee = ['base_url' => $base_url, 'nom_url'=> $nom_url];
@@ -29,7 +29,7 @@ class LienController extends BaseController
         $base_url = $this->request->getPost('lien');
         $nom_url = $this->request->getPost('nom_lien');
         if ($id) {
-            $lien = new LienModel();
+            $lien = new M_lien();
             $data = $lien->find($id);
             if ($data) {
                 $donnee = ['base_url' => $base_url, 'nom_url' => $nom_url];
@@ -42,7 +42,7 @@ class LienController extends BaseController
     public function DeleteLien($id = null)
     {
         if ($id != null) {
-            $lien = new LienModel();
+            $lien = new M_lien();
             $lien->delete($id);
         }
         return redirect()->to(site_url('base_url'));
@@ -63,7 +63,7 @@ class LienController extends BaseController
      */
     public function AfficherLienJson()
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
         $donnee = $lien->findAll();
         return $this->response->setJSON($donnee);
     }
@@ -88,7 +88,7 @@ class LienController extends BaseController
      */
     public function AfficherLienById($id)
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
         $donnee = $lien->where('id', $id)->first();
         return $this->response->setJSON($donnee);
     }
@@ -118,7 +118,7 @@ class LienController extends BaseController
 
     public function AjoutLienJson()
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
         $data = $this->request->getJSON(true);
         $lien->insert([
             'base_url' => $data['base_url'],
@@ -161,7 +161,7 @@ class LienController extends BaseController
      */
     public function EditLienJson($id)
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
         $data = $lien->find($id);
         if (!$data) {
             return $this->response
@@ -207,7 +207,7 @@ class LienController extends BaseController
      */
     public function DeleteLienJson($id)
     {
-        $lien = new LienModel();
+        $lien = new M_lien();
 
         $exist = $lien->find($id);
         if (!$exist) {

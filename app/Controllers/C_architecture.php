@@ -2,20 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Models\ArchitectureModel;
-use App\Models\FormatModel;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\M_architecture;
+use App\Models\M_format;
 use OpenApi\Annotations as OA;
 
-class ArchitectureController extends BaseController
+class C_architecture extends BaseController
 {
     public function AfficherArchitecture()
     {
-        $archi = new ArchitectureModel();
-        $format = new FormatModel();
+        $archi = new M_architecture();
+        $format = new M_format();
         $donnee['format'] = $format->findAll();
         $donnee['archi'] = $archi->AfficherArchitecture();
-        return view('architecture', $donnee);
+        return view('V_architecture', $donnee);
     }
 
     public function AjoutArchitecture()
@@ -24,7 +23,7 @@ class ArchitectureController extends BaseController
         $format = $this->request->getPost('format');
         $header = $this->request->getPost('hed');
 
-        $archi = new ArchitectureModel();
+        $archi = new M_architecture();
         $donnee = [
             'architecture_name' => $archi_name,
             'format_donnee' => $format,
@@ -38,7 +37,7 @@ class ArchitectureController extends BaseController
     public function DeleteArchitecture($id = null)
     {
         if ($id != null) {
-            $archi = new ArchitectureModel();
+            $archi = new M_architecture();
             $archi->delete($id);
         }
         return redirect()->to(site_url('architecture'));
@@ -52,7 +51,7 @@ class ArchitectureController extends BaseController
         $header = $this->request->getPost('hed');
 
         if ($id) {
-            $archi = new ArchitectureModel();
+            $archi = new M_architecture();
             $data = $archi->find($id);
 
             if ($data) {
@@ -86,7 +85,7 @@ class ArchitectureController extends BaseController
      */
     public function AfficherArchitectureJson()
     {
-        $archi = new ArchitectureModel();
+        $archi = new M_architecture();
         $donnee = $archi->AfficherArchitecture();
         return $this->response->setJSON($donnee);
     }
@@ -115,7 +114,7 @@ class ArchitectureController extends BaseController
      */
     public function AfficherArchitectureById($id)
     {
-        $archi = new ArchitectureModel();
+        $archi = new M_architecture();
         $donnee = $archi->where('id', $id)->first();
         return $this->response->setJSON($donnee);
     }
@@ -147,7 +146,7 @@ class ArchitectureController extends BaseController
     public function AjoutArchitectureJson()
     {
         $data = $this->request->getJSON(true);
-        $archi = new ArchitectureModel();
+        $archi = new M_architecture();
         $archi->insert([
             'architecture_name' => $data['architecture_name'] ?? null,
             'format_donnee' => $data['format_donnee'] ?? null,
@@ -194,7 +193,7 @@ class ArchitectureController extends BaseController
      */
     public function EditArchitectureJson($id)
     {
-        $archi = new ArchitectureModel();
+        $archi = new M_architecture();
 
         $data = $archi->find($id);
         if (!$data) {
@@ -242,7 +241,7 @@ class ArchitectureController extends BaseController
      */
     public function DeleteArchitectureJson($id = null)
     {
-        $archi = new ArchitectureModel();
+        $archi = new M_architecture();
 
         if ($id === null) {
             return $this->response

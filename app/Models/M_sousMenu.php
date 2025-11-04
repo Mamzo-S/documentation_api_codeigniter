@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Sous_menuModel extends Model {
+class M_sousMenu extends Model {
     protected $table = 'sous_menu';
     protected $primaryKey = 'id';
     

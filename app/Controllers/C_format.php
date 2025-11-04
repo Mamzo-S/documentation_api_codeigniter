@@ -2,20 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\FormatModel;
+use App\Models\M_format;
 
-class FormatController extends BaseController
+class C_format extends BaseController
 {
     public function AfficherFormat()
     {
-        $format = new FormatModel();
+        $format = new M_format();
         $donnee['format'] = $format->findAll();
-        return view('format_donnee', $donnee);
+        return view('V_format_donnee', $donnee);
     }
 
     public function AjoutFormat()
     {
-        $Formats = new FormatModel();
+        $Formats = new M_format();
         $format = $this->request->getPost('format');
         $donnee = ['format' => $format];
         $Formats->insert($donnee);
@@ -27,7 +27,7 @@ class FormatController extends BaseController
         $id = $this->request->getPost('id');
         $format = $this->request->getPost('format');
         if ($id) {
-            $Formats = new FormatModel();
+            $Formats = new M_format();
             $data = $Formats->find($id);
             if ($data) {
                 $donnee = ['format' => $format];
@@ -40,7 +40,7 @@ class FormatController extends BaseController
     public function DeleteFormat($id = null)
     {
         if ($id != null) {
-            $format = new FormatModel();
+            $format = new M_format();
             $format->delete($id);
         }
         return redirect()->to(site_url('format_donnee'));
@@ -65,7 +65,7 @@ class FormatController extends BaseController
      */
     public function AfficherFormatJson()
     {
-        $format = new FormatModel();
+        $format = new M_format();
         $donnee = $format->findAll();
         return $this->response->setJSON($donnee);
     }
@@ -94,7 +94,7 @@ class FormatController extends BaseController
      */
     public function AfficherFormatById($id)
     {
-        $format = new FormatModel();
+        $format = new M_format();
         $donnee = $format->where('id', $id)->first();
         if (!$donnee) {
             return $this->response
@@ -131,7 +131,7 @@ class FormatController extends BaseController
 
     public function AjoutFormatJson()
     {
-        $format = new FormatModel();
+        $format = new M_format();
         $donnee = $this->request->getJSON(true);
         $format->insert([
             'format' => $donnee['format'],
@@ -173,7 +173,7 @@ class FormatController extends BaseController
 
     public function EditFormatJson($id)
     {
-        $format = new FormatModel();
+        $format = new M_format();
         $donnee = $this->request->getJSON(true);
         $data = $format->find($id);
         if (!$data) {
@@ -204,7 +204,7 @@ class FormatController extends BaseController
      * )
      */
     public function DeleteFormatJson($id) {
-        $format = new FormatModel();
+        $format = new M_format();
         $exist = $format->find($id);
 
         if (!$exist) {
